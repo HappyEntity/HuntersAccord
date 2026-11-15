@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>HuntersAccord.Platform</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HuntersAccord.Core\HuntersAccord.Core.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,28 @@
+# Build output
+bin/
+obj/
+artifacts/
+publish/
+TestResults/
+*.user
+
+# IDE
+.idea/
+.vs/
+*.DotSettings.user
+
+# Never commit game files, emulator binaries, keys or Steam SDK redistributables
+*.pkg
+*.sprx
+*.prx
+eboot.bin
+steam_api*.dll
+libsteam_api.*
+steam_appid.txt
+keys.json
+shadps4/
+
+# The closed co-op mod: copied from a release next to a local build (under bin/), never committed
+huntersaccord.dll
+libhuntersaccord.*
+huntersaccord_layer.json

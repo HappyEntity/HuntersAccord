@@ -1,0 +1,21 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <InvariantGlobalization>true</InvariantGlobalization>
+
+    <Product>Hunters' Accord — Seamless Co-op for Bloodborne</Product>
+    <Company>HappyEntity</Company>
+    <Authors>HappyEntity</Authors>
+    <!-- A release: also bump CoopCompat.Number (src/HuntersAccord.Core/CoopCompat.cs) when this release's mod cannot play
+         with the previous one's (peer messages, the directory's or lobbies' data, world sync both mods apply). -->
+    <Version>0.2.14</Version>
+    <Copyright>Copyright (c) 2026 HappyEntity</Copyright>
+
+    <!-- Every library must stay trimming/NativeAOT friendly: the mod core is shipped as a NativeAOT binary. -->
+    <IsAotCompatible Condition="'$(IsTestProject)' != 'true'">true</IsAotCompatible>
+  </PropertyGroup>
+</Project>

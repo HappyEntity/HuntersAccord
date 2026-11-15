@@ -1,0 +1,1380 @@
+<!-- Hunters' Accord launcher theme ("Night"): tokens as resources, controls as themes and class styles.
+     Blood is only for action (Play, progress, checked marks), gold for ornament, hover and focus. All corners are sharp. -->
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="using:HuntersAccord.Launcher.Views">
+  <Styles.Resources>
+    <!-- Colours -->
+    <Color x:Key="Night000">#060508</Color>
+    <Color x:Key="Night100">#0C0A0E</Color>
+    <Color x:Key="Night200">#141019</Color>
+    <Color x:Key="Stone200">#16121A</Color>
+    <Color x:Key="Stone300">#201A22</Color>
+    <Color x:Key="Stone400">#2A2229</Color>
+    <Color x:Key="PanelVeil">#EB16121A</Color>
+    <Color x:Key="LineFaint">#2E262C</Color>
+    <Color x:Key="LineControl">#7A6D65</Color>
+    <Color x:Key="Gold700">#8A7550</Color>
+    <Color x:Key="Gold500">#B49B6C</Color>
+    <Color x:Key="Gold300">#D8C49A</Color>
+    <Color x:Key="Bone100">#E8DFCF</Color>
+    <Color x:Key="Ash300">#A89D90</Color>
+    <Color x:Key="Ash500">#8F857A</Color>
+    <Color x:Key="TextDisabled">#6F665E</Color>
+    <Color x:Key="Blood800">#3A0A0E</Color>
+    <Color x:Key="Blood700">#5E1016</Color>
+    <Color x:Key="Blood600">#781820</Color>
+    <Color x:Key="Blood500">#9E2229</Color>
+    <Color x:Key="Blood300">#D0483F</Color>
+    <Color x:Key="MoonCore">#7A1F1A</Color>
+    <Color x:Key="MoonRim">#2C0C0C</Color>
+    <Color x:Key="ErrorColor">#E27A66</Color>
+    <Color x:Key="SuccessColor">#A9BF8E</Color>
+    <Color x:Key="WarnColor">#D2A85C</Color>
+
+    <SolidColorBrush x:Key="Night000Brush" Color="{StaticResource Night000}" />
+    <SolidColorBrush x:Key="Night100Brush" Color="{StaticResource Night100}" />
+    <SolidColorBrush x:Key="Night200Brush" Color="{StaticResource Night200}" />
+    <SolidColorBrush x:Key="Stone200Brush" Color="{StaticResource Stone200}" />
+    <SolidColorBrush x:Key="Stone300Brush" Color="{StaticResource Stone300}" />
+    <SolidColorBrush x:Key="Stone400Brush" Color="{StaticResource Stone400}" />
+    <SolidColorBrush x:Key="PanelVeilBrush" Color="{StaticResource PanelVeil}" />
+    <SolidColorBrush x:Key="LineFaintBrush" Color="{StaticResource LineFaint}" />
+    <SolidColorBrush x:Key="LineControlBrush" Color="{StaticResource LineControl}" />
+    <SolidColorBrush x:Key="Gold700Brush" Color="{StaticResource Gold700}" />
+    <SolidColorBrush x:Key="Gold500Brush" Color="{StaticResource Gold500}" />
+    <SolidColorBrush x:Key="Gold300Brush" Color="{StaticResource Gold300}" />
+    <SolidColorBrush x:Key="Bone100Brush" Color="{StaticResource Bone100}" />
+    <SolidColorBrush x:Key="Ash300Brush" Color="{StaticResource Ash300}" />
+    <SolidColorBrush x:Key="Ash500Brush" Color="{StaticResource Ash500}" />
+    <SolidColorBrush x:Key="TextDisabledBrush" Color="{StaticResource TextDisabled}" />
+    <SolidColorBrush x:Key="Blood800Brush" Color="{StaticResource Blood800}" />
+    <SolidColorBrush x:Key="Blood700Brush" Color="{StaticResource Blood700}" />
+    <SolidColorBrush x:Key="Blood600Brush" Color="{StaticResource Blood600}" />
+    <SolidColorBrush x:Key="Blood500Brush" Color="{StaticResource Blood500}" />
+    <SolidColorBrush x:Key="Blood300Brush" Color="{StaticResource Blood300}" />
+    <SolidColorBrush x:Key="ErrorBrush" Color="{StaticResource ErrorColor}" />
+    <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource SuccessColor}" />
+    <SolidColorBrush x:Key="WarnBrush" Color="{StaticResource WarnColor}" />
+
+    <!-- Fonts (SIL OFL 1.1, Assets/Fonts with their licences) -->
+    <FontFamily x:Key="FontLogo">avares://HuntersAccord/Assets/Fonts#Cinzel</FontFamily>
+    <FontFamily x:Key="FontCaps">avares://HuntersAccord/Assets/Fonts#Cormorant SC</FontFamily>
+    <FontFamily x:Key="FontText">avares://HuntersAccord/Assets/Fonts#EB Garamond</FontFamily>
+    <FontFamily x:Key="FontMono">avares://HuntersAccord/Assets/Fonts#JetBrains Mono</FontFamily>
+
+    <DrawingImage x:Key="HaEmblem">
+      <DrawingGroup>
+        <GeometryDrawing Brush="#00000000" Geometry="M0,0 H64 V64 H0 Z" />
+        <GeometryDrawing Geometry="M16,58 L16,38 A22,22 0 0 1 27,18.95 A22,22 0 0 1 38,38 L38,58 M26,58 L26,38 A22,22 0 0 1 37,18.95 A22,22 0 0 1 48,38 L48,58">
+          <GeometryDrawing.Pen>
+            <Pen Brush="{StaticResource Gold500Brush}" Thickness="1.8" LineJoin="Miter" />
+          </GeometryDrawing.Pen>
+        </GeometryDrawing>
+        <GeometryDrawing Geometry="M12,58 L12,38 A40,40 0 0 1 32,3.36 A40,40 0 0 1 52,38 L52,58 M8,58.5 H56">
+          <GeometryDrawing.Pen>
+            <Pen Brush="{StaticResource Gold500Brush}" Thickness="2.4" LineJoin="Miter" />
+          </GeometryDrawing.Pen>
+        </GeometryDrawing>
+        <GeometryDrawing Brush="{StaticResource Gold500Brush}" Geometry="M32,9.5 L35,12.5 L32,15.5 L29,12.5 Z" />
+      </DrawingGroup>
+    </DrawingImage>
+
+    <!-- Fluent ComboBox and scroll bar take their colours from these keys. -->
+    <SolidColorBrush x:Key="ComboBoxBackground" Color="{StaticResource Stone300}" />
+    <SolidColorBrush x:Key="ComboBoxBackgroundPointerOver" Color="{StaticResource Stone400}" />
+    <SolidColorBrush x:Key="ComboBoxBackgroundPressed" Color="{StaticResource Night000}" />
+    <SolidColorBrush x:Key="ComboBoxBackgroundDisabled" Color="Transparent" />
+    <SolidColorBrush x:Key="ComboBoxBorderBrush" Color="{StaticResource LineControl}" />
+    <SolidColorBrush x:Key="ComboBoxBorderBrushPointerOver" Color="{StaticResource Gold500}" />
+    <SolidColorBrush x:Key="ComboBoxBorderBrushPressed" Color="{StaticResource Gold500}" />
+    <SolidColorBrush x:Key="ComboBoxBorderBrushDisabled" Color="{StaticResource LineFaint}" />
+    <SolidColorBrush x:Key="ComboBoxForeground" Color="{StaticResource Bone100}" />
+    <SolidColorBrush x:Key="ComboBoxForegroundDisabled" Color="{StaticResource TextDisabled}" />
+    <SolidColorBrush x:Key="ComboBoxDropDownGlyphForeground" Color="{StaticResource Gold500}" />
+    <SolidColorBrush x:Key="ComboBoxDropDownBackground" Color="{StaticResource Stone200}" />
+    <SolidColorBrush x:Key="ComboBoxDropDownBorderBrush" Color="{StaticResource Gold700}" />
+    <SolidColorBrush x:Key="ComboBoxItemForeground" Color="{StaticResource Bone100}" />
+    <SolidColorBrush x:Key="ComboBoxItemBackgroundPointerOver" Color="{StaticResource Stone400}" />
+    <SolidColorBrush x:Key="ComboBoxItemBackgroundSelected" Color="{StaticResource Stone300}" />
+    <SolidColorBrush x:Key="ComboBoxItemBackgroundSelectedPointerOver" Color="{StaticResource Stone400}" />
+    <SolidColorBrush x:Key="ComboBoxItemForegroundSelected" Color="{StaticResource Gold300}" />
+    <SolidColorBrush x:Key="ComboBoxItemForegroundPointerOver" Color="{StaticResource Bone100}" />
+    <SolidColorBrush x:Key="ComboBoxItemForegroundSelectedPointerOver" Color="{StaticResource Gold300}" />
+    <SolidColorBrush x:Key="ScrollBarThumbFill" Color="{StaticResource LineControl}" />
+    <SolidColorBrush x:Key="ScrollBarThumbFillPointerOver" Color="{StaticResource Gold700}" />
+
+    <!-- The one big button of the title screen: blood gradient, gold double frame, a diamond on top. -->
+    <ControlTheme x:Key="PlayButton" TargetType="Button">
+      <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+      <Setter Property="FontSize" Value="22" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="LetterSpacing" Value="6" />
+      <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+      <Setter Property="BorderBrush" Value="{StaticResource Gold700Brush}" />
+      <Setter Property="MinWidth" Value="260" />
+      <Setter Property="Height" Value="56" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Background">
+        <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+          <GradientStop Offset="0" Color="{StaticResource Blood600}" />
+          <GradientStop Offset="1" Color="{StaticResource Blood700}" />
+        </LinearGradientBrush>
+      </Setter>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Panel>
+            <Border Name="Outer" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="1">
+              <Border.Transitions>
+                <Transitions>
+                  <BrushTransition Property="BorderBrush" Duration="0:0:0.12" />
+                  <BoxShadowsTransition Property="BoxShadow" Duration="0:0:0.12" />
+                </Transitions>
+              </Border.Transitions>
+              <Border Name="Inner" Margin="3" BorderThickness="1" BorderBrush="#47B49B6C">
+                <!-- The letter spacing trails the last letter: shift right by it to stay centred. -->
+                <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}"
+                                  Foreground="{TemplateBinding Foreground}" Padding="50,0,44,0"
+                                  HorizontalAlignment="Center" VerticalAlignment="Center" />
+              </Border>
+            </Border>
+            <Rectangle Name="Gem" Width="7" Height="7" HorizontalAlignment="Center" VerticalAlignment="Top"
+                       Margin="0,-4,0,0" Fill="{StaticResource Night100Brush}" Stroke="{StaticResource Gold700Brush}"
+                       StrokeThickness="1" RenderTransform="rotate(45deg)" />
+          </Panel>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover /template/ Border#Outer">
+        <Setter Property="Background" Value="{StaticResource Blood600Brush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Gold300Brush}" />
+        <Setter Property="BoxShadow" Value="0 0 28 0 #739E2229" />
+      </Style>
+      <Style Selector="^:pointerover /template/ Rectangle#Gem">
+        <Setter Property="Stroke" Value="{StaticResource Gold300Brush}" />
+      </Style>
+      <Style Selector="^:pressed /template/ Border#Outer">
+        <Setter Property="Background" Value="{StaticResource Blood800Brush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Gold500Brush}" />
+        <Setter Property="BoxShadow" Value="inset 0 2 8 0 #99000000" />
+      </Style>
+      <Style Selector="^:disabled /template/ Border#Outer">
+        <Setter Property="Background" Value="{StaticResource Stone300Brush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource LineFaintBrush}" />
+        <Setter Property="BoxShadow" Value="none" />
+      </Style>
+      <Style Selector="^:disabled /template/ Border#Inner">
+        <Setter Property="BorderBrush" Value="#E62E262C" />
+      </Style>
+      <Style Selector="^:disabled /template/ Rectangle#Gem">
+        <Setter Property="Stroke" Value="{StaticResource LineFaintBrush}" />
+      </Style>
+      <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Foreground" Value="{StaticResource TextDisabledBrush}" />
+      </Style>
+      <!-- Busy (downloading shadPS4): dark blood, quiet text. -->
+      <Style Selector="^.busy /template/ Border#Outer">
+        <Setter Property="Background" Value="{StaticResource Blood800Brush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Gold700Brush}" />
+      </Style>
+      <Style Selector="^.busy /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+      </Style>
+    </ControlTheme>
+
+    <!-- Quiet text link: caps, ash; bone with a gold underline on hover. -->
+    <ControlTheme x:Key="LinkButton" TargetType="Button">
+      <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+      <Setter Property="FontSize" Value="16" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="LetterSpacing" Value="1" />
+      <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Name="Line" Background="Transparent" BorderThickness="0,0,0,1" BorderBrush="Transparent" Padding="0,0,0,2">
+            <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}"
+                              Foreground="{TemplateBinding Foreground}" />
+          </Border>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover">
+        <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+      </Style>
+      <Style Selector="^:pointerover /template/ Border#Line">
+        <Setter Property="BorderBrush" Value="{StaticResource Gold500Brush}" />
+      </Style>
+      <Style Selector="^:pressed">
+        <Setter Property="Foreground" Value="{StaticResource Gold300Brush}" />
+      </Style>
+      <Style Selector="^:disabled">
+        <Setter Property="Foreground" Value="{StaticResource TextDisabledBrush}" />
+      </Style>
+    </ControlTheme>
+
+    <!-- Minimise / close in the custom title strip. -->
+    <ControlTheme x:Key="ChromeButton" TargetType="Button">
+      <Setter Property="Width" Value="40" />
+      <Setter Property="Height" Value="28" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Name="Back" Background="{TemplateBinding Background}">
+            <ContentPresenter Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}"
+                              HorizontalAlignment="Center" VerticalAlignment="Center" />
+          </Border>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover">
+        <Setter Property="Background" Value="{StaticResource Stone400Brush}" />
+        <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+      </Style>
+      <Style Selector="^.close:pointerover">
+        <Setter Property="Background" Value="{StaticResource Blood700Brush}" />
+      </Style>
+    </ControlTheme>
+
+    <!-- Check box: square on night, blood with a bone tick when on; dashed when unavailable. -->
+    <ControlTheme x:Key="{x:Type CheckBox}" TargetType="CheckBox">
+      <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+      <Setter Property="FontFamily" Value="{StaticResource FontText}" />
+      <Setter Property="FontSize" Value="16" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid ColumnDefinitions="16,*" Background="Transparent">
+            <Panel Width="16" Height="16" VerticalAlignment="Top" Margin="0,3,0,0">
+              <Rectangle Name="Box" Fill="{StaticResource Night000Brush}" Stroke="{StaticResource LineControlBrush}"
+                         StrokeThickness="1" RadiusX="1" RadiusY="1" />
+              <Path Name="Mark" Data="M3.5,8.2 L6.5,11.2 L12.5,4.8" Stroke="{StaticResource Bone100Brush}"
+                    StrokeThickness="1.6" IsVisible="False" />
+            </Panel>
+            <ContentPresenter Name="PART_ContentPresenter" Grid.Column="1" Margin="12,0,0,0"
+                              Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+                              Foreground="{TemplateBinding Foreground}" />
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:checked /template/ Rectangle#Box">
+        <Setter Property="Fill" Value="{StaticResource Blood500Brush}" />
+        <Setter Property="Stroke" Value="{StaticResource Gold500Brush}" />
+      </Style>
+      <Style Selector="^:checked /template/ Path#Mark">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:pointerover /template/ Rectangle#Box">
+        <Setter Property="Stroke" Value="{StaticResource Gold300Brush}" />
+      </Style>
+      <Style Selector="^:disabled">
+        <Setter Property="Foreground" Value="{StaticResource TextDisabledBrush}" />
+        <Setter Property="Cursor" Value="Arrow" />
+      </Style>
+      <Style Selector="^:disabled /template/ Rectangle#Box">
+        <Setter Property="Fill" Value="Transparent" />
+        <Setter Property="Stroke" Value="{StaticResource LineControlBrush}" />
+        <Setter Property="StrokeDashArray" Value="2,2" />
+      </Style>
+    </ControlTheme>
+
+    <!-- Tabs: caps, ash; the active one bone with a gold line and diamond. -->
+    <ControlTheme x:Key="{x:Type TabControl}" TargetType="TabControl">
+      <Setter Property="ItemsPanel">
+        <ItemsPanelTemplate>
+          <StackPanel Orientation="Horizontal" Spacing="24" />
+        </ItemsPanelTemplate>
+      </Setter>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <DockPanel>
+            <Border DockPanel.Dock="Top" BorderBrush="{StaticResource LineFaintBrush}" BorderThickness="0,0,0,1">
+              <ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}" />
+            </Border>
+            <ContentPresenter Name="PART_SelectedContentHost" Margin="{TemplateBinding Padding}"
+                              Content="{TemplateBinding SelectedContent}"
+                              ContentTemplate="{TemplateBinding SelectedContentTemplate}" />
+          </DockPanel>
+        </ControlTemplate>
+      </Setter>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type TabItem}" TargetType="TabItem">
+      <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+      <Setter Property="FontSize" Value="16" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="LetterSpacing" Value="1.3" />
+      <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Panel Background="Transparent">
+            <ContentPresenter Name="PART_HeaderPresenter" Margin="0,0,0,10"
+                              Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}"
+                              Foreground="{TemplateBinding Foreground}" />
+            <Rectangle Name="Line" Height="1" VerticalAlignment="Bottom" Margin="0,0,0,-1"
+                       Fill="{StaticResource Gold500Brush}" IsVisible="False" />
+            <Rectangle Name="Gem" Width="5" Height="5" VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                       Margin="0,0,0,-3" Fill="{StaticResource Gold500Brush}" RenderTransform="rotate(45deg)"
+                       IsVisible="False" />
+          </Panel>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover">
+        <Setter Property="Foreground" Value="{StaticResource Gold300Brush}" />
+      </Style>
+      <Style Selector="^:selected">
+        <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+      </Style>
+      <Style Selector="^:selected /template/ Rectangle#Line">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:selected /template/ Rectangle#Gem">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+    </ControlTheme>
+
+    <!-- Title-bar tabs (Play · Patches · Settings): caps 17, ash; the active one bone with a gold line and diamond. -->
+    <ControlTheme x:Key="{x:Type TabStripItem}" TargetType="TabStripItem">
+      <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+      <Setter Property="FontSize" Value="17" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="LetterSpacing" Value="1.4" />
+      <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Panel Background="Transparent">
+            <ContentPresenter Name="PART_ContentPresenter" Margin="0,0,0,12" VerticalAlignment="Bottom"
+                              Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+                              Foreground="{TemplateBinding Foreground}" />
+            <Rectangle Name="Line" Height="1" VerticalAlignment="Bottom" Fill="{StaticResource Gold500Brush}" IsVisible="False" />
+            <Rectangle Name="Gem" Width="5" Height="5" VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                       Margin="0,0,0,-2" Fill="{StaticResource Gold500Brush}" RenderTransform="rotate(45deg)"
+                       IsVisible="False" />
+          </Panel>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover">
+        <Setter Property="Foreground" Value="{StaticResource Gold300Brush}" />
+      </Style>
+      <Style Selector="^:selected">
+        <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+      </Style>
+      <Style Selector="^:selected /template/ Rectangle#Line, ^:selected /template/ Rectangle#Gem">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type ProgressBar}" TargetType="ProgressBar">
+      <Setter Property="Height" Value="4" />
+      <Setter Property="MinHeight" Value="4" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Panel>
+            <Border Background="{StaticResource Night000Brush}" BorderBrush="{StaticResource LineFaintBrush}"
+                    BorderThickness="1" />
+            <Border Name="PART_Indicator" HorizontalAlignment="Left">
+              <Border.Background>
+                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+                  <GradientStop Offset="0" Color="{StaticResource Blood700}" />
+                  <GradientStop Offset="1" Color="{StaticResource Blood500}" />
+                </LinearGradientBrush>
+              </Border.Background>
+              <Rectangle Width="2" HorizontalAlignment="Right" Margin="0,-2,-1,-2" Fill="{StaticResource Blood300Brush}" />
+            </Border>
+          </Panel>
+        </ControlTemplate>
+      </Setter>
+    </ControlTheme>
+    <ControlTheme x:Key="{x:Type Slider}" TargetType="Slider">
+      <Setter Property="Foreground" Value="{StaticResource Blood500Brush}" />
+      <Setter Property="Background" Value="{StaticResource Blood500Brush}" />
+      <Setter Property="BorderBrush" Value="{StaticResource Gold500Brush}" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Height="32" Background="Transparent">
+            <Rectangle Name="Rail" Height="1" VerticalAlignment="Center" Fill="{StaticResource LineControlBrush}" />
+            <Track Name="PART_Track" Orientation="Horizontal" Minimum="{TemplateBinding Minimum}"
+                   Maximum="{TemplateBinding Maximum}" Value="{TemplateBinding Value, Mode=TwoWay}"
+                   IsDirectionReversed="{TemplateBinding IsDirectionReversed}">
+              <Track.DecreaseButton>
+                <RepeatButton Name="PART_DecreaseButton" Focusable="False">
+                  <RepeatButton.Template>
+                    <ControlTemplate>
+                      <Panel Background="Transparent">
+                        <Rectangle Height="3" VerticalAlignment="Center" Fill="{Binding $parent[Slider].Foreground}" />
+                      </Panel>
+                    </ControlTemplate>
+                  </RepeatButton.Template>
+                </RepeatButton>
+              </Track.DecreaseButton>
+              <Track.IncreaseButton>
+                <RepeatButton Name="PART_IncreaseButton" Focusable="False">
+                  <RepeatButton.Template>
+                    <ControlTemplate>
+                      <Panel Background="Transparent" />
+                    </ControlTemplate>
+                  </RepeatButton.Template>
+                </RepeatButton>
+              </Track.IncreaseButton>
+              <Thumb Width="16" Height="16">
+                <Thumb.Template>
+                  <ControlTemplate>
+                    <Panel Background="Transparent">
+                      <Rectangle Width="10" Height="10" Fill="{Binding $parent[Slider].Background}"
+                                 Stroke="{Binding $parent[Slider].BorderBrush}" StrokeThickness="1"
+                                 RenderTransform="rotate(45deg)" />
+                    </Panel>
+                  </ControlTemplate>
+                </Thumb.Template>
+              </Thumb>
+            </Track>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+    <Style Selector="^:pointerover, ^:focus-visible">
+      <Setter Property="Background" Value="{StaticResource Blood600Brush}" />
+      <Setter Property="BorderBrush" Value="{StaticResource Gold300Brush}" />
+    </Style>
+    <Style Selector="^:disabled">
+      <Setter Property="Foreground" Value="{StaticResource TextDisabledBrush}" />
+      <Setter Property="Background" Value="{StaticResource Stone300Brush}" />
+      <Setter Property="BorderBrush" Value="{StaticResource TextDisabledBrush}" />
+      <Setter Property="Cursor" Value="Arrow" />
+    </Style>
+    <Style Selector="^:disabled /template/ Rectangle#Rail">
+      <Setter Property="Fill" Value="{StaticResource LineFaintBrush}" />
+    </Style>
+  </ControlTheme>
+
+    <!-- Tooltip: stone with a dim gold hairline and a diamond tail toward its control (placed under it, see App). -->
+    <ControlTheme x:Key="{x:Type ToolTip}" TargetType="ToolTip">
+      <Setter Property="Background" Value="{StaticResource Stone200Brush}" />
+      <Setter Property="BorderBrush" Value="{StaticResource Gold700Brush}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Padding" Value="12,8" />
+      <Setter Property="MaxWidth" Value="320" />
+      <Setter Property="FontFamily" Value="{StaticResource FontText}" />
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Panel Margin="0,5,0,0">
+            <Rectangle Name="Tail" Width="8" Height="8" Margin="18,-4,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                       Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="1"
+                       RenderTransform="rotate(45deg)" />
+            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
+              <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}" TextWrapping="Wrap" LineHeight="19" />
+            </Border>
+            <!-- the tail's inner half, drawn over the border line -->
+            <Rectangle Name="TailInner" Width="7" Height="2" Margin="18.5,1,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                       Fill="{TemplateBinding Background}" />
+          </Panel>
+        </ControlTemplate>
+      </Setter>
+      <!-- At the window's right edge (minimise, close): the tip lines up with its control's right edge, tail on the right. -->
+      <Style Selector="^.right /template/ Rectangle#Tail">
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="Margin" Value="0,-4,18,0" />
+      </Style>
+      <Style Selector="^.right /template/ Rectangle#TailInner">
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="Margin" Value="0,1,18.5,0" />
+      </Style>
+    </ControlTheme>
+
+    <ControlTemplate x:Key="ScrollPageButton" TargetType="RepeatButton">
+      <Panel Background="Transparent" />
+    </ControlTemplate>
+    <ControlTemplate x:Key="ScrollThumb" TargetType="Thumb">
+      <Rectangle Fill="{Binding $parent[ScrollBar].Foreground}" />
+    </ControlTemplate>
+    <ControlTheme x:Key="{x:Type ScrollBar}" TargetType="ScrollBar">
+      <Setter Property="Foreground" Value="{StaticResource LineControlBrush}" />
+      <Setter Property="Background" Value="{StaticResource Night000Brush}" />
+      <Style Selector="^:vertical">
+        <Setter Property="Width" Value="4" />
+        <Setter Property="Template">
+          <ControlTemplate>
+            <Border Background="{TemplateBinding Background}">
+              <Track Name="PART_Track" Orientation="Vertical" IsDirectionReversed="True"
+                     Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}"
+                     Value="{TemplateBinding Value, Mode=TwoWay}" ViewportSize="{TemplateBinding ViewportSize}">
+                <Track.DecreaseButton>
+                  <RepeatButton Name="PART_PageUpButton" Focusable="False" Template="{StaticResource ScrollPageButton}" />
+                </Track.DecreaseButton>
+                <Track.IncreaseButton>
+                  <RepeatButton Name="PART_PageDownButton" Focusable="False" Template="{StaticResource ScrollPageButton}" />
+                </Track.IncreaseButton>
+                <Thumb Template="{StaticResource ScrollThumb}" />
+              </Track>
+            </Border>
+          </ControlTemplate>
+        </Setter>
+      </Style>
+      <Style Selector="^:horizontal">
+        <Setter Property="Height" Value="4" />
+        <Setter Property="Template">
+          <ControlTemplate>
+            <Border Background="{TemplateBinding Background}">
+              <Track Name="PART_Track" Orientation="Horizontal"
+                     Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}"
+                     Value="{TemplateBinding Value, Mode=TwoWay}" ViewportSize="{TemplateBinding ViewportSize}">
+                <Track.DecreaseButton>
+                  <RepeatButton Name="PART_PageUpButton" Focusable="False" Template="{StaticResource ScrollPageButton}" />
+                </Track.DecreaseButton>
+                <Track.IncreaseButton>
+                  <RepeatButton Name="PART_PageDownButton" Focusable="False" Template="{StaticResource ScrollPageButton}" />
+                </Track.IncreaseButton>
+                <Thumb Template="{StaticResource ScrollThumb}" />
+              </Track>
+            </Border>
+          </ControlTemplate>
+        </Setter>
+      </Style>
+      <Style Selector="^:pointerover">
+        <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+      </Style>
+    </ControlTheme>
+
+    <!-- A clickable area with no look of its own (a row of the shadPS4 keys table): only the hand cursor. -->
+    <ControlTheme x:Key="PlainButton" TargetType="Button">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="HorizontalContentAlignment" Value="Left" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <ContentPresenter Name="PART_ContentPresenter" Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}" Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:disabled">
+        <Setter Property="Cursor" Value="Arrow" />
+      </Style>
+    </ControlTheme>
+
+    <!-- A pick in a page's left column that is a button (the trophies' filters): the rail's look, .active = chosen. -->
+    <ControlTheme x:Key="RailItem" TargetType="Button">
+      <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+      <Setter Property="FontSize" Value="16" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="LetterSpacing" Value="0.5" />
+      <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Padding" Value="32,9,20,9" />
+      <Setter Property="HorizontalAlignment" Value="Stretch" />
+      <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Panel Name="Row" Background="{TemplateBinding Background}">
+            <Rectangle Name="Gem" Width="6" Height="6" Margin="14,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"
+                       Fill="{StaticResource Gold500Brush}" RenderTransform="rotate(45deg)" IsVisible="False" />
+            <ContentPresenter Name="PART_ContentPresenter" Padding="{TemplateBinding Padding}" Content="{TemplateBinding Content}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}" Foreground="{TemplateBinding Foreground}"
+                              HorizontalContentAlignment="Stretch" />
+          </Panel>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover">
+        <Setter Property="Foreground" Value="{StaticResource Gold300Brush}" />
+      </Style>
+      <Style Selector="^.active">
+        <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+        <Setter Property="Background" Value="#0FB49B6C" />
+      </Style>
+      <Style Selector="^.active /template/ Rectangle#Gem">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^.rank">
+        <Setter Property="Padding" Value="32,6,20,6" />
+      </Style>
+    </ControlTheme>
+  </Styles.Resources>
+
+  <!-- Windows: night. Main window draws its own backdrop over this. -->
+  <Style Selector="Window">
+    <Setter Property="Background" Value="{StaticResource Night100Brush}" />
+    <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+    <Setter Property="FontFamily" Value="{StaticResource FontText}" />
+    <Setter Property="FontSize" Value="16" />
+  </Style>
+
+  <!-- Plain buttons: stone field, control border; gold text and border on hover. -->
+  <Style Selector="Button.bb">
+    <Setter Property="MinHeight" Value="32" />
+    <Setter Property="MinWidth" Value="96" />
+    <Setter Property="Padding" Value="16,0" />
+    <Setter Property="CornerRadius" Value="0" />
+    <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="LetterSpacing" Value="1" />
+    <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+    <Setter Property="Background" Value="{StaticResource Stone300Brush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource LineControlBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+  </Style>
+  <Style Selector="Button.bb:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{StaticResource Stone400Brush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource Gold500Brush}" />
+    <Setter Property="Foreground" Value="{StaticResource Gold300Brush}" />
+  </Style>
+  <Style Selector="Button.bb:pressed /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{StaticResource Night000Brush}" />
+  </Style>
+  <Style Selector="Button.bb:disabled /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="{StaticResource LineFaintBrush}" />
+    <Setter Property="Foreground" Value="{StaticResource TextDisabledBrush}" />
+  </Style>
+  <!-- Second press of a dangerous action ("Delete for good?", "Clear for sure?"): the question in the error colour. -->
+  <Style Selector="Button.bb.armed">
+    <Setter Property="Foreground" Value="{StaticResource ErrorBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource ErrorBrush}" />
+  </Style>
+  <Style Selector="Button.bb.armed:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="BorderBrush" Value="{StaticResource ErrorBrush}" />
+    <Setter Property="Foreground" Value="{StaticResource ErrorBrush}" />
+  </Style>
+  <Style Selector="Button.bb.sm">
+    <Setter Property="MinHeight" Value="26" />
+    <Setter Property="Height" Value="26" />
+    <Setter Property="MinWidth" Value="0" />
+    <Setter Property="Padding" Value="10,0" />
+    <Setter Property="FontSize" Value="15" />
+  </Style>
+
+  <Style Selector="ComboBox">
+    <Setter Property="CornerRadius" Value="0" />
+    <Setter Property="MinHeight" Value="32" />
+    <Setter Property="MinWidth" Value="240" />
+    <Setter Property="FontFamily" Value="{StaticResource FontText}" />
+    <Setter Property="FontSize" Value="16" />
+  </Style>
+
+  <Style Selector="TextBlock.logo">
+    <Setter Property="FontFamily" Value="{StaticResource FontLogo}" />
+    <Setter Property="FontSize" Value="46" />
+    <Setter Property="FontWeight" Value="Medium" />
+    <Setter Property="LetterSpacing" Value="5.5" />
+    <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="TextWrapping" Value="NoWrap" />
+  </Style>
+  <Style Selector="TextBlock.logosub">
+    <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+    <Setter Property="FontSize" Value="15" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="LetterSpacing" Value="4.5" />
+    <Setter Property="LineHeight" Value="20" />
+    <Setter Property="Foreground" Value="{StaticResource Gold500Brush}" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="TextWrapping" Value="NoWrap" />
+  </Style>
+  <Style Selector="TextBlock.hmodal">
+    <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+    <Setter Property="FontSize" Value="22" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="LetterSpacing" Value="2.6" />
+    <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+  </Style>
+  <Style Selector="TextBlock.hpanel">
+    <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+    <Setter Property="FontSize" Value="19" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="LetterSpacing" Value="1.5" />
+    <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+  </Style>
+  <Style Selector="TextBlock.section">
+    <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="FontWeight" Value="Bold" />
+    <Setter Property="LetterSpacing" Value="2" />
+    <Setter Property="Foreground" Value="{StaticResource Gold500Brush}" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+  <Style Selector="TextBlock.body">
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="LineHeight" Value="22" />
+    <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+    <Setter Property="TextWrapping" Value="Wrap" />
+  </Style>
+  <Style Selector="TextBlock.small">
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="LineHeight" Value="19" />
+    <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+    <Setter Property="TextWrapping" Value="Wrap" />
+  </Style>
+  <Style Selector="TextBlock.status">
+    <Setter Property="FontSize" Value="15" />
+    <Setter Property="LineHeight" Value="20" />
+    <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+    <Setter Property="FontFeatures" Value="+tnum" />
+  </Style>
+  <Style Selector="TextBlock.caption">
+    <Setter Property="FontSize" Value="13" />
+    <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+    <Setter Property="FontFeatures" Value="+tnum" />
+  </Style>
+  <Style Selector="TextBlock.note">
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+  </Style>
+  <Style Selector="TextBlock.mono">
+    <Setter Property="FontFamily" Value="{StaticResource FontMono}" />
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+  <Style Selector="TextBlock.key">
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+  <Style Selector="TextBlock.error">
+    <Setter Property="Foreground" Value="{StaticResource ErrorBrush}" />
+  </Style>
+  <Style Selector="TextBlock.ok">
+    <Setter Property="Foreground" Value="{StaticResource SuccessBrush}" />
+  </Style>
+  <Style Selector="TextBlock.warn">
+    <Setter Property="Foreground" Value="{StaticResource WarnBrush}" />
+  </Style>
+  <Style Selector="TextBlock.dev">
+    <Setter Property="Foreground" Value="{StaticResource WarnBrush}" />
+  </Style>
+  <!-- A patch name and its description inside a check box. -->
+  <Style Selector="CheckBox TextBlock.label">
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="FontWeight" Value="Medium" />
+  </Style>
+  <Style Selector="CheckBox TextBlock.desc">
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="LineHeight" Value="19" />
+    <Setter Property="Margin" Value="0,2,0,0" />
+    <Setter Property="TextWrapping" Value="Wrap" />
+    <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+  </Style>
+  <Style Selector="CheckBox:disabled TextBlock.desc">
+    <Setter Property="Foreground" Value="{StaticResource TextDisabledBrush}" />
+  </Style>
+
+  <!-- Small bordered tag next to a value: "supported", "needs 1.09", "not in downloaded files". -->
+  <Style Selector="Border.tag">
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="BorderBrush" Value="{StaticResource LineFaintBrush}" />
+    <Setter Property="Padding" Value="6,0" />
+    <Setter Property="Margin" Value="8,0,0,0" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+  <Style Selector="Border.tag > TextBlock">
+    <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="FontSize" Value="13" />
+    <Setter Property="LetterSpacing" Value="1" />
+    <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+  </Style>
+  <Style Selector="Border.tag.ok">
+    <Setter Property="BorderBrush" Value="#66A9BF8E" />
+  </Style>
+  <Style Selector="Border.tag.ok > TextBlock">
+    <Setter Property="Foreground" Value="{StaticResource SuccessBrush}" />
+  </Style>
+  <Style Selector="Border.tag.err">
+    <Setter Property="BorderBrush" Value="#73E27A66" />
+  </Style>
+  <Style Selector="Border.tag.err > TextBlock">
+    <Setter Property="Foreground" Value="{StaticResource ErrorBrush}" />
+  </Style>
+  <Style Selector="Border.tag.warn">
+    <Setter Property="BorderBrush" Value="#73D2A85C" />
+  </Style>
+  <Style Selector="Border.tag.warn > TextBlock">
+    <Setter Property="Foreground" Value="{StaticResource WarnBrush}" />
+  </Style>
+
+  <!-- "RECOMMENDED": a solid gold badge with night caps (stronger than a tag). -->
+  <Style Selector="Border.badge">
+    <Setter Property="Background" Value="{StaticResource Gold500Brush}" />
+    <Setter Property="Height" Value="18" />
+    <Setter Property="Padding" Value="7,0" />
+  </Style>
+  <Style Selector="Border.badge > TextBlock">
+    <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+    <Setter Property="FontWeight" Value="Bold" />
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="LetterSpacing" Value="1.4" />
+    <Setter Property="Foreground" Value="{StaticResource Night000Brush}" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+
+  <!-- Panel on the title screen: veil, faint border, gold corners (drawn by the view). -->
+  <Style Selector="Border.panel">
+    <Setter Property="Background" Value="{StaticResource PanelVeilBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource LineFaintBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="Padding" Value="28,22,28,24" />
+  </Style>
+
+  <!-- Game copies list: stone rows, gold diamond on the selected one. -->
+  <Style Selector="ListBox.games">
+    <Setter Property="Background" Value="{StaticResource Stone200Brush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource LineFaintBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="CornerRadius" Value="0" />
+  </Style>
+  <Style Selector="ListBox.games ListBoxItem">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="Row" MinHeight="36" Padding="12,4" Background="Transparent"
+                BorderBrush="{StaticResource LineFaintBrush}" BorderThickness="0,0,0,1">
+          <Grid ColumnDefinitions="12,*">
+            <Rectangle Name="Marker" Width="5" Height="5" RenderTransform="rotate(45deg)" Fill="Transparent"
+                       VerticalAlignment="Center" HorizontalAlignment="Left" />
+            <ContentPresenter Name="PART_ContentPresenter" Grid.Column="1" Content="{TemplateBinding Content}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}" VerticalAlignment="Center" />
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="ListBox.games ListBoxItem:pointerover /template/ Border#Row">
+    <Setter Property="Background" Value="{StaticResource Stone400Brush}" />
+  </Style>
+  <Style Selector="ListBox.games ListBoxItem:selected /template/ Border#Row">
+    <Setter Property="Background" Value="{StaticResource Stone300Brush}" />
+  </Style>
+  <Style Selector="ListBox.games ListBoxItem:selected /template/ Rectangle#Marker">
+    <Setter Property="Fill" Value="{StaticResource Gold500Brush}" />
+  </Style>
+
+  <!-- Our rows show selection themselves: no Fluent accent fill behind the item content. -->
+  <Style Selector="ListBox.games ListBoxItem /template/ ContentPresenter#PART_ContentPresenter, ListBox.radio ListBoxItem /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent" />
+  </Style>
+  <Style Selector="ListBox.games ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter, ListBox.radio ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter, ListBox.games ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter, ListBox.radio ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter, ListBox.games ListBoxItem:selected:pointerover /template/ ContentPresenter#PART_ContentPresenter, ListBox.radio ListBoxItem:selected:pointerover /template/ ContentPresenter#PART_ContentPresenter, ListBox.games ListBoxItem:pressed /template/ ContentPresenter#PART_ContentPresenter, ListBox.radio ListBoxItem:pressed /template/ ContentPresenter#PART_ContentPresenter, ListBox.games ListBoxItem:selected:focus /template/ ContentPresenter#PART_ContentPresenter, ListBox.radio ListBoxItem:selected:focus /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+  </Style>
+
+  <!-- Diamond radio choice (emulator channel) as a horizontal ListBox. -->
+  <Style Selector="ListBox.radio">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="ItemsPanel">
+      <ItemsPanelTemplate>
+        <WrapPanel Orientation="Horizontal" />
+      </ItemsPanelTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="ListBox.radio ListBoxItem">
+    <Setter Property="Cursor" Value="Hand" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <StackPanel Orientation="Horizontal" Spacing="12" Background="Transparent" Margin="0,0,28,8">
+          <Rectangle Name="Mark" Width="11" Height="11" Margin="2,0" VerticalAlignment="Center"
+                     RenderTransform="rotate(45deg)" Fill="{StaticResource Night000Brush}"
+                     Stroke="{StaticResource LineControlBrush}" StrokeThickness="1" />
+          <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}" VerticalAlignment="Center"
+                            Foreground="{StaticResource Bone100Brush}" />
+        </StackPanel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="ListBox.radio ListBoxItem:pointerover /template/ Rectangle#Mark">
+    <Setter Property="Stroke" Value="{StaticResource Gold300Brush}" />
+  </Style>
+  <Style Selector="ListBox.radio ListBoxItem:selected /template/ Rectangle#Mark">
+    <Setter Property="Fill" Value="{StaticResource Blood500Brush}" />
+    <Setter Property="Stroke" Value="{StaticResource Gold500Brush}" />
+  </Style>
+
+  <!-- Keycap: a key in a hairline box (shadPS4 keys on the Display tab); .off = taken by the mod's controls. -->
+  <Style Selector="Border.keycap">
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="BorderBrush" Value="{StaticResource LineControlBrush}" />
+    <Setter Property="Background" Value="{StaticResource Night000Brush}" />
+    <Setter Property="Height" Value="20" />
+    <Setter Property="MinWidth" Value="22" />
+    <Setter Property="Padding" Value="6,0" />
+  </Style>
+  <Style Selector="Border.keycap > TextBlock">
+    <Setter Property="FontFamily" Value="{StaticResource FontMono}" />
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+  <Style Selector="Border.keycap.off">
+    <Setter Property="BorderBrush" Value="{StaticResource LineFaintBrush}" />
+    <Setter Property="Background" Value="Transparent" />
+  </Style>
+  <Style Selector="Border.keycap.off > TextBlock">
+    <Setter Property="Foreground" Value="{StaticResource TextDisabledBrush}" />
+    <Setter Property="TextDecorations" Value="Strikethrough" />
+  </Style>
+  <!-- A PS4 button (Controls): mono text ("R1", "OPT") or an outlined shape (✕ ○ △ □, the D-pad) in a keycap. -->
+  <Style Selector="Border.glyph">
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="BorderBrush" Value="{StaticResource LineControlBrush}" />
+    <Setter Property="Background" Value="{StaticResource Night000Brush}" />
+    <Setter Property="Height" Value="22" />
+    <Setter Property="MinWidth" Value="30" />
+    <Setter Property="Padding" Value="6,0" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+  </Style>
+  <Style Selector="Border.glyph TextBlock">
+    <Setter Property="FontFamily" Value="{StaticResource FontMono}" />
+    <Setter Property="FontSize" Value="11" />
+    <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+  <Style Selector="Border.glyph Path">
+    <Setter Property="Width" Value="12" />
+    <Setter Property="Height" Value="12" />
+    <Setter Property="Stretch" Value="None" />
+    <Setter Property="Stroke" Value="{StaticResource Bone100Brush}" />
+    <Setter Property="StrokeThickness" Value="1.4" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+  <Style Selector="Border.glyph Path.fill">
+    <Setter Property="Fill" Value="{StaticResource Bone100Brush}" />
+    <Setter Property="StrokeThickness" Value="0" />
+  </Style>
+  <!-- The small one inside a list of buttons. -->
+  <Style Selector="Border.glyph.sm">
+    <Setter Property="Height" Value="18" />
+    <Setter Property="MinWidth" Value="24" />
+    <Setter Property="Padding" Value="4,0" />
+    <Setter Property="BorderBrush" Value="{StaticResource LineFaintBrush}" />
+  </Style>
+  <Style Selector="Border.glyph.sm Path">
+    <Setter Property="RenderTransform" Value="scale(0.84)" />
+  </Style>
+  <Style Selector="TextBlock.keyplus">
+    <Setter Property="FontFamily" Value="{StaticResource FontMono}" />
+    <Setter Property="FontSize" Value="11" />
+    <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+
+  <!-- A grey line under a field: what the choice limits ("Fullscreen uses the monitor's resolution."). -->
+  <Style Selector="TextBlock.hint">
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="LineHeight" Value="19" />
+    <Setter Property="Margin" Value="0,6,0,0" />
+    <Setter Property="TextWrapping" Value="Wrap" />
+    <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+  </Style>
+  <Style Selector="TextBlock.value">
+    <Setter Property="FontSize" Value="15" />
+    <Setter Property="LineHeight" Value="20" />
+    <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+    <Setter Property="FontFeatures" Value="+tnum" />
+  </Style>
+  <!-- A label or value greys out with its control. -->
+  <Style Selector="TextBlock.off">
+    <Setter Property="Foreground" Value="{StaticResource TextDisabledBrush}" />
+  </Style>
+
+  <!-- Style, not OverrideDefaultValue: Avalonia already overrides these defaults on Control. -->
+  <Style Selector=":is(Control)">
+    <Setter Property="ToolTip.Placement" Value="Bottom" />
+    <Setter Property="ToolTip.VerticalOffset" Value="4" />
+    <Setter Property="ToolTip.ShowDelay" Value="500" />
+  </Style>
+
+  <!-- Scroll viewers keep their bar visible (no auto-hide). -->
+  <Style Selector="ScrollViewer">
+    <Setter Property="AllowAutoHide" Value="False" />
+  </Style>
+
+  <!-- Developer-only link ("Two players"): amber, like the other things only a developer sees. -->
+  <Style Selector="Button.dev">
+    <Setter Property="Foreground" Value="{StaticResource WarnBrush}" />
+  </Style>
+  <Style Selector="Button.dev:pointerover">
+    <Setter Property="Foreground" Value="{StaticResource Gold300Brush}" />
+  </Style>
+  <Style Selector="Button.dev:pointerover /template/ Border#Line">
+    <Setter Property="BorderBrush" Value="{StaticResource WarnBrush}" />
+  </Style>
+
+  <!-- The game is running (Patches): the boxes keep their state in grey. -->
+  <Style Selector="CheckBox.locked:disabled /template/ Rectangle#Box">
+    <Setter Property="Stroke" Value="{StaticResource LineFaintBrush}" />
+    <Setter Property="StrokeDashArray" Value="{x:Null}" />
+  </Style>
+  <Style Selector="CheckBox.locked:disabled:checked /template/ Rectangle#Box">
+    <Setter Property="Fill" Value="{StaticResource Stone400Brush}" />
+  </Style>
+
+  <!-- Key capture field (Backups): keycaps on stone; listening = night with a light gold line. -->
+  <Style Selector="Button.capture">
+    <Setter Property="MinHeight" Value="32" />
+    <Setter Property="MinWidth" Value="180" />
+    <Setter Property="Padding" Value="12,0" />
+    <Setter Property="CornerRadius" Value="0" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="FontSize" Value="15" />
+    <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+    <Setter Property="Background" Value="{StaticResource Stone300Brush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource LineControlBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+  </Style>
+  <Style Selector="Button.capture:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{StaticResource Stone400Brush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource Gold500Brush}" />
+    <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+  </Style>
+  <Style Selector="Button.capture.listen /template/ ContentPresenter#PART_ContentPresenter, Button.capture.listen:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{StaticResource Night000Brush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource Gold300Brush}" />
+  </Style>
+
+  <!-- A field's label above its control (two-column layouts: Display, Backups). -->
+  <Style Selector="TextBlock.above">
+    <Setter Property="FontSize" Value="15" />
+    <Setter Property="LineHeight" Value="20" />
+    <Setter Property="Margin" Value="0,0,0,6" />
+    <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+  </Style>
+  <Style Selector="TextBlock.above.off">
+    <Setter Property="Foreground" Value="{StaticResource TextDisabledBrush}" />
+  </Style>
+
+  <!-- The shader cache's size on its description line; green once cleared, red when it could not be. -->
+  <Style Selector="Run.cachestatus">
+    <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+  </Style>
+  <Style Selector="Run.cachestatus.ok">
+    <Setter Property="Foreground" Value="{StaticResource SuccessBrush}" />
+  </Style>
+  <Style Selector="Run.cachestatus.error">
+    <Setter Property="Foreground" Value="{StaticResource ErrorBrush}" />
+  </Style>
+
+  <!-- A shadPS4 key row under the pointer: its action lights up (it can be turned off or on). -->
+  <Style Selector="Button.hotkey:pointerover TextBlock.value">
+    <Setter Property="Foreground" Value="{StaticResource Gold300Brush}" />
+  </Style>
+  <Style Selector="Button.hotkey:pointerover Border.keycap">
+    <Setter Property="BorderBrush" Value="{StaticResource Gold500Brush}" />
+  </Style>
+
+  <!-- Section rail item. Two hosts share the look: Settings (TabControl.rail) and Patches (ListBox.rail). -->
+  <Style Selector="TabControl.rail">
+    <Setter Property="ItemsPanel">
+      <ItemsPanelTemplate>
+        <StackPanel Spacing="2" />
+      </ItemsPanelTemplate>
+    </Setter>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid ColumnDefinitions="Auto,*">
+          <Border Name="Rail" Width="208" BorderBrush="{StaticResource LineFaintBrush}" BorderThickness="0,0,1,0" Padding="0,18">
+            <ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}" />
+          </Border>
+          <ContentPresenter Name="PART_SelectedContentHost" Grid.Column="1" Content="{TemplateBinding SelectedContent}"
+                            ContentTemplate="{TemplateBinding SelectedContentTemplate}" />
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="TabControl.rail TabItem, ListBox.rail ListBoxItem">
+    <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="LetterSpacing" Value="1" />
+    <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+    <Setter Property="Cursor" Value="Hand" />
+  </Style>
+  <Style Selector="TabControl.rail TabItem">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel Name="Row" Background="Transparent">
+          <Rectangle Name="Gem" Width="6" Height="6" Margin="14,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"
+                     Fill="{StaticResource Gold500Brush}" RenderTransform="rotate(45deg)" IsVisible="False" />
+          <ContentPresenter Name="PART_HeaderPresenter" Margin="32,9,20,9" Content="{TemplateBinding Header}"
+                            ContentTemplate="{TemplateBinding HeaderTemplate}" Foreground="{TemplateBinding Foreground}" />
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="ListBox.rail">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="ItemsPanel">
+      <ItemsPanelTemplate>
+        <StackPanel Spacing="2" />
+      </ItemsPanelTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="ListBox.rail ListBoxItem">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel Name="Row" Background="Transparent">
+          <Rectangle Name="Gem" Width="6" Height="6" Margin="14,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"
+                     Fill="{StaticResource Gold500Brush}" RenderTransform="rotate(45deg)" IsVisible="False" />
+          <ContentPresenter Name="PART_ContentPresenter" Margin="32,9,20,9" Background="Transparent"
+                            Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+                            Foreground="{TemplateBinding Foreground}" />
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="TabControl.rail TabItem:pointerover, ListBox.rail ListBoxItem:pointerover">
+    <Setter Property="Foreground" Value="{StaticResource Gold300Brush}" />
+  </Style>
+  <Style Selector="TabControl.rail TabItem:selected, ListBox.rail ListBoxItem:selected">
+    <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+  </Style>
+  <Style Selector="TabControl.rail TabItem:selected /template/ Panel#Row, ListBox.rail ListBoxItem:selected /template/ Panel#Row">
+    <Setter Property="Background" Value="#0FB49B6C" />
+  </Style>
+  <Style Selector="TabControl.rail TabItem:selected /template/ Rectangle#Gem, ListBox.rail ListBoxItem:selected /template/ Rectangle#Gem">
+    <Setter Property="IsVisible" Value="True" />
+  </Style>
+  <Style Selector="TabControl.rail TabItem.dev, TabControl.rail TabItem.dev:selected">
+    <Setter Property="Foreground" Value="{StaticResource WarnBrush}" />
+  </Style>
+  <!-- Fluent paints its own fill behind a list item's content: the rail's row shows the selection instead. -->
+  <Style Selector="ListBox.rail ListBoxItem /template/ ContentPresenter#PART_ContentPresenter, ListBox.rail ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter, ListBox.rail ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter, ListBox.rail ListBoxItem:selected:pointerover /template/ ContentPresenter#PART_ContentPresenter, ListBox.rail ListBoxItem:pressed /template/ ContentPresenter#PART_ContentPresenter, ListBox.rail ListBoxItem:selected:focus /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent" />
+  </Style>
+
+  <!-- The page's footer, only where it holds an action or a status: a hairline above, under the section only. -->
+  <Style Selector="Border.pagefoot">
+    <Setter Property="BorderBrush" Value="{StaticResource LineFaintBrush}" />
+    <Setter Property="BorderThickness" Value="0,1,0,0" />
+    <Setter Property="MinHeight" Value="52" />
+    <Setter Property="Padding" Value="32,8" />
+  </Style>
+  <!-- A section's body: 20/36/20/32 around, 14 between blocks. -->
+  <Style Selector="StackPanel.page">
+    <Setter Property="Margin" Value="32,20,36,20" />
+    <Setter Property="Spacing" Value="14" />
+  </Style>
+  <Style Selector="TextBlock.flabel">
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="LineHeight" Value="20" />
+    <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="TextWrapping" Value="Wrap" />
+  </Style>
+  <Style Selector="TextBlock.flabel.off">
+    <Setter Property="Foreground" Value="{StaticResource TextDisabledBrush}" />
+  </Style>
+  <!-- A grey status line in a section ("Bloodborne v01.09 is ready.", "Cache: 214 MB"). -->
+  <Style Selector="TextBlock.tabstatus">
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="LineHeight" Value="19" />
+    <Setter Property="TextWrapping" Value="Wrap" />
+    <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+  </Style>
+  <Style Selector="TextBlock.tabstatus.ok">
+    <Setter Property="Foreground" Value="{StaticResource SuccessBrush}" />
+  </Style>
+  <Style Selector="TextBlock.tabstatus.error">
+    <Setter Property="Foreground" Value="{StaticResource ErrorBrush}" />
+  </Style>
+  <Style Selector="TextBlock.tabstatus.warn">
+    <Setter Property="Foreground" Value="{StaticResource WarnBrush}" />
+  </Style>
+  <!-- A hairline between groups. -->
+  <Style Selector="Rectangle.rule">
+    <Setter Property="Height" Value="1" />
+    <Setter Property="Fill" Value="{StaticResource LineFaintBrush}" />
+  </Style>
+  <!-- A diamond marking a status line: filled (ok, error) or outlined (warning). -->
+  <Style Selector="Rectangle.mark">
+    <Setter Property="Width" Value="6" />
+    <Setter Property="Height" Value="6" />
+    <Setter Property="RenderTransform" Value="rotate(45deg)" />
+  </Style>
+
+  <!-- ===================== v9 ===================== -->
+  <!-- The page's left column (Patches' sections, the trophies' filters): 208 wide, 184 in the narrow window. -->
+  <Style Selector="Border.railcol">
+    <Setter Property="Width" Value="208" />
+    <Setter Property="BorderBrush" Value="{StaticResource LineFaintBrush}" />
+    <Setter Property="BorderThickness" Value="0,0,1,0" />
+    <Setter Property="Padding" Value="0,18" />
+  </Style>
+  <Style Selector="TextBlock.railgroup">
+    <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+    <Setter Property="FontWeight" Value="Bold" />
+    <Setter Property="FontSize" Value="13" />
+    <Setter Property="LetterSpacing" Value="1.3" />
+    <Setter Property="Margin" Value="32,0,20,4" />
+    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+    <Setter Property="Foreground" Value="{StaticResource Gold500Brush}" />
+  </Style>
+  <Style Selector="Rectangle.raildiv">
+    <Setter Property="Height" Value="1" />
+    <Setter Property="Margin" Value="20,12,20,10" />
+    <Setter Property="Fill" Value="{StaticResource LineFaintBrush}" />
+  </Style>
+  <Style Selector="TextBlock.railn">
+    <Setter Property="FontFamily" Value="{StaticResource FontMono}" />
+    <Setter Property="FontSize" Value="11" />
+    <Setter Property="FontWeight" Value="Normal" />
+    <Setter Property="LetterSpacing" Value="0" />
+    <Setter Property="Margin" Value="10,0,0,0" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+  </Style>
+  <Style Selector="Button.active TextBlock.railn">
+    <Setter Property="Foreground" Value="{StaticResource Gold500Brush}" />
+  </Style>
+
+  <!-- The main button of a dialog (Download): a gold rim; blood stays Play's alone. -->
+  <Style Selector="Button.bb.primary">
+    <Setter Property="BorderBrush" Value="{StaticResource Gold500Brush}" />
+    <Setter Property="Foreground" Value="{StaticResource Gold300Brush}" />
+    <Setter Property="Background" Value="{StaticResource Stone400Brush}" />
+  </Style>
+  <!-- A dialog over the title screen: stone, a gold rim with light gold corners (drawn by the view), the window's shadow. -->
+  <Style Selector="Border.dialog">
+    <Setter Property="Background" Value="{StaticResource Stone200Brush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource Gold700Brush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="Padding" Value="28,24,28,22" />
+    <Setter Property="BoxShadow" Value="0 18 56 0 #B3000000" />
+  </Style>
+  <Style Selector="TextBlock.dtitle">
+    <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+    <Setter Property="FontSize" Value="22" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="LineHeight" Value="28" />
+    <Setter Property="LetterSpacing" Value="1.8" />
+    <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+  </Style>
+  <Style Selector="TextBlock.dtext">
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="LineHeight" Value="22" />
+    <Setter Property="TextWrapping" Value="Wrap" />
+    <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+  </Style>
+  <Style Selector="TextBlock.dnote">
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="LineHeight" Value="19" />
+    <Setter Property="TextWrapping" Value="Wrap" />
+    <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+  </Style>
+  <!-- A field's grey italic note ("set in the game"). -->
+  <Style Selector="TextBlock.hint.note">
+    <Setter Property="FontStyle" Value="Italic" />
+  </Style>
+  <!-- A section header (v9): caps 14 bold gold, a hairline to the right; its buttons after it. -->
+  <Style Selector="Grid.sechead > Rectangle">
+    <Setter Property="Grid.Column" Value="1" />
+    <Setter Property="Height" Value="1" />
+    <Setter Property="Margin" Value="12,0" />
+    <Setter Property="Fill" Value="{StaticResource LineFaintBrush}" />
+  </Style>
+  <!-- A status line with its diamond (Game, Emulator, Steam). -->
+  <Style Selector="TextBlock.srow">
+    <Setter Property="FontSize" Value="15" />
+    <Setter Property="LineHeight" Value="20" />
+    <Setter Property="TextWrapping" Value="Wrap" />
+    <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+  </Style>
+  <Style Selector="TextBlock.srow.warn">
+    <Setter Property="Foreground" Value="{StaticResource WarnBrush}" />
+  </Style>
+  <Style Selector="TextBlock.srow.error">
+    <Setter Property="Foreground" Value="{StaticResource ErrorBrush}" />
+  </Style>
+  <!-- Key - value pairs (the PKG install): the key grey 14, the value bone 15. -->
+  <Style Selector="TextBlock.kvk">
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="LineHeight" Value="19" />
+    <Setter Property="Margin" Value="0,0,16,6" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+  </Style>
+  <Style Selector="TextBlock.kvv">
+    <Setter Property="FontSize" Value="15" />
+    <Setter Property="LineHeight" Value="20" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+    <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+  </Style>
+
+  <!-- ===================== The narrow window (720x480, MainWindow sets .narrow below about 800) ===================== -->
+  <Style Selector=".narrow Border.railcol">
+    <Setter Property="Width" Value="184" />
+    <Setter Property="Padding" Value="0,10" />
+  </Style>
+  <Style Selector=".narrow TextBlock.railgroup">
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="LetterSpacing" Value="0.7" />
+    <Setter Property="Margin" Value="24,2,8,4" />
+  </Style>
+  <Style Selector=".narrow Rectangle.raildiv">
+    <Setter Property="Margin" Value="20,6,20,6" />
+  </Style>
+  <Style Selector=".narrow Button.ri">
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="LetterSpacing" Value="0.3" />
+    <Setter Property="Padding" Value="24,6,8,6" />
+  </Style>
+  <Style Selector=".narrow Button.ri.rank">
+    <Setter Property="Padding" Value="24,4,8,4" />
+  </Style>
+  <Style Selector=".narrow Button.ri /template/ Rectangle#Gem">
+    <Setter Property="Margin" Value="10,0,0,0" />
+  </Style>
+  <Style Selector=".narrow TabControl.rail TabItem, .narrow ListBox.rail ListBoxItem">
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="LetterSpacing" Value="0.3" />
+  </Style>
+  <Style Selector=".narrow TabControl.rail TabItem /template/ ContentPresenter#PART_HeaderPresenter, .narrow ListBox.rail ListBoxItem /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Margin" Value="24,6,8,6" />
+  </Style>
+  <Style Selector=".narrow TabControl.rail TabItem /template/ Rectangle#Gem, .narrow ListBox.rail ListBoxItem /template/ Rectangle#Gem">
+    <Setter Property="Margin" Value="10,0,0,0" />
+  </Style>
+  <Style Selector=".narrow TabControl.rail /template/ Border#Rail">
+    <Setter Property="Width" Value="184" />
+    <Setter Property="Padding" Value="0,10" />
+  </Style>
+  <Style Selector=".narrow StackPanel.page">
+    <Setter Property="Margin" Value="22,16,26,18" />
+    <Setter Property="Spacing" Value="12" />
+  </Style>
+  <Style Selector=".narrow Border.pagefoot">
+    <Setter Property="Padding" Value="22,8" />
+  </Style>
+  <Style Selector=".narrow views|FieldPanel">
+    <Setter Property="Narrow" Value="True" />
+  </Style>
+  <Style Selector=".narrow views|SplitPanel">
+    <Setter Property="Narrow" Value="True" />
+  </Style>
+  <Style Selector=".narrow TabStrip StackPanel">
+    <Setter Property="Spacing" Value="22" />
+  </Style>
+  <Style Selector=".narrow TabStripItem">
+    <Setter Property="FontSize" Value="16" />
+  </Style>
+</Styles>

@@ -1,0 +1,21 @@
+Hunters' Accord co-op mod - binary licence
+Copyright (c) 2026 HappyEntity. All rights reserved.
+
+This licence covers the co-op mod shipped in the "mod" folder of a Hunters' Accord release (huntersaccord.dll /
+libhuntersaccord.so / libhuntersaccord.dylib and the files next to it). The mod is closed source; the launcher's
+source is published separately under the MIT License at https://github.com/HappyEntity/HuntersAccord.
+
+You may:
+- use the mod free of charge with your own legally obtained copy of Bloodborne;
+- share an official Hunters' Accord release unmodified and free of charge, this file included.
+
+You may not:
+- reverse engineer, decompile or disassemble the mod, except where the law allows it regardless of this licence;
+- modify the mod or distribute modified copies of it;
+- sell the mod, or distribute it for a fee or as part of a paid product or service.
+
+The mod is provided "as is", without warranty of any kind. In no event shall the authors be liable for any claim,
+damages or other liability arising from its use.
+
+Bloodborne is a trademark of Sony Interactive Entertainment. Hunters' Accord is a fan project, not affiliated with
+or endorsed by Sony Interactive Entertainment or FromSoftware.

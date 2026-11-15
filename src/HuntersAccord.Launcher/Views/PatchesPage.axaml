@@ -1,0 +1,374 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:HuntersAccord.Launcher.ViewModels"
+             xmlns:views="using:HuntersAccord.Launcher.Views"
+             xmlns:loc="using:HuntersAccord.Launcher.Localization"
+             x:Class="HuntersAccord.Launcher.Views.PatchesPage"
+             x:DataType="vm:PatchesViewModel">
+  <UserControl.Styles>
+    <Style Selector="Border.feature">
+      <Setter Property="Background" Value="#0FB49B6C" />
+      <Setter Property="BorderBrush" Value="{StaticResource Gold700Brush}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Padding" Value="14,12,16,12" />
+    </Style>
+    <Style Selector="Path.corner">
+      <Setter Property="Stroke" Value="{StaticResource Gold300Brush}" />
+      <Setter Property="StrokeThickness" Value="1" />
+      <Setter Property="IsHitTestVisible" Value="False" />
+    </Style>
+    <Style Selector="Panel.locked Border.feature">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderBrush" Value="{StaticResource LineFaintBrush}" />
+    </Style>
+    <Style Selector="Panel.locked Path.corner">
+      <Setter Property="Stroke" Value="{StaticResource LineFaintBrush}" />
+    </Style>
+    <Style Selector="Panel.locked Border.badge">
+      <Setter Property="Background" Value="{StaticResource Stone400Brush}" />
+    </Style>
+    <Style Selector="Panel.locked Border.badge > TextBlock">
+      <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+    </Style>
+    <!-- The note under the card: an outlined ash diamond and a grey line. -->
+    <Style Selector="TextBlock.fnote">
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="LineHeight" Value="19" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+      <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+    </Style>
+    <!-- The files block at the bottom of the rail: the patch files' date or warning, Update, Developer mode. -->
+    <Style Selector="Border.railbox">
+      <Setter Property="Margin" Value="32,0,20,0" />
+      <Setter Property="Padding" Value="0,14,0,0" />
+      <Setter Property="BorderBrush" Value="{StaticResource LineFaintBrush}" />
+      <Setter Property="BorderThickness" Value="0,1,0,0" />
+    </Style>
+    <Style Selector="TextBlock.railstatus">
+      <Setter Property="MaxWidth" Value="156" />
+      <Setter Property="HorizontalAlignment" Value="Left" />
+      <Setter Property="FontSize" Value="13" />
+      <Setter Property="LineHeight" Value="18" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+      <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+    </Style>
+    <Style Selector="TextBlock.railstatus.date">
+      <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+    </Style>
+    <Style Selector="TextBlock.railstatus.warn">
+      <Setter Property="Foreground" Value="{StaticResource WarnBrush}" />
+    </Style>
+    <!-- A line above the list (the game running, a patch turned off, the debug font): a diamond, then the text. -->
+    <Style Selector="TextBlock.tabstatus">
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="LineHeight" Value="19" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+      <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+    </Style>
+    <Style Selector="TextBlock.tabstatus.warn">
+      <Setter Property="Foreground" Value="{StaticResource WarnBrush}" />
+    </Style>
+    <!-- The game is running: the sections can still be looked at, but read as locked. -->
+    <Style Selector="ListBox.rail.locked ListBoxItem">
+      <Setter Property="Foreground" Value="{StaticResource TextDisabledBrush}" />
+    </Style>
+    <Style Selector="ListBox.rail.locked ListBoxItem:selected">
+      <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+    </Style>
+    <Style Selector="ListBox.rail ListBoxItem TextBlock.dev">
+      <Setter Property="Foreground" Value="{StaticResource WarnBrush}" />
+    </Style>
+    <!-- The heading item: not a section (disabled, no hover, no selection), only its hairline and gold caps. -->
+    <Style Selector="ListBox.rail ListBoxItem.heading">
+      <Setter Property="Cursor" Value="Arrow" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <ContentPresenter Margin="20,12,20,8" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" />
+        </ControlTemplate>
+      </Setter>
+    </Style>
+    <Style Selector="TextBlock.railhead">
+      <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+      <Setter Property="FontSize" Value="13" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="LetterSpacing" Value="1.8" />
+      <Setter Property="Margin" Value="12,0,0,0" />
+      <Setter Property="Foreground" Value="{StaticResource Gold500Brush}" />
+    </Style>
+    <!-- v9: the column is 208 (184 narrow): its items a little tighter so "Производительность" fits. -->
+    <Style Selector="ListBox.rail ListBoxItem">
+      <Setter Property="LetterSpacing" Value="0.3" />
+    </Style>
+    <Style Selector="ListBox.rail ListBoxItem:not(.heading) /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Margin" Value="32,9,6,9" />
+    </Style>
+    <Style Selector=".narrow ListBox.rail ListBoxItem:not(.heading) /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Margin" Value="24,6,6,6" />
+    </Style>
+    <Style Selector=".narrow Border.railbox">
+      <Setter Property="Margin" Value="22,0,12,0" />
+    </Style>
+    <Style Selector=".narrow TextBlock.railhead">
+      <Setter Property="FontSize" Value="12" />
+      <Setter Property="LetterSpacing" Value="1" />
+      <Setter Property="Margin" Value="4,0,0,0" />
+    </Style>
+  </UserControl.Styles>
+
+  <Panel>
+    <!-- The sections: rail on the left with the patch files' block at its bottom, the list on the right; no footer. -->
+    <Grid ColumnDefinitions="Auto,*" IsVisible="{Binding !ShowFeaturedDetails}">
+      <Border Classes="railcol">
+        <DockPanel>
+          <!-- The community patches' files: they belong to the sections, so they live under them, not under the page. -->
+          <Border DockPanel.Dock="Bottom" Classes="railbox">
+            <StackPanel Spacing="10">
+              <!-- "Patch files" and the date (or the running bar while updating); a warning alone when they are missing. -->
+              <StackPanel IsVisible="{Binding !ShowFilesWarning}">
+                <TextBlock Classes="railstatus" Text="{loc:Tr Patches.FilesHead}" />
+                <TextBlock Classes="railstatus date" Text="{Binding FilesStatus.Text}" IsVisible="{Binding ShowFilesDate}" />
+              </StackPanel>
+              <ProgressBar Margin="0,4" IsIndeterminate="True" IsVisible="{Binding IsUpdating}" />
+              <TextBlock Classes="railstatus warn" Text="{Binding FilesStatus.Text}" IsVisible="{Binding ShowFilesWarning}" />
+              <Button Classes="bb" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                      Content="{loc:Tr Patches.Refresh}" Command="{Binding RefreshCommand}" IsEnabled="{Binding CanUpdate}"
+                      ToolTip.Tip="{loc:Tr Patches.RefreshSource}" ToolTip.ShowOnDisabled="True" />
+              <!-- Hidden until the versions on Play are clicked 5 times (or it is already on); under a dashed amber line. -->
+              <StackPanel Spacing="10" IsVisible="{Binding ShowDeveloperMode}">
+                <Line StartPoint="0,0.5" EndPoint="1,0.5" Stretch="Fill" Height="1" StrokeThickness="1" StrokeDashArray="3,3"
+                      Stroke="#4DD2A85C" />
+                <CheckBox IsEnabled="{Binding IsEditable}" IsChecked="{Binding DeveloperMode}"
+                          ToolTip.Tip="{loc:Tr Play.DeveloperModeTip}">
+                  <TextBlock FontSize="14" Foreground="{StaticResource WarnBrush}" Text="{loc:Tr Play.DeveloperMode}" />
+                </CheckBox>
+              </StackPanel>
+            </StackPanel>
+          </Border>
+          <ListBox Classes="rail" Classes.locked="{Binding IsLocked}" ItemsSource="{Binding RailItems}"
+                   SelectedItem="{Binding SelectedSection}" ContainerPrepared="OnRailContainerPrepared">
+            <ListBox.DataTemplates>
+              <DataTemplate DataType="vm:PatchSectionViewModel">
+                <TextBlock Classes.dev="{Binding DeveloperOnly}" Text="{Binding Title.Text}" />
+              </DataTemplate>
+              <!-- A hairline, then the community patches' heading in small gold caps. -->
+              <DataTemplate DataType="vm:PatchRailHeading">
+                <StackPanel Spacing="14">
+                  <Rectangle Height="1" Fill="{StaticResource LineFaintBrush}" />
+                  <TextBlock Classes="railhead" Text="{Binding Title.Text}" />
+                </StackPanel>
+              </DataTemplate>
+            </ListBox.DataTemplates>
+          </ListBox>
+        </DockPanel>
+      </Border>
+
+      <ScrollViewer Grid.Column="1">
+        <StackPanel Classes="page">
+          <TextBlock Classes="small" MaxWidth="720" HorizontalAlignment="Left" Text="{loc:Tr Patches.HuntersAccordHint}"
+                     IsVisible="{Binding SelectedSection.IsHuntersAccord, FallbackValue=False}" />
+          <TextBlock Classes="small" MaxWidth="720" HorizontalAlignment="Left" Text="{loc:Tr Patches.Hint}"
+                     IsVisible="{Binding !SelectedSection.IsHuntersAccord, FallbackValue=False}" />
+
+          <Grid ColumnDefinitions="Auto,*" IsVisible="{Binding IsLocked}">
+            <Rectangle Classes="mark" Margin="0,7,8,0" VerticalAlignment="Top" Stroke="{StaticResource WarnBrush}" StrokeThickness="1" />
+            <TextBlock Grid.Column="1" Classes="tabstatus warn" Text="{loc:Tr Patches.GameRunning}" />
+          </Grid>
+          <Grid ColumnDefinitions="Auto,*" IsVisible="{Binding ShowNotice}">
+            <Rectangle Classes="mark" Margin="0,7,8,0" VerticalAlignment="Top" Stroke="{StaticResource WarnBrush}" StrokeThickness="1"
+                       IsVisible="{Binding NoticeIsWarning}" />
+            <TextBlock Grid.Column="1" Classes="tabstatus" Classes.warn="{Binding NoticeIsWarning}" Text="{Binding Notice.Text}" />
+          </Grid>
+
+          <Panel Classes.locked="{Binding IsLocked}" Margin="0,0,0,4" IsVisible="{Binding SelectedSection.IsHuntersAccord, FallbackValue=False}">
+            <Border Classes="feature">
+              <StackPanel>
+                <CheckBox Classes="locked" IsChecked="{Binding Featured.IsOn}" IsEnabled="{Binding Featured.CanToggle}">
+                  <StackPanel>
+                    <WrapPanel Orientation="Horizontal">
+                      <TextBlock Classes="label" Text="{Binding Featured.Name.Text}" />
+                      <Border Classes="badge" Margin="10,0,0,0" VerticalAlignment="Center">
+                        <TextBlock Text="{loc:Tr Patches.Recommended}" />
+                      </Border>
+                    </WrapPanel>
+                    <TextBlock Classes="desc" Text="{Binding Featured.Help}" />
+                  </StackPanel>
+                </CheckBox>
+                <!-- Outside the check box: the page opens also while the game runs. -->
+                <StackPanel Margin="28,4,0,0" Spacing="6">
+                  <Button Theme="{StaticResource LinkButton}" FontSize="15" HorizontalAlignment="Left"
+                          Content="{loc:Tr Patches.LearnMore}" Command="{Binding OpenFeaturedDetailsCommand}" />
+                  <Grid ColumnDefinitions="Auto,*" IsVisible="{Binding ShowFeaturedNote}">
+                    <Rectangle Width="5" Height="5" Margin="0,7,9,0" VerticalAlignment="Top" RenderTransform="rotate(45deg)"
+                               Stroke="{StaticResource Ash300Brush}" StrokeThickness="1" />
+                    <TextBlock Grid.Column="1" Classes="fnote" Text="{Binding FeaturedNote.Text}" />
+                  </Grid>
+                </StackPanel>
+              </StackPanel>
+            </Border>
+            <Path Classes="corner" HorizontalAlignment="Left" VerticalAlignment="Top" Data="M0.5,10 V0.5 H10" />
+            <Path Classes="corner" HorizontalAlignment="Right" VerticalAlignment="Bottom" Data="M0,9.5 H9.5 V0" />
+          </Panel>
+
+          <Panel Classes.locked="{Binding IsLocked}" Margin="0,0,0,4" IsVisible="{Binding SelectedSection.IsHuntersAccord, FallbackValue=False}">
+            <Border Classes="feature">
+              <StackPanel>
+                <CheckBox Classes="locked" IsChecked="{Binding HuntersAccord.KeyboardMouse}" IsEnabled="{Binding HuntersAccord.IsEditable}">
+                  <StackPanel>
+                    <WrapPanel Orientation="Horizontal">
+                      <TextBlock Classes="label" Text="{loc:Tr Patches.KeyboardMouse}" />
+                      <Border Classes="badge" Margin="10,0,0,0" VerticalAlignment="Center">
+                        <TextBlock Text="{loc:Tr Patches.Recommended}" />
+                      </Border>
+                    </WrapPanel>
+                    <TextBlock Classes="desc" Text="{loc:Tr Patches.KeyboardMouseHelp}" />
+                  </StackPanel>
+                </CheckBox>
+                <StackPanel Margin="28,10,0,0" Spacing="10">
+                  <CheckBox Classes="locked" IsChecked="{Binding HuntersAccord.MouseCamera}" IsEnabled="{Binding HuntersAccord.CanToggleSub}">
+                    <TextBlock Classes="label" Text="{loc:Tr Patches.MouseCamera}" />
+                  </CheckBox>
+                  <CheckBox Classes="locked" IsChecked="{Binding HuntersAccord.KeyPrompts}" IsEnabled="{Binding HuntersAccord.CanToggleSub}">
+                    <StackPanel>
+                      <TextBlock Classes="label" Text="{loc:Tr Patches.KeyPrompts}" />
+                      <TextBlock Classes="desc" Text="{loc:Tr Patches.KeyPromptsHelp}" />
+                    </StackPanel>
+                  </CheckBox>
+                  <CheckBox Classes="locked" Margin="28,0,0,0" IsChecked="{Binding HuntersAccord.KeyIcons}" IsEnabled="{Binding HuntersAccord.CanToggleIcons}">
+                    <StackPanel>
+                      <TextBlock Classes="label" Text="{loc:Tr Patches.KeyIcons}" />
+                      <TextBlock Classes="desc" Text="{loc:Tr Patches.KeyIconsHelp}" />
+                    </StackPanel>
+                  </CheckBox>
+                  <Grid ColumnDefinitions="Auto,*">
+                    <Rectangle Width="5" Height="5" Margin="0,7,9,0" VerticalAlignment="Top" RenderTransform="rotate(45deg)"
+                               Stroke="{StaticResource Ash300Brush}" StrokeThickness="1" />
+                    <TextBlock Grid.Column="1" Classes="fnote" Text="{loc:Tr Patches.KeyboardMouseNote}" />
+                  </Grid>
+                </StackPanel>
+              </StackPanel>
+            </Border>
+            <Path Classes="corner" HorizontalAlignment="Left" VerticalAlignment="Top" Data="M0.5,10 V0.5 H10" />
+            <Path Classes="corner" HorizontalAlignment="Right" VerticalAlignment="Bottom" Data="M0,9.5 H9.5 V0" />
+          </Panel>
+
+          <!-- Co-op enemy scaling: a card as the keyboard's, the percentages under its box (the host's count). -->
+          <Panel Classes.locked="{Binding IsLocked}" Margin="0,0,0,4" IsVisible="{Binding SelectedSection.IsHuntersAccord, FallbackValue=False}">
+            <Border Classes="feature">
+              <StackPanel>
+                <CheckBox Classes="locked" IsChecked="{Binding HuntersAccord.CoopScaling}" IsEnabled="{Binding HuntersAccord.IsEditable}">
+                  <StackPanel>
+                    <TextBlock Classes="label" Text="{loc:Tr Patches.CoopScaling}" />
+                    <TextBlock Classes="desc" Text="{loc:Tr Patches.CoopScalingHelp}" />
+                  </StackPanel>
+                </CheckBox>
+                <StackPanel Margin="28,10,0,0" Spacing="4">
+                  <Grid ColumnDefinitions="180,240,Auto">
+                    <TextBlock Classes="label" FontSize="16" FontWeight="Medium" VerticalAlignment="Center" Text="{loc:Tr Patches.ScaleEnemyHp}" />
+                    <Slider Grid.Column="1" Minimum="0" Maximum="200" SmallChange="5" LargeChange="25" IsSnapToTickEnabled="True"
+                            TickFrequency="5" Value="{Binding HuntersAccord.ScaleEnemyHp}" IsEnabled="{Binding HuntersAccord.CanEditScaling}" />
+                    <TextBlock Grid.Column="2" Classes="value" MinWidth="56" Margin="14,0,0,0" TextAlignment="Right"
+                               VerticalAlignment="Center" Text="{Binding HuntersAccord.ScaleEnemyHpText}" />
+                  </Grid>
+                  <Grid ColumnDefinitions="180,240,Auto">
+                    <TextBlock Classes="label" FontSize="16" FontWeight="Medium" VerticalAlignment="Center" Text="{loc:Tr Patches.ScaleEnemyDamage}" />
+                    <Slider Grid.Column="1" Minimum="0" Maximum="200" SmallChange="5" LargeChange="25" IsSnapToTickEnabled="True"
+                            TickFrequency="5" Value="{Binding HuntersAccord.ScaleEnemyDamage}" IsEnabled="{Binding HuntersAccord.CanEditScaling}" />
+                    <TextBlock Grid.Column="2" Classes="value" MinWidth="56" Margin="14,0,0,0" TextAlignment="Right"
+                               VerticalAlignment="Center" Text="{Binding HuntersAccord.ScaleEnemyDamageText}" />
+                  </Grid>
+                  <Grid ColumnDefinitions="180,240,Auto">
+                    <TextBlock Classes="label" FontSize="16" FontWeight="Medium" VerticalAlignment="Center" Text="{loc:Tr Patches.ScaleBossHp}" />
+                    <Slider Grid.Column="1" Minimum="0" Maximum="200" SmallChange="5" LargeChange="25" IsSnapToTickEnabled="True"
+                            TickFrequency="5" Value="{Binding HuntersAccord.ScaleBossHp}" IsEnabled="{Binding HuntersAccord.CanEditScaling}" />
+                    <TextBlock Grid.Column="2" Classes="value" MinWidth="56" Margin="14,0,0,0" TextAlignment="Right"
+                               VerticalAlignment="Center" Text="{Binding HuntersAccord.ScaleBossHpText}" />
+                  </Grid>
+                  <Grid ColumnDefinitions="180,240,Auto">
+                    <TextBlock Classes="label" FontSize="16" FontWeight="Medium" VerticalAlignment="Center" Text="{loc:Tr Patches.ScaleBossDamage}" />
+                    <Slider Grid.Column="1" Minimum="0" Maximum="200" SmallChange="5" LargeChange="25" IsSnapToTickEnabled="True"
+                            TickFrequency="5" Value="{Binding HuntersAccord.ScaleBossDamage}" IsEnabled="{Binding HuntersAccord.CanEditScaling}" />
+                    <TextBlock Grid.Column="2" Classes="value" MinWidth="56" Margin="14,0,0,0" TextAlignment="Right"
+                               VerticalAlignment="Center" Text="{Binding HuntersAccord.ScaleBossDamageText}" />
+                  </Grid>
+                  <Grid ColumnDefinitions="Auto,*" Margin="0,4,0,0">
+                    <Rectangle Width="5" Height="5" Margin="0,7,9,0" VerticalAlignment="Top" RenderTransform="rotate(45deg)"
+                               Stroke="{StaticResource Ash300Brush}" StrokeThickness="1" />
+                    <TextBlock Grid.Column="1" Classes="fnote" Text="{loc:Tr Patches.CoopScalingNote}" />
+                  </Grid>
+                </StackPanel>
+              </StackPanel>
+            </Border>
+            <Path Classes="corner" HorizontalAlignment="Left" VerticalAlignment="Top" Data="M0.5,10 V0.5 H10" />
+            <Path Classes="corner" HorizontalAlignment="Right" VerticalAlignment="Bottom" Data="M0,9.5 H9.5 V0" />
+          </Panel>
+
+          <!-- Rest at lamps: a plain row (the frame's padding on the left, so its box lines up with the cards'). -->
+          <CheckBox Classes="locked" Margin="15,0,0,0" IsChecked="{Binding HuntersAccord.LampRest}" IsEnabled="{Binding HuntersAccord.IsEditable}"
+                    IsVisible="{Binding SelectedSection.IsHuntersAccord, FallbackValue=False}">
+            <StackPanel>
+              <TextBlock Classes="label" Text="{loc:Tr Patches.LampRest}" />
+              <TextBlock Classes="desc" Text="{loc:Tr Patches.LampRestHelp}" />
+            </StackPanel>
+          </CheckBox>
+
+          <!-- Short start-up logos: a plain row as the Rest's. -->
+          <CheckBox Classes="locked" Margin="15,0,0,0" IsChecked="{Binding HuntersAccord.SkipLogos}" IsEnabled="{Binding HuntersAccord.IsEditable}"
+                    IsVisible="{Binding SelectedSection.IsHuntersAccord, FallbackValue=False}">
+            <StackPanel>
+              <TextBlock Classes="label" Text="{loc:Tr Patches.SkipLogos}" />
+              <TextBlock Classes="desc" Text="{loc:Tr Patches.SkipLogosHelp}" />
+            </StackPanel>
+          </CheckBox>
+
+          <!-- Graphics: what moved into the game's own screen. -->
+          <Grid ColumnDefinitions="Auto,*" IsVisible="{Binding SelectedSection.IsGraphics, FallbackValue=False}">
+            <Rectangle Classes="mark" Margin="0,7,8,0" VerticalAlignment="Top" Stroke="{StaticResource Ash500Brush}" StrokeThickness="1" />
+            <TextBlock Grid.Column="1" Classes="tabstatus" Text="{loc:Tr Patches.GraphicsHint}" />
+          </Grid>
+
+          <!-- While the game runs the sections still switch (the list can be looked at); only the boxes are locked. -->
+          <ItemsControl ItemsSource="{Binding SelectedSection.Rows}">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <StackPanel Spacing="10" />
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="vm:PatchOptionViewModel">
+                <CheckBox IsChecked="{Binding IsOn}" IsEnabled="{Binding CanToggle}" Classes.locked="{Binding IsAvailable}">
+                  <StackPanel>
+                    <WrapPanel Orientation="Horizontal">
+                      <TextBlock Classes="label" Text="{Binding Name.Text}" />
+                      <Border Classes="tag" IsVisible="{Binding !IsAvailable}">
+                        <TextBlock Text="{Binding UnavailableTag.Text}" />
+                      </Border>
+                      <Border Classes="tag" IsVisible="{Binding IsVSyncPatch}">
+                        <TextBlock Text="{loc:Tr Patches.GamePatchTag}" />
+                      </Border>
+                    </WrapPanel>
+                    <TextBlock Classes="desc" Text="{Binding Help}" />
+                    <!-- Debug menu: is the font there, where to get it, install it from the download. -->
+                    <WrapPanel Orientation="Horizontal" Margin="0,6,0,0" IsVisible="{Binding NeedsDebugFont}">
+                      <Border Classes="tag ok" Margin="0,0,16,0" IsVisible="{Binding DebugFontFound}">
+                        <TextBlock Text="{loc:Tr Patches.FontFound}" />
+                      </Border>
+                      <Border Classes="tag err" Margin="0,0,16,0" IsVisible="{Binding !DebugFontFound}">
+                        <TextBlock Text="{loc:Tr Patches.FontMissing}" />
+                      </Border>
+                      <Button Theme="{StaticResource LinkButton}" FontSize="15" Margin="0,0,16,0"
+                              Content="{loc:Tr Patches.FontDownload}" Command="{Binding OpenDebugFontPageCommand}" />
+                      <Button Theme="{StaticResource LinkButton}" FontSize="15"
+                              Content="{loc:Tr Patches.FontInstall}" Click="OnInstallDebugFont" />
+                    </WrapPanel>
+                  </StackPanel>
+                </CheckBox>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </StackPanel>
+      </ScrollViewer>
+    </Grid>
+
+    <views:Fps60DetailsPage IsVisible="{Binding ShowFeaturedDetails}" />
+  </Panel>
+</UserControl>

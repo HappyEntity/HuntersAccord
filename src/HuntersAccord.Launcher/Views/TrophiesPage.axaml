@@ -1,0 +1,366 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:HuntersAccord.Launcher.ViewModels"
+             xmlns:loc="using:HuntersAccord.Launcher.Localization"
+             xmlns:views="using:HuntersAccord.Launcher.Views"
+             x:Class="HuntersAccord.Launcher.Views.TrophiesPage"
+             x:DataType="vm:TrophiesViewModel">
+  <UserControl.Styles>
+    <!-- The header plate: the platinum on the left, the progress on the right. -->
+    <Style Selector="Border.thead">
+      <Setter Property="Background" Value="#EB16121A" />
+      <Setter Property="BorderBrush" Value="{StaticResource LineFaintBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Padding" Value="18,14" />
+    </Style>
+    <Style Selector=".narrow Border.thead">
+      <Setter Property="Padding" Value="14,12" />
+    </Style>
+    <Style Selector="TextBlock.pname">
+      <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="FontSize" Value="17" />
+      <Setter Property="LineHeight" Value="21" />
+      <Setter Property="LetterSpacing" Value="0.7" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+      <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+    </Style>
+    <Style Selector="TextBlock.pname.got">
+      <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+    </Style>
+    <Style Selector="TextBlock.pstate">
+      <Setter Property="FontSize" Value="13" />
+      <Setter Property="LineHeight" Value="18" />
+      <Setter Property="Margin" Value="0,2,0,0" />
+      <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+    </Style>
+    <Style Selector="TextBlock.pstate.got">
+      <Setter Property="Foreground" Value="{StaticResource Gold500Brush}" />
+    </Style>
+    <Style Selector="TextBlock.tnum">
+      <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="FontSize" Value="19" />
+      <Setter Property="LetterSpacing" Value="0.8" />
+      <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+    </Style>
+    <Style Selector="TextBlock.tmono">
+      <Setter Property="FontFamily" Value="{StaticResource FontMono}" />
+      <Setter Property="FontSize" Value="12" />
+      <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="TextBlock.tmono.held">
+      <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+      <Setter Property="FontWeight" Value="Medium" />
+    </Style>
+    <Style Selector="TextBlock.tmono.of">
+      <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+    </Style>
+    <!-- The toolbar over the list. -->
+    <Style Selector="TextBlock.tcount">
+      <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="LetterSpacing" Value="2" />
+      <Setter Property="Foreground" Value="{StaticResource Gold500Brush}" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="ComboBox.sort">
+      <Setter Property="MinWidth" Value="196" />
+      <Setter Property="MinHeight" Value="30" />
+      <Setter Property="Height" Value="30" />
+      <Setter Property="FontSize" Value="15" />
+    </Style>
+    <!-- A trophy's row. -->
+    <Style Selector="Border.trow">
+      <Setter Property="Padding" Value="6,9,10,9" />
+      <Setter Property="MinHeight" Value="56" />
+      <Setter Property="BorderBrush" Value="{StaticResource LineFaintBrush}" />
+      <Setter Property="BorderThickness" Value="0,0,0,1" />
+      <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style Selector="Border.trow:pointerover">
+      <Setter Property="Background" Value="#0DB49B6C" />
+    </Style>
+    <Style Selector="Border.trow.secret">
+      <Setter Property="Cursor" Value="Hand" />
+    </Style>
+    <Style Selector="TextBlock.tname">
+      <Setter Property="FontSize" Value="16" />
+      <Setter Property="LineHeight" Value="21" />
+      <Setter Property="FontWeight" Value="Medium" />
+      <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+      <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+    </Style>
+    <Style Selector="TextBlock.tname.locked">
+      <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+    </Style>
+    <Style Selector="TextBlock.tname.secret">
+      <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+      <Setter Property="LetterSpacing" Value="3.2" />
+    </Style>
+    <Style Selector="TextBlock.tdesc">
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="LineHeight" Value="18" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+      <Setter Property="MaxLines" Value="2" />
+      <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+      <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+    </Style>
+    <Style Selector=".narrow TextBlock.tdesc">
+      <Setter Property="MaxLines" Value="1" />
+    </Style>
+    <Style Selector="TextBlock.tdesc.locked">
+      <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+    </Style>
+    <Style Selector="TextBlock.tdesc.secret">
+      <Setter Property="FontStyle" Value="Italic" />
+    </Style>
+    <Style Selector="TextBlock.tdate">
+      <Setter Property="FontFamily" Value="{StaticResource FontMono}" />
+      <Setter Property="FontSize" Value="12" />
+      <Setter Property="LineHeight" Value="16" />
+      <Setter Property="HorizontalAlignment" Value="Right" />
+      <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+    </Style>
+    <Style Selector="TextBlock.tcoop">
+      <Setter Property="FontSize" Value="13" />
+      <Setter Property="LineHeight" Value="17" />
+      <Setter Property="Foreground" Value="{StaticResource Gold500Brush}" />
+    </Style>
+    <Style Selector="Border.timp">
+      <Setter Property="BorderBrush" Value="{StaticResource LineControlBrush}" />
+      <Setter Property="BorderThickness" Value="0,0,0,1" />
+      <Setter Property="HorizontalAlignment" Value="Right" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Cursor" Value="Help" />
+    </Style>
+    <Style Selector="Border.timp TextBlock">
+      <Setter Property="FontSize" Value="13" />
+      <Setter Property="LineHeight" Value="17" />
+      <Setter Property="FontStyle" Value="Italic" />
+      <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+    </Style>
+    <Style Selector="Border.timp:pointerover">
+      <Setter Property="BorderBrush" Value="{StaticResource Gold500Brush}" />
+    </Style>
+    <Style Selector="Border.timp:pointerover TextBlock">
+      <Setter Property="Foreground" Value="{StaticResource Gold300Brush}" />
+    </Style>
+    <!-- The empty page. -->
+    <Style Selector="TextBlock.etitle">
+      <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="FontSize" Value="19" />
+      <Setter Property="LetterSpacing" Value="1.1" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+    </Style>
+    <Style Selector="TextBlock.etext">
+      <Setter Property="FontSize" Value="15" />
+      <Setter Property="LineHeight" Value="21" />
+      <Setter Property="MaxWidth" Value="440" />
+      <Setter Property="TextAlignment" Value="Center" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+    </Style>
+  </UserControl.Styles>
+
+  <Grid ColumnDefinitions="Auto,*">
+    <!-- The filters: what to show (one), ranks and parts (several; none on = all). -->
+    <Border Classes="railcol">
+      <ScrollViewer VerticalScrollBarVisibility="Hidden">
+        <StackPanel Spacing="2">
+          <TextBlock Classes="railgroup" Text="{loc:Tr Trophies.Show}" />
+          <Button Theme="{StaticResource RailItem}" Classes="ri" Classes.active="{Binding ShowAll.IsActive}"
+                  Command="{Binding ShowCommand}" CommandParameter="{Binding ShowAll}">
+            <Grid ColumnDefinitions="*,Auto">
+              <TextBlock Text="{Binding ShowAll.Label.Text}" TextTrimming="CharacterEllipsis" />
+              <TextBlock Grid.Column="1" Classes="railn" Text="{Binding ShowAll.Count}" />
+            </Grid>
+          </Button>
+          <Button Theme="{StaticResource RailItem}" Classes="ri" Classes.active="{Binding ShowEarned.IsActive}"
+                  Command="{Binding ShowCommand}" CommandParameter="{Binding ShowEarned}">
+            <Grid ColumnDefinitions="*,Auto">
+              <TextBlock Text="{Binding ShowEarned.Label.Text}" TextTrimming="CharacterEllipsis" />
+              <TextBlock Grid.Column="1" Classes="railn" Text="{Binding ShowEarned.Count}" />
+            </Grid>
+          </Button>
+          <Button Theme="{StaticResource RailItem}" Classes="ri" Classes.active="{Binding ShowNotEarned.IsActive}"
+                  Command="{Binding ShowCommand}" CommandParameter="{Binding ShowNotEarned}">
+            <Grid ColumnDefinitions="*,Auto">
+              <TextBlock Text="{Binding ShowNotEarned.Label.Text}" TextTrimming="CharacterEllipsis" />
+              <TextBlock Grid.Column="1" Classes="railn" Text="{Binding ShowNotEarned.Count}" />
+            </Grid>
+          </Button>
+
+          <Rectangle Classes="raildiv" />
+          <TextBlock Classes="railgroup" Text="{loc:Tr Trophies.Rank}" />
+          <Button Theme="{StaticResource RailItem}" Classes="ri rank" Classes.active="{Binding Platinum.IsActive}"
+                  Command="{Binding ToggleCommand}" CommandParameter="{Binding Platinum}">
+            <Grid ColumnDefinitions="Auto,*,Auto">
+              <Image Width="16" Height="16" Margin="0,0,9,0" VerticalAlignment="Center" Source="{Binding Platinum.Badge}" />
+              <TextBlock Grid.Column="1" Text="{Binding Platinum.Label.Text}" TextTrimming="CharacterEllipsis" />
+              <TextBlock Grid.Column="2" Classes="railn" Text="{Binding Platinum.Count}" />
+            </Grid>
+          </Button>
+          <Button Theme="{StaticResource RailItem}" Classes="ri rank" Classes.active="{Binding Gold.IsActive}"
+                  Command="{Binding ToggleCommand}" CommandParameter="{Binding Gold}">
+            <Grid ColumnDefinitions="Auto,*,Auto">
+              <Image Width="16" Height="16" Margin="0,0,9,0" VerticalAlignment="Center" Source="{Binding Gold.Badge}" />
+              <TextBlock Grid.Column="1" Text="{Binding Gold.Label.Text}" TextTrimming="CharacterEllipsis" />
+              <TextBlock Grid.Column="2" Classes="railn" Text="{Binding Gold.Count}" />
+            </Grid>
+          </Button>
+          <Button Theme="{StaticResource RailItem}" Classes="ri rank" Classes.active="{Binding Silver.IsActive}"
+                  Command="{Binding ToggleCommand}" CommandParameter="{Binding Silver}">
+            <Grid ColumnDefinitions="Auto,*,Auto">
+              <Image Width="16" Height="16" Margin="0,0,9,0" VerticalAlignment="Center" Source="{Binding Silver.Badge}" />
+              <TextBlock Grid.Column="1" Text="{Binding Silver.Label.Text}" TextTrimming="CharacterEllipsis" />
+              <TextBlock Grid.Column="2" Classes="railn" Text="{Binding Silver.Count}" />
+            </Grid>
+          </Button>
+          <Button Theme="{StaticResource RailItem}" Classes="ri rank" Classes.active="{Binding Bronze.IsActive}"
+                  Command="{Binding ToggleCommand}" CommandParameter="{Binding Bronze}">
+            <Grid ColumnDefinitions="Auto,*,Auto">
+              <Image Width="16" Height="16" Margin="0,0,9,0" VerticalAlignment="Center" Source="{Binding Bronze.Badge}" />
+              <TextBlock Grid.Column="1" Text="{Binding Bronze.Label.Text}" TextTrimming="CharacterEllipsis" />
+              <TextBlock Grid.Column="2" Classes="railn" Text="{Binding Bronze.Count}" />
+            </Grid>
+          </Button>
+
+          <Rectangle Classes="raildiv" />
+          <TextBlock Classes="railgroup" Text="{loc:Tr Trophies.Part}" />
+          <Button Theme="{StaticResource RailItem}" Classes="ri" Classes.active="{Binding BaseGame.IsActive}"
+                  Command="{Binding ToggleCommand}" CommandParameter="{Binding BaseGame}">
+            <Grid ColumnDefinitions="*,Auto">
+              <TextBlock Text="{Binding BaseGame.Label.Text}" TextTrimming="CharacterEllipsis" />
+              <TextBlock Grid.Column="1" Classes="railn" Text="{Binding BaseGame.Count}" />
+            </Grid>
+          </Button>
+          <Button Theme="{StaticResource RailItem}" Classes="ri" Classes.active="{Binding OldHunters.IsActive}"
+                  Command="{Binding ToggleCommand}" CommandParameter="{Binding OldHunters}">
+            <Grid ColumnDefinitions="*,Auto">
+              <TextBlock Text="{Binding OldHunters.Label.Text}" TextTrimming="CharacterEllipsis" />
+              <TextBlock Grid.Column="1" Classes="railn" Text="{Binding OldHunters.Count}" />
+            </Grid>
+          </Button>
+        </StackPanel>
+      </ScrollViewer>
+    </Border>
+
+    <ScrollViewer Grid.Column="1" Name="Body">
+      <StackPanel Classes="page">
+        <!-- The header: the platinum, then how many of all with the bar and the counts by rank. -->
+        <Border Classes="thead">
+          <views:SplitPanel>
+            <Grid ColumnDefinitions="52,14,*">
+              <views:TrophyIcon Width="52" Height="52" VerticalAlignment="Center" Picture="{Binding PlatinumPicture}"
+                                Badge="{Binding PlatinumBadge}" Dim="{Binding !HasPlatinum}" />
+              <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                <TextBlock Classes="pname" Classes.got="{Binding HasPlatinum}" Text="{Binding PlatinumName}" />
+                <TextBlock Classes="pstate" Classes.got="{Binding HasPlatinum}" Text="{Binding PlatinumState}" />
+              </StackPanel>
+            </Grid>
+            <StackPanel>
+              <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,8">
+                <TextBlock Classes="tnum" Text="{Binding OfText}" />
+                <TextBlock Grid.Column="1" Classes="tmono" Text="{Binding PercentText}" />
+              </Grid>
+              <views:Meter Height="2" Value="{Binding Percent}" Track="{StaticResource Night000Brush}" Head="{StaticResource Gold300Brush}">
+                <views:Meter.Fill>
+                  <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+                    <GradientStop Offset="0" Color="{StaticResource Gold700}" />
+                    <GradientStop Offset="1" Color="{StaticResource Gold500}" />
+                  </LinearGradientBrush>
+                </views:Meter.Fill>
+              </views:Meter>
+              <StackPanel Orientation="Horizontal" Spacing="18" Margin="0,10,0,0">
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                  <Image Width="18" Height="18" Source="{StaticResource TrophyGold}" />
+                  <TextBlock Classes="tmono held" Text="{Binding GoldHeld}" />
+                  <TextBlock Classes="tmono of" Text="{Binding GoldCount}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                  <Image Width="18" Height="18" Source="{StaticResource TrophySilver}" />
+                  <TextBlock Classes="tmono held" Text="{Binding SilverHeld}" />
+                  <TextBlock Classes="tmono of" Text="{Binding SilverCount}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                  <Image Width="18" Height="18" Source="{StaticResource TrophyBronze}" />
+                  <TextBlock Classes="tmono held" Text="{Binding BronzeHeld}" />
+                  <TextBlock Classes="tmono of" Text="{Binding BronzeCount}" />
+                </StackPanel>
+              </StackPanel>
+            </StackPanel>
+          </views:SplitPanel>
+        </Border>
+
+        <!-- How many are listed; the order. -->
+        <Grid ColumnDefinitions="*,Auto,10,Auto" Margin="0,2,0,0">
+          <TextBlock Classes="tcount" Text="{Binding ListCount}" />
+          <TextBlock Grid.Column="1" Classes="note" VerticalAlignment="Center" Text="{loc:Tr Trophies.Sort}" />
+          <ComboBox Grid.Column="3" Classes="sort" ItemsSource="{Binding SortOptions}" SelectedItem="{Binding SelectedSort}">
+            <ComboBox.ItemTemplate>
+              <DataTemplate x:DataType="vm:TrophySortOption">
+                <TextBlock Text="{Binding Label.Text}" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+        </Grid>
+
+        <Border BorderBrush="{StaticResource LineFaintBrush}" BorderThickness="0,1,0,0">
+          <Panel>
+            <ItemsControl ItemsSource="{Binding Rows}" IsVisible="{Binding !IsEmpty}">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="vm:TrophyRowViewModel">
+                  <!-- A hidden trophy not earned: a click shows it (until the launcher closes). -->
+                  <Border Classes="trow" Classes.secret="{Binding IsSecret}" Tapped="OnRowTapped"
+                          ToolTip.Tip="{loc:Tr Trophies.RevealTip}" ToolTip.IsEnabled="{Binding IsSecret}">
+                    <Grid ColumnDefinitions="36,14,*,Auto">
+                      <views:TrophyIcon Width="36" Height="36" VerticalAlignment="Center" Picture="{Binding Picture}"
+                                        Badge="{Binding Badge}" Dim="{Binding IsLocked}" IsVisible="{Binding HasPicture}" />
+                      <Image Width="36" Height="36" VerticalAlignment="Center" Source="{Binding Badge}" IsVisible="{Binding !HasPicture}" />
+                      <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal">
+                          <TextBlock Classes="tname" Classes.locked="{Binding IsLocked}" Classes.secret="{Binding IsSecret}"
+                                     Text="{Binding Name}" />
+                          <Border Classes="tag" IsVisible="{Binding IsDlc}">
+                            <TextBlock Foreground="{StaticResource Ash300Brush}" Text="{loc:Tr Trophies.Dlc}" />
+                          </Border>
+                        </StackPanel>
+                        <TextBlock Classes="tdesc" Classes.locked="{Binding IsLocked}" Classes.secret="{Binding IsSecret}"
+                                   Text="{Binding Description}" />
+                      </StackPanel>
+                      <StackPanel Grid.Column="3" Margin="14,0,0,0" Spacing="2" VerticalAlignment="Center">
+                        <TextBlock Classes="tdate" Text="{Binding Date}" IsVisible="{Binding HasDate}" />
+                        <StackPanel Orientation="Horizontal" Spacing="7" HorizontalAlignment="Right" IsVisible="{Binding HasPartner}">
+                          <Rectangle Width="5" Height="5" VerticalAlignment="Center" RenderTransform="rotate(45deg)"
+                                     Fill="{StaticResource Gold500Brush}" />
+                          <TextBlock Classes="tcoop" Text="{Binding Partner}" />
+                        </StackPanel>
+                        <Border Classes="timp" IsVisible="{Binding FromSave}" ToolTip.Tip="{loc:Tr Trophies.FromSaveTip}"
+                                ToolTip.Placement="BottomEdgeAlignedRight">
+                          <TextBlock Text="{loc:Tr Trophies.FromSave}" />
+                        </Border>
+                      </StackPanel>
+                    </Grid>
+                  </Border>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <TextBlock Classes="tabstatus" Margin="6,14,0,0" Text="{loc:Tr Trophies.NoneMatch}" IsVisible="{Binding NoneMatch}" />
+            <!-- The first start: nothing earned yet, what will come and how. -->
+            <StackPanel Spacing="10" Margin="24,26,24,10" HorizontalAlignment="Center" IsVisible="{Binding IsEmpty}">
+              <Image Width="52" Height="52" HorizontalAlignment="Center" Source="{StaticResource TrophyHidden}" />
+              <TextBlock Classes="etitle" Margin="0,6,0,0" Text="{loc:Tr Trophies.Empty.Title}" />
+              <TextBlock Classes="etext" Text="{loc:Tr Trophies.Empty.Text}" />
+            </StackPanel>
+          </Panel>
+        </Border>
+      </StackPanel>
+    </ScrollViewer>
+  </Grid>
+</UserControl>

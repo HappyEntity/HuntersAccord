@@ -1,0 +1,1111 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:HuntersAccord.Launcher.ViewModels"
+             xmlns:loc="using:HuntersAccord.Launcher.Localization"
+             xmlns:views="using:HuntersAccord.Launcher.Views"
+             x:Class="HuntersAccord.Launcher.Views.SettingsPage"
+             x:DataType="vm:MainWindowViewModel">
+  <UserControl.Styles>
+    <Style Selector="views|FieldPanel > ComboBox">
+      <Setter Property="Grid.Column" Value="2" />
+      <Setter Property="HorizontalAlignment" Value="Stretch" />
+      <Setter Property="MinWidth" Value="0" />
+    </Style>
+    <!-- A section header with a hairline to the right and its buttons after it. -->
+    <Style Selector="Grid.sechead > Rectangle">
+      <Setter Property="Grid.Column" Value="1" />
+      <Setter Property="Height" Value="1" />
+      <Setter Property="Margin" Value="12,0" />
+      <Setter Property="Fill" Value="{StaticResource LineFaintBrush}" />
+    </Style>
+    <Style Selector="TextBlock.section.dev">
+      <Setter Property="Foreground" Value="{StaticResource WarnBrush}" />
+    </Style>
+    <!-- A status line with its diamond (Steam: the client, the library). -->
+    <Style Selector="TextBlock.srow">
+      <Setter Property="FontSize" Value="15" />
+      <Setter Property="LineHeight" Value="20" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+      <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+    </Style>
+    <Style Selector="TextBlock.srow.warn">
+      <Setter Property="Foreground" Value="{StaticResource WarnBrush}" />
+    </Style>
+    <Style Selector="TextBlock.srow.error">
+      <Setter Property="Foreground" Value="{StaticResource ErrorBrush}" />
+    </Style>
+    <Style Selector="TextBlock.srow.ok">
+      <Setter Property="Foreground" Value="{StaticResource SuccessBrush}" />
+    </Style>
+    <!-- The trophy key's field: a stone field like the buttons, the key in mono; gold rim on hover, light gold in focus. -->
+    <Style Selector="TextBox.key">
+      <Setter Property="FontFamily" Value="{StaticResource FontMono}" />
+      <Setter Property="FontSize" Value="13" />
+      <Setter Property="MinHeight" Value="32" />
+      <Setter Property="Height" Value="32" />
+      <Setter Property="Padding" Value="10,0" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="CornerRadius" Value="0" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+      <Setter Property="Background" Value="{StaticResource Stone300Brush}" />
+      <Setter Property="BorderBrush" Value="{StaticResource LineControlBrush}" />
+      <Setter Property="CaretBrush" Value="{StaticResource Gold300Brush}" />
+      <Setter Property="SelectionBrush" Value="#66B49B6C" />
+    </Style>
+    <Style Selector="TextBox.key:pointerover /template/ Border#PART_BorderElement">
+      <Setter Property="Background" Value="{StaticResource Stone400Brush}" />
+      <Setter Property="BorderBrush" Value="{StaticResource Gold500Brush}" />
+    </Style>
+    <Style Selector="TextBox.key:focus /template/ Border#PART_BorderElement">
+      <Setter Property="Background" Value="{StaticResource Night000Brush}" />
+      <Setter Property="BorderBrush" Value="{StaticResource Gold300Brush}" />
+      <Setter Property="BorderThickness" Value="1" />
+    </Style>
+    <Style Selector="TextBox.key:pointerover, TextBox.key:focus">
+      <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+    </Style>
+    <Style Selector="Button.hotkey TextBlock.value">
+      <Setter Property="FontSize" Value="15" />
+    </Style>
+    <!-- About: the thanks with small gold diamonds. -->
+    <Style Selector="Grid.thanks > Rectangle">
+      <Setter Property="Width" Value="4" />
+      <Setter Property="Height" Value="4" />
+      <Setter Property="Margin" Value="0,8,0,0" />
+      <Setter Property="HorizontalAlignment" Value="Left" />
+      <Setter Property="VerticalAlignment" Value="Top" />
+      <Setter Property="RenderTransform" Value="rotate(45deg)" />
+      <Setter Property="Fill" Value="{StaticResource Gold700Brush}" />
+    </Style>
+    <Style Selector="Grid.thanks > TextBlock">
+      <Setter Property="Grid.Column" Value="1" />
+    </Style>
+
+    <Style Selector=".narrow Border.kbmplate">
+      <Setter Property="Margin" Value="22,12,26,0" />
+    </Style>
+    <Style Selector=".narrow UniformGrid.keys">
+      <Setter Property="Columns" Value="1" />
+    </Style>
+    <Style Selector="Border.railfoot">
+      <Setter Property="Width" Value="208" />
+    </Style>
+    <Style Selector=".narrow Border.railfoot">
+      <Setter Property="Width" Value="184" />
+    </Style>
+    <Style Selector="Border.kbmplate">
+      <Setter Property="Margin" Value="32,16,36,0" />
+      <Setter Property="Padding" Value="14,10" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="BorderBrush" Value="#66B49B6C" />
+      <Setter Property="Background" Value="#0FB49B6C" />
+    </Style>
+    <Style Selector="TextBlock.platetitle">
+      <Setter Property="FontSize" Value="15" />
+      <Setter Property="LineHeight" Value="20" />
+      <Setter Property="FontWeight" Value="Medium" />
+      <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+    </Style>
+    <Style Selector="Border.keycap.plate">
+      <Setter Property="Padding" Value="7,0" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Border.keycap.plate > TextBlock">
+      <Setter Property="FontFamily" Value="{StaticResource FontText}" />
+      <Setter Property="FontSize" Value="13" />
+    </Style>
+    <Style Selector="TextBlock.platesep">
+      <Setter Property="Margin" Value="6,0" />
+      <Setter Property="FontSize" Value="13" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+    </Style>
+    <Style Selector="TextBlock.platenote">
+      <Setter Property="Margin" Value="10,0,0,0" />
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+    </Style>
+    <Style Selector="TextBlock.section.lg">
+      <Setter Property="FontSize" Value="16" />
+      <Setter Property="LetterSpacing" Value="2.6" />
+      <Setter Property="Foreground" Value="{StaticResource Gold300Brush}" />
+    </Style>
+    <!-- The buttons table: a group's heading, then rows "changed · PS4 button · action · gamepad button". -->
+    <Style Selector="TextBlock.bgroup">
+      <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="FontSize" Value="13" />
+      <Setter Property="LetterSpacing" Value="1.3" />
+      <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+      <Setter Property="Margin" Value="18,10,0,4" />
+    </Style>
+    <Style Selector="Border.brow">
+      <Setter Property="MinHeight" Value="36" />
+      <Setter Property="BorderThickness" Value="0,0,0,1" />
+      <Setter Property="BorderBrush" Value="#992E262C" />
+    </Style>
+    <Style Selector="Border.brow:pointerover">
+      <Setter Property="Background" Value="#0DB49B6C" />
+    </Style>
+    <Style Selector="Border.brow Rectangle.mark">
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <Style Selector="Border.brow Border.glyph">
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="TextBlock.baction">
+      <Setter Property="FontSize" Value="15" />
+      <Setter Property="LineHeight" Value="20" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+    </Style>
+    <Style Selector="ComboBox.padbtn">
+      <Setter Property="Width" Value="214" />
+      <Setter Property="MinWidth" Value="0" />
+      <Setter Property="Height" Value="28" />
+      <Setter Property="MinHeight" Value="28" />
+      <Setter Property="FontSize" Value="15" />
+      <Setter Property="Padding" Value="8,0,4,0" />
+      <Setter Property="MaxDropDownHeight" Value="296" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="ComboBox.padbtn.unset">
+      <Setter Property="Foreground" Value="{StaticResource TextDisabledBrush}" />
+    </Style>
+    <Style Selector="TextBlock.xbox">
+      <Setter Property="FontFamily" Value="{StaticResource FontMono}" />
+      <Setter Property="FontSize" Value="11" />
+      <Setter Property="Margin" Value="10,0,4,0" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+    </Style>
+    <Style Selector="StackPanel.lightbar:disabled">
+      <Setter Property="Opacity" Value="0.35" />
+    </Style>
+    <Style Selector="Button.swatch Rectangle#Pick">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="Button.swatch.sel Rectangle#Pick">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="Button.swatch Border#Ring">
+      <Setter Property="BorderBrush" Value="Transparent" />
+    </Style>
+    <Style Selector="Button.swatch.sel Border#Ring">
+      <Setter Property="BorderBrush" Value="{StaticResource Gold300Brush}" />
+    </Style>
+    <Style Selector="Button.swatch:pointerover Border#Ring">
+      <Setter Property="BorderBrush" Value="{StaticResource Gold500Brush}" />
+    </Style>
+    <Style Selector="Border.customchip">
+      <Setter Property="Height" Value="24" />
+      <Setter Property="Padding" Value="8,0" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="BorderBrush" Value="{StaticResource LineControlBrush}" />
+      <Setter Property="Background" Value="{StaticResource Stone300Brush}" />
+    </Style>
+    <Style Selector="Border.customchip > TextBlock">
+      <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="LetterSpacing" Value="0.6" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+    </Style>
+    <Style Selector="Border.rgb">
+      <Setter Property="Margin" Value="0,4,0,0" />
+      <Setter Property="Padding" Value="14,12" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="BorderBrush" Value="{StaticResource LineFaintBrush}" />
+      <Setter Property="Background" Value="{StaticResource Stone200Brush}" />
+    </Style>
+    <Style Selector="Border.rgb Slider">
+      <Setter Property="Height" Value="26" />
+    </Style>
+    <Style Selector="TextBlock.rgbl">
+      <Setter Property="FontFamily" Value="{StaticResource FontMono}" />
+      <Setter Property="FontSize" Value="12" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+    </Style>
+  </UserControl.Styles>
+
+  <UserControl.Resources>
+    <!-- A PS4 button's face: its text, or its outline with the pressed D-pad arm filled. -->
+    <DataTemplate x:Key="PadGlyphTemplate" x:DataType="vm:PadGlyph">
+      <Panel>
+        <TextBlock Text="{Binding Text}" IsVisible="{Binding IsText}" />
+        <Path Data="{Binding Outline}" StrokeThickness="{Binding Stroke}" IsVisible="{Binding !IsText}" />
+        <Path Classes="fill" Data="{Binding Fill}" IsVisible="{Binding !IsText}" />
+      </Panel>
+    </DataTemplate>
+    <!-- A gamepad button in a row's list: small glyph, name, and the Xbox button on the right in grey. -->
+    <DataTemplate x:Key="PadChoiceTemplate" x:DataType="vm:PadInputChoice">
+      <Grid ColumnDefinitions="Auto,*,Auto">
+        <Border Classes="glyph sm" Margin="0,0,8,0" VerticalAlignment="Center" IsVisible="{Binding !IsUnassigned}">
+          <ContentControl Content="{Binding Glyph}" ContentTemplate="{StaticResource PadGlyphTemplate}" />
+        </Border>
+        <TextBlock Grid.Column="1" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Text="{Binding Name.Text}" />
+        <TextBlock Grid.Column="2" Classes="xbox" Text="{Binding Xbox}" />
+      </Grid>
+    </DataTemplate>
+  </UserControl.Resources>
+
+  <Grid ColumnDefinitions="Auto,*" RowDefinitions="*,Auto">
+    <TabControl Name="Sections" Classes="rail" Grid.ColumnSpan="2">
+      <!-- General: language, launch, files (v9: grouped; the bug report moved to About) -->
+      <TabItem Header="{loc:Tr Settings.General}">
+        <ScrollViewer>
+          <StackPanel Classes="page">
+            <Grid Classes="sechead" ColumnDefinitions="Auto,*,Auto">
+              <TextBlock Classes="section" Text="{loc:Tr Settings.Section.Language}" />
+              <Rectangle Margin="12,0,0,0" />
+            </Grid>
+            <views:FieldPanel>
+              <TextBlock Classes="flabel" Text="{loc:Tr Settings.UiLanguage}" />
+              <ComboBox ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}">
+                <ComboBox.ItemTemplate>
+                  <DataTemplate x:DataType="loc:LanguageOption">
+                    <TextBlock Text="{Binding NativeName}" />
+                  </DataTemplate>
+                </ComboBox.ItemTemplate>
+              </ComboBox>
+            </views:FieldPanel>
+            <views:FieldPanel>
+              <TextBlock Classes="flabel" Text="{loc:Tr Settings.GameLanguage}" />
+              <ComboBox ItemsSource="{Binding GameLanguages}" SelectedItem="{Binding SelectedGameLanguage}">
+                <ComboBox.ItemTemplate>
+                  <DataTemplate x:DataType="vm:GameLanguageOption">
+                    <TextBlock Text="{Binding Label.Text}" />
+                  </DataTemplate>
+                </ComboBox.ItemTemplate>
+              </ComboBox>
+            </views:FieldPanel>
+
+            <Grid Classes="sechead" ColumnDefinitions="Auto,*,Auto">
+              <TextBlock Classes="section" Text="{loc:Tr Settings.Section.Launch}" />
+              <Rectangle Margin="12,0,0,0" />
+            </Grid>
+            <CheckBox IsChecked="{Binding LaunchWithoutMod}">
+              <StackPanel>
+                <TextBlock Classes="label" Text="{loc:Tr Play.WithoutMod}" />
+                <TextBlock Classes="desc" Text="{loc:Tr Play.WithoutModTip}" />
+              </StackPanel>
+            </CheckBox>
+            <CheckBox IsChecked="{Binding UiSounds}">
+              <TextBlock Classes="label" Text="{loc:Tr Settings.UiSounds}" />
+            </CheckBox>
+            <!-- What the check contacts and what it does not do: said here, it is the player's to turn off. -->
+            <CheckBox IsChecked="{Binding CheckForUpdates}">
+              <StackPanel>
+                <TextBlock Classes="label" Text="{loc:Tr Settings.CheckUpdates}" />
+                <TextBlock Classes="desc" MaxWidth="480" HorizontalAlignment="Left" Text="{loc:Tr Settings.CheckUpdatesTip}" />
+              </StackPanel>
+            </CheckBox>
+
+            <Grid Classes="sechead" ColumnDefinitions="Auto,*,Auto">
+              <TextBlock Classes="section" Text="{loc:Tr Settings.Section.Files}" />
+              <Rectangle Margin="12,0,0,0" />
+            </Grid>
+            <WrapPanel>
+              <Button Classes="bb" Margin="0,0,12,0" Content="{loc:Tr Play.OpenProfile}" Command="{Binding OpenProfileFolderCommand}" />
+              <TextBlock Classes="mono" Foreground="{StaticResource Ash300Brush}" TextTrimming="PathSegmentEllipsis" MaxWidth="400"
+                         Text="{Binding ProfileFolder}" ToolTip.Tip="{Binding ProfileFolder}" />
+            </WrapPanel>
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+      <!-- Game: copies found, PKG files -->
+      <TabItem Header="{loc:Tr Settings.Game}">
+        <ScrollViewer DataContext="{Binding Game}">
+          <StackPanel Classes="page" x:DataType="vm:GameSectionViewModel">
+            <Grid Classes="sechead" ColumnDefinitions="Auto,*,Auto">
+              <TextBlock Classes="section" Text="{loc:Tr Settings.GameCopies}" />
+              <Rectangle />
+              <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8">
+                <Button Classes="bb sm" Content="{loc:Tr Game.Browse}" Command="{Binding BrowseFolderCommand}" />
+                <Button Classes="bb sm" Content="{loc:Tr Game.Rescan}" Command="{Binding RescanCommand}" />
+              </StackPanel>
+            </Grid>
+            <!-- The state in one line with its diamond: ready (filled), otherwise what is wrong (outlined). -->
+            <Grid ColumnDefinitions="Auto,*">
+              <Panel Width="6" Height="6" Margin="0,7,10,0" VerticalAlignment="Top" RenderTransform="rotate(45deg)">
+                <Rectangle Fill="{StaticResource SuccessBrush}" IsVisible="{Binding IsReady}" />
+                <Rectangle Stroke="{StaticResource WarnBrush}" StrokeThickness="1" IsVisible="{Binding !IsReady}" />
+              </Panel>
+              <TextBlock Grid.Column="1" Classes="srow" Text="{Binding Status.Text}" />
+            </Grid>
+            <ListBox Classes="games" MaxHeight="112" ItemsSource="{Binding Installs}"
+                     SelectedItem="{Binding SelectedInstall}"
+                     IsVisible="{Binding !!Installs.Count}">
+              <ListBox.ItemTemplate>
+                <DataTemplate x:DataType="vm:GameInstallOption">
+                  <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Classes="mono" TextTrimming="PathSegmentEllipsis" Text="{Binding Path}" ToolTip.Tip="{Binding Path}" />
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="12,0,0,0">
+                      <TextBlock Classes="small" VerticalAlignment="Center" Text="{Binding Version}" />
+                      <Border Classes="tag" Classes.ok="{Binding IsSupported}" Classes.err="{Binding !IsSupported}">
+                        <TextBlock Text="{Binding Tag.Text}" />
+                      </Border>
+                    </StackPanel>
+                  </Grid>
+                </DataTemplate>
+              </ListBox.ItemTemplate>
+            </ListBox>
+
+            <StackPanel Spacing="14" IsVisible="{Binding HasPkg}">
+              <Grid Classes="sechead" ColumnDefinitions="Auto,*,Auto" Margin="0,6,0,0">
+                <TextBlock Classes="section" Text="{loc:Tr Settings.PkgFiles}" />
+                <Rectangle />
+                <Button Grid.Column="2" Classes="bb sm" Content="{loc:Tr Game.KeysImport}" Command="{Binding ImportKeysCommand}" />
+              </Grid>
+              <!-- Key - value pairs: the files, the keys, where it unpacks. -->
+              <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto">
+                <TextBlock Classes="kvk" Text="{loc:Tr Pkg.Base}" />
+                <!-- A long file name loses its start (the end tells the files apart); the size always shows. -->
+                <Grid Grid.Column="1" ColumnDefinitions="*,Auto" Margin="0,0,0,6">
+                  <TextBlock Classes="mono" TextTrimming="PrefixCharacterEllipsis" Text="{Binding BasePkgName}"
+                             ToolTip.Tip="{Binding BasePkgName}" />
+                  <TextBlock Grid.Column="1" Classes="caption" Margin="12,0,0,0" VerticalAlignment="Center" Text="{Binding BasePkgSize}" />
+                </Grid>
+                <TextBlock Grid.Row="1" Classes="kvk" Text="{loc:Tr Pkg.Update}" />
+                <Grid Grid.Row="1" Grid.Column="1" ColumnDefinitions="*,Auto" Margin="0,0,0,6">
+                  <TextBlock Classes="mono" TextTrimming="PrefixCharacterEllipsis" Text="{Binding PatchPkgName}"
+                             ToolTip.Tip="{Binding PatchPkgName}" />
+                  <TextBlock Grid.Column="1" Classes="caption" Margin="12,0,0,0" VerticalAlignment="Center" Text="{Binding PatchPkgSize}" />
+                </Grid>
+                <TextBlock Grid.Row="2" Classes="kvk" Text="{loc:Tr Pkg.Keys}" />
+                <Panel Grid.Row="2" Grid.Column="1" Margin="0,0,0,6">
+                  <TextBlock Classes="kvv ok" IsVisible="{Binding HasKeys}" Text="{loc:Tr Pkg.KeysFound}" />
+                  <TextBlock Classes="kvv error" IsVisible="{Binding !HasKeys}" Text="{loc:Tr Pkg.KeysMissing}" />
+                </Panel>
+                <TextBlock Grid.Row="3" Classes="kvk" Margin="0,0,16,0" Text="{loc:Tr Pkg.UnpackFolder}" />
+                <Grid Grid.Row="3" Grid.Column="1" ColumnDefinitions="Auto,*">
+                  <TextBlock Classes="mono" VerticalAlignment="Center" TextTrimming="PathSegmentEllipsis"
+                             Text="{Binding InstallDestination}" ToolTip.Tip="{Binding InstallDestination}" />
+                  <Button Grid.Column="1" Theme="{StaticResource LinkButton}" FontSize="15" Margin="12,0,0,0" HorizontalAlignment="Left"
+                          Content="{loc:Tr Game.DestinationChange}" Command="{Binding ChangeDestinationCommand}" />
+                </Grid>
+              </Grid>
+              <Button Classes="bb" HorizontalAlignment="Left" Content="{loc:Tr Game.InstallPkg}" Command="{Binding InstallFromPkgCommand}"
+                      IsVisible="{Binding !IsInstalling}" />
+              <StackPanel Spacing="10" IsVisible="{Binding IsInstalling}">
+                <ProgressBar Maximum="100" Value="{Binding InstallProgress}" />
+                <Button Classes="bb" HorizontalAlignment="Left" Content="{loc:Tr Game.InstallCancel}"
+                        Command="{Binding CancelInstallCommand}" />
+              </StackPanel>
+              <TextBlock Classes="status" TextWrapping="Wrap" Text="{Binding InstallText.Text}" />
+            </StackPanel>
+
+            <!-- The trophy key: from keys.json or typed in, masked; saved only when it opens this copy's trophies. -->
+            <Grid Classes="sechead" ColumnDefinitions="Auto,*,Auto" Margin="0,6,0,0">
+              <TextBlock Classes="section" Text="{loc:Tr Settings.Section.Trophies}" />
+              <Rectangle />
+              <Button Grid.Column="2" Classes="bb sm" Content="{loc:Tr Game.KeysImport}" Command="{Binding ImportKeysCommand}"
+                      IsVisible="{Binding !HasPkg}" />
+            </Grid>
+            <views:FieldPanel>
+              <TextBlock Classes="flabel" Text="{loc:Tr Game.TrophyKey}" />
+              <Grid ColumnDefinitions="*,Auto,Auto">
+                <TextBox Name="TrophyKeyBox" Classes="key" Text="{Binding TrophyKeyText}" PasswordChar="•"
+                         RevealPassword="{Binding ShowTrophyKey}" MaxLength="40" />
+                <Button Grid.Column="1" Classes="bb sm" Margin="8,0,0,0" VerticalAlignment="Center"
+                        Content="{Binding TrophyKeyReveal.Text}" Command="{Binding ToggleTrophyKeyCommand}" />
+                <Button Grid.Column="2" Classes="bb sm" Margin="8,0,0,0" VerticalAlignment="Center"
+                        Content="{loc:Tr Game.TrophyKeySave}" Command="{Binding SaveTrophyKeyCommand}" />
+              </Grid>
+              <!-- Its state with a diamond: fits (filled, success), wrong (filled, error), unchecked (outlined, warning). -->
+              <Grid ColumnDefinitions="Auto,*" Margin="0,8,0,0">
+                <Panel Width="6" Height="6" Margin="1,7,10,0" VerticalAlignment="Top" RenderTransform="rotate(45deg)">
+                  <Rectangle Fill="{StaticResource SuccessBrush}" IsVisible="{Binding TrophyKeyOk}" />
+                  <Rectangle Fill="{StaticResource ErrorBrush}" IsVisible="{Binding TrophyKeyError}" />
+                  <Rectangle Stroke="{StaticResource WarnBrush}" StrokeThickness="1" IsVisible="{Binding TrophyKeyWarn}" />
+                  <Rectangle Stroke="{StaticResource Ash500Brush}" StrokeThickness="1" IsVisible="{Binding TrophyKeyPlain}" />
+                </Panel>
+                <TextBlock Grid.Column="1" Classes="srow"
+                           Classes.ok="{Binding TrophyKeyOk}"
+                           Classes.error="{Binding TrophyKeyError}"
+                           Classes.warn="{Binding TrophyKeyWarn}"
+                           Text="{Binding TrophyKeyStatus.Text}" />
+              </Grid>
+              <TextBlock Classes="hint" Text="{loc:Tr Game.TrophyKeyHint}" />
+            </views:FieldPanel>
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+      <!-- Display: shadPS4's picture settings, its shader cache and the hotkeys it keeps -->
+      <TabItem Name="DisplayTab" Header="{loc:Tr Settings.Display}">
+        <ScrollViewer DataContext="{Binding Display}">
+          <StackPanel Classes="page" x:DataType="vm:DisplayViewModel">
+            <Grid Classes="sechead" ColumnDefinitions="Auto,*,Auto">
+              <TextBlock Classes="section" Text="{loc:Tr Display.Picture}" />
+              <Rectangle Margin="12,0,0,0" />
+            </Grid>
+            <views:FieldPanel>
+              <TextBlock Classes="flabel" Text="{loc:Tr Display.ScreenMode}" />
+              <ComboBox ItemsSource="{Binding ScreenModes}" SelectedItem="{Binding SelectedScreenMode}">
+                <ComboBox.ItemTemplate>
+                  <DataTemplate x:DataType="vm:DisplayChoice">
+                    <TextBlock Text="{Binding Label.Text}" />
+                  </DataTemplate>
+                </ComboBox.ItemTemplate>
+              </ComboBox>
+            </views:FieldPanel>
+            <!-- The game's render size (the mod sets it at the game's start): its detail and shape. -->
+            <views:FieldPanel>
+              <WrapPanel VerticalAlignment="Center">
+                <TextBlock Classes="flabel" Margin="0,0,6,0" Text="{loc:Tr Display.Resolution}" />
+                <Border Classes="tag" Margin="0">
+                  <TextBlock Text="{loc:Tr Display.ResolutionTag}" />
+                </Border>
+              </WrapPanel>
+              <ComboBox ItemsSource="{Binding Resolutions}" SelectedItem="{Binding SelectedResolution}">
+                <ComboBox.ItemTemplate>
+                  <DataTemplate x:DataType="vm:DisplayChoice">
+                    <TextBlock Text="{Binding Label.Text}" />
+                  </DataTemplate>
+                </ComboBox.ItemTemplate>
+              </ComboBox>
+              <TextBlock Classes="hint" Text="{loc:Tr Display.ResolutionHint}" />
+              <TextBlock Classes="hint" Text="{Binding ResolutionMemory.Text}" IsVisible="{Binding HasResolutionMemory}" />
+              <TextBlock Classes="hint" Margin="0" Text="{Binding ResolutionBars.Text}" IsVisible="{Binding HasResolutionBars}" />
+            </views:FieldPanel>
+            <views:FieldPanel>
+              <TextBlock Classes="flabel" Classes.off="{Binding !IsWindowed}" Text="{loc:Tr Display.WindowSize}" />
+              <ComboBox ItemsSource="{Binding WindowSizes}" SelectedItem="{Binding SelectedWindowSize}"
+                        IsEnabled="{Binding IsWindowed}">
+                <ComboBox.ItemTemplate>
+                  <DataTemplate x:DataType="vm:DisplayChoice">
+                    <TextBlock Text="{Binding Label.Text}" />
+                  </DataTemplate>
+                </ComboBox.ItemTemplate>
+              </ComboBox>
+              <TextBlock Classes="hint" Text="{loc:Tr Display.FullscreenHint}" IsVisible="{Binding !IsWindowed}" />
+            </views:FieldPanel>
+            <views:FieldPanel>
+              <!-- shadPS4's own V-Sync, not the "No VSync" game patch (Patches, which points back here). -->
+              <WrapPanel VerticalAlignment="Center">
+                <TextBlock Classes="flabel" Margin="0,0,6,0" Text="{loc:Tr Display.VSync}" />
+                <Border Classes="tag" Margin="0">
+                  <TextBlock Text="{loc:Tr Display.VSyncTag}" />
+                </Border>
+              </WrapPanel>
+              <ComboBox ItemsSource="{Binding VSyncModes}" SelectedItem="{Binding SelectedVSync}">
+                <ComboBox.ItemTemplate>
+                  <DataTemplate x:DataType="vm:DisplayChoice">
+                    <TextBlock Text="{Binding Label.Text}" />
+                  </DataTemplate>
+                </ComboBox.ItemTemplate>
+              </ComboBox>
+              <TextBlock Classes="hint" Text="{loc:Tr Display.VSyncHint}" />
+              <TextBlock Classes="hint" Margin="0" Text="{loc:Tr Display.VSyncNotPatch}" />
+            </views:FieldPanel>
+            <CheckBox IsChecked="{Binding Fsr}">
+              <StackPanel>
+                <TextBlock Classes="label" Text="{loc:Tr Display.Fsr}" />
+                <TextBlock Classes="desc" Text="{loc:Tr Display.FsrDesc}" />
+              </StackPanel>
+            </CheckBox>
+            <views:FieldPanel>
+              <TextBlock Classes="flabel" Classes.off="{Binding !Fsr}" Margin="28,0,0,0" Text="{loc:Tr Display.Sharpness}" />
+              <Grid ColumnDefinitions="*,Auto">
+                <Slider Minimum="0" Maximum="100" SmallChange="1" LargeChange="10" IsSnapToTickEnabled="True" TickFrequency="1"
+                        Value="{Binding Sharpness}" IsEnabled="{Binding Fsr}" />
+                <TextBlock Grid.Column="1" Classes="value" Classes.off="{Binding !Fsr}" MinWidth="48" Margin="14,0,0,0"
+                           TextAlignment="Right" VerticalAlignment="Center" Text="{Binding SharpnessText}" />
+              </Grid>
+            </views:FieldPanel>
+            <CheckBox IsChecked="{Binding ShowFps}">
+              <TextBlock Classes="label" Text="{loc:Tr Display.ShowFps}" />
+            </CheckBox>
+
+            <Grid Classes="sechead" ColumnDefinitions="Auto,*,Auto" Margin="0,6,0,0">
+              <TextBlock Classes="section" Text="{loc:Tr Display.ShaderCache}" />
+              <Rectangle />
+              <Panel Grid.Column="2" ToolTip.Tip="{loc:Tr Display.ClearTip}">
+                <Button Classes="bb sm" Content="{loc:Tr Display.Clear}" Command="{Binding ClearCacheCommand}"
+                        IsVisible="{Binding !ClearArmed}" />
+                <Button Classes="bb sm armed" Content="{loc:Tr Display.ClearSure}" Command="{Binding ClearCacheCommand}"
+                        IsVisible="{Binding ClearArmed}" />
+              </Panel>
+            </Grid>
+            <CheckBox IsChecked="{Binding ShaderCache}">
+              <StackPanel>
+                <TextBlock Classes="label" Text="{loc:Tr Display.KeepShaders}" />
+                <TextBlock Classes="desc" Text="{loc:Tr Display.KeepShadersDesc}" />
+              </StackPanel>
+            </CheckBox>
+            <!-- The cache's size, or that it was cleared (green) or could not be (red). -->
+            <TextBlock Classes="tabstatus" Margin="28,-6,0,0" Classes.ok="{Binding CacheCleared}" Classes.error="{Binding CacheError}"
+                       Text="{Binding CacheStatus.Text}" />
+
+            <Grid Classes="sechead" ColumnDefinitions="Auto,*,Auto" Margin="0,6,0,0">
+              <TextBlock Classes="section" Text="{loc:Tr Display.Keys}" />
+              <Rectangle Margin="12,0,0,0" />
+            </Grid>
+            <!-- Two columns (one in the narrow window): the keys, what they do. -->
+            <ItemsControl ItemsSource="{Binding Hotkeys}">
+              <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <UniformGrid Classes="keys" Columns="2" />
+                </ItemsPanelTemplate>
+              </ItemsControl.ItemsPanel>
+              <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="vm:HotkeyRow">
+                  <!-- A click turns the key off or back on; a key the mod uses stays off. -->
+                  <Button Theme="{StaticResource PlainButton}" Classes="hotkey" Margin="0,0,24,10" HorizontalAlignment="Stretch"
+                          Command="{Binding $parent[ItemsControl].((vm:DisplayViewModel)DataContext).ToggleHotkeyCommand}"
+                          CommandParameter="{Binding}" IsEnabled="{Binding CanToggle}" ToolTip.Tip="{loc:Tr Display.KeyToggleTip}">
+                    <Grid ColumnDefinitions="128,10,*">
+                      <ItemsControl ItemsSource="{Binding Keys}" VerticalAlignment="Top">
+                        <ItemsControl.ItemsPanel>
+                          <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" />
+                          </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                          <DataTemplate x:DataType="vm:KeyToken">
+                            <Panel Margin="0,0,3,0">
+                              <Border Classes="keycap" Classes.off="{Binding IsOff}" IsVisible="{Binding IsKey}">
+                                <TextBlock Text="{Binding Text}" />
+                              </Border>
+                              <TextBlock Classes="keyplus" Text="{Binding Text}" IsVisible="{Binding !IsKey}" />
+                            </Panel>
+                          </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                      </ItemsControl>
+                      <StackPanel Grid.Column="2">
+                        <TextBlock Classes="value" Classes.off="{Binding IsOff}" TextWrapping="Wrap" Text="{Binding Action.Text}" />
+                        <TextBlock FontSize="13" LineHeight="17" TextWrapping="Wrap" Foreground="{StaticResource Ash500Brush}"
+                                   IsVisible="{Binding IsTaken}" Text="{loc:Tr Display.KeyTaken}" />
+                        <TextBlock FontSize="13" LineHeight="17" TextWrapping="Wrap" Foreground="{StaticResource Ash500Brush}"
+                                   IsVisible="{Binding ShowTurnedOff}" Text="{loc:Tr Display.KeyTurnedOff}" />
+                      </StackPanel>
+                    </Grid>
+                  </Button>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <TextBlock Classes="tabstatus" Margin="0,-10,0,0" Text="{loc:Tr Display.KeysToggleHint}" />
+            <TextBlock Classes="tabstatus" Margin="0,-10,0,0" Text="{loc:Tr Display.KeysHint}" />
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+      <!-- Controls: the gamepad as shadPS4 hands it to the game; keyboard and mouse are set up in the game -->
+      <TabItem Name="ControlsTab" Header="{loc:Tr Settings.Controls}">
+        <DockPanel>
+          <!-- Pinned above the scroll: where the keyboard is, for whoever came here looking for it. -->
+          <Border DockPanel.Dock="Top" Classes="kbmplate">
+            <Grid ColumnDefinitions="14,12,*">
+              <Rectangle Width="7" Height="7" Margin="2,7,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"
+                         RenderTransform="rotate(45deg)" Fill="{StaticResource Gold500Brush}" />
+              <StackPanel Grid.Column="2">
+                <TextBlock Classes="platetitle" Text="{loc:Tr Controls.PlateTitle}" />
+                <WrapPanel Margin="0,4,0,0">
+                  <Border Classes="keycap plate"><TextBlock Text="{loc:Tr Controls.PlateSystem}" /></Border>
+                  <TextBlock Classes="platesep" Text="›" />
+                  <Border Classes="keycap plate"><TextBlock Text="{loc:Tr GameText.KeysScreen}" /></Border>
+                  <TextBlock Classes="platenote" Text="{loc:Tr Controls.PlateNote}" />
+                </WrapPanel>
+              </StackPanel>
+            </Grid>
+          </Border>
+          <ScrollViewer DataContext="{Binding Controls}">
+            <StackPanel Classes="page" x:DataType="vm:ControlsViewModel">
+              <TextBlock Classes="section lg" Text="{loc:Tr Controls.Gamepad}" />
+
+              <Grid Classes="sechead" ColumnDefinitions="Auto,*,Auto">
+                <TextBlock Classes="section" Text="{loc:Tr Controls.Buttons}" />
+                <Rectangle />
+                <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8">
+                  <Button Classes="bb sm" Content="{loc:Tr Controls.SwapCrossCircle}" Command="{Binding SwapCrossCircleCommand}"
+                          ToolTip.Tip="{loc:Tr Controls.SwapTip}" />
+                  <Panel>
+                    <Button Classes="bb sm" Content="{loc:Tr Controls.Default}" Command="{Binding ResetButtonsCommand}"
+                            IsVisible="{Binding !ResetArmed}" />
+                    <Button Classes="bb sm armed" Content="{loc:Tr Controls.DefaultSure}" Command="{Binding ResetButtonsCommand}"
+                            IsVisible="{Binding ResetArmed}" />
+                  </Panel>
+                </StackPanel>
+              </Grid>
+              <ItemsControl ItemsSource="{Binding Groups}" Margin="0,-4,0,0">
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate x:DataType="vm:PadButtonGroup">
+                    <StackPanel>
+                      <TextBlock Classes="bgroup" Text="{Binding Title.Text}" />
+                      <ItemsControl ItemsSource="{Binding Rows}">
+                        <ItemsControl.ItemTemplate>
+                          <DataTemplate x:DataType="vm:PadButtonRow">
+                            <Border Classes="brow">
+                              <Grid ColumnDefinitions="10,8,64,8,*,8,214">
+                                <Rectangle Classes="mark" Fill="{StaticResource Gold500Brush}" IsVisible="{Binding IsModified}" />
+                                <Border Grid.Column="2" Classes="glyph">
+                                  <ContentControl Content="{Binding Glyph}" ContentTemplate="{StaticResource PadGlyphTemplate}" />
+                                </Border>
+                                <WrapPanel Grid.Column="4" VerticalAlignment="Center">
+                                  <TextBlock Classes="baction" Classes.off="{Binding IsUnassigned}" Text="{Binding Action.Text}" />
+                                  <Border Classes="tag warn" IsVisible="{Binding HasAlso}" ToolTip.Tip="{loc:Tr Controls.AlsoTip}">
+                                    <TextBlock Text="{Binding Also.Text}" />
+                                  </Border>
+                                </WrapPanel>
+                                <ComboBox Grid.Column="6" Classes="padbtn" Classes.unset="{Binding IsUnassigned}"
+                                          ItemsSource="{Binding Choices}" SelectedItem="{Binding Selected}"
+                                          ItemTemplate="{StaticResource PadChoiceTemplate}" />
+                              </Grid>
+                            </Border>
+                          </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                      </ItemsControl>
+                    </StackPanel>
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+
+              <Grid Classes="sechead" ColumnDefinitions="Auto,*,Auto" Margin="0,6,0,0">
+                <TextBlock Classes="section" Text="{loc:Tr Controls.Sticks}" />
+                <Rectangle Margin="12,0,0,0" />
+              </Grid>
+              <views:FieldPanel>
+                <TextBlock Classes="flabel" Text="{loc:Tr Controls.Movement}" />
+                <ComboBox ItemsSource="{Binding Sticks}" SelectedItem="{Binding SelectedMove}">
+                  <ComboBox.ItemTemplate>
+                    <DataTemplate x:DataType="vm:StickChoice">
+                      <TextBlock Text="{Binding Label.Text}" />
+                    </DataTemplate>
+                  </ComboBox.ItemTemplate>
+                </ComboBox>
+              </views:FieldPanel>
+              <views:FieldPanel>
+                <TextBlock Classes="flabel" Text="{loc:Tr Controls.Camera}" />
+                <ComboBox ItemsSource="{Binding Sticks}" SelectedItem="{Binding SelectedCamera}">
+                  <ComboBox.ItemTemplate>
+                    <DataTemplate x:DataType="vm:StickChoice">
+                      <TextBlock Text="{Binding Label.Text}" />
+                    </DataTemplate>
+                  </ComboBox.ItemTemplate>
+                </ComboBox>
+              </views:FieldPanel>
+              <views:FieldPanel>
+                <TextBlock Classes="flabel" Text="{loc:Tr Controls.LeftDeadZone}" />
+                <Grid ColumnDefinitions="*,Auto">
+                  <Slider Minimum="0" Maximum="{Binding MaxDeadZone}" SmallChange="1" LargeChange="5" IsSnapToTickEnabled="True"
+                          TickFrequency="1" Value="{Binding LeftDeadZone}" />
+                  <TextBlock Grid.Column="1" Classes="value" MinWidth="48" Margin="14,0,0,0" TextAlignment="Right"
+                             VerticalAlignment="Center" Text="{Binding LeftDeadZoneText}" />
+                </Grid>
+              </views:FieldPanel>
+              <views:FieldPanel>
+                <TextBlock Classes="flabel" Text="{loc:Tr Controls.RightDeadZone}" />
+                <Grid ColumnDefinitions="*,Auto">
+                  <Slider Minimum="0" Maximum="{Binding MaxDeadZone}" SmallChange="1" LargeChange="5" IsSnapToTickEnabled="True"
+                          TickFrequency="1" Value="{Binding RightDeadZone}" />
+                  <TextBlock Grid.Column="1" Classes="value" MinWidth="48" Margin="14,0,0,0" TextAlignment="Right"
+                             VerticalAlignment="Center" Text="{Binding RightDeadZoneText}" />
+                </Grid>
+                <TextBlock Classes="hint" Text="{loc:Tr Controls.DeadZoneHint}" />
+              </views:FieldPanel>
+
+              <Grid Classes="sechead" ColumnDefinitions="Auto,*,Auto" Margin="0,6,0,0">
+                <TextBlock Classes="section" Text="{loc:Tr Controls.LightBar}" />
+                <Rectangle Margin="12,0,0,0" />
+              </Grid>
+              <CheckBox IsChecked="{Binding OwnLightColor}">
+                <StackPanel>
+                  <TextBlock Classes="label" Text="{loc:Tr Controls.OwnColor}" />
+                  <TextBlock Classes="desc" Text="{loc:Tr Controls.OwnColorDesc}" />
+                </StackPanel>
+              </CheckBox>
+              <StackPanel Classes="lightbar" Margin="28,-4,0,0" IsEnabled="{Binding OwnLightColor}">
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                  <ItemsControl ItemsSource="{Binding Swatches}">
+                    <ItemsControl.ItemsPanel>
+                      <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" Spacing="10" />
+                      </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                      <DataTemplate x:DataType="vm:LightSwatch">
+                        <Button Theme="{StaticResource PlainButton}" Classes="swatch" Classes.sel="{Binding IsSelected}"
+                                Command="{Binding $parent[ItemsControl].((vm:ControlsViewModel)DataContext).PickSwatchCommand}"
+                                CommandParameter="{Binding}" ToolTip.Tip="{Binding Name.Text}">
+                          <Panel Width="28" Height="40" VerticalAlignment="Top">
+                            <Border Name="Ring" Width="28" Height="28" VerticalAlignment="Top" BorderThickness="1" />
+                            <Border Width="24" Height="24" Margin="0,2,0,0" VerticalAlignment="Top" BorderThickness="1"
+                                    BorderBrush="{StaticResource LineControlBrush}" Background="{Binding Brush}" ClipToBounds="True">
+                              <Line StartPoint="0,22" EndPoint="22,0" Stroke="{StaticResource LineControlBrush}" StrokeThickness="1.5"
+                                    IsVisible="{Binding IsOff}" />
+                            </Border>
+                            <Rectangle Name="Pick" Classes="mark" Width="5" Height="5" VerticalAlignment="Bottom" Margin="0,0,0,3"
+                                       Fill="{StaticResource Gold500Brush}" />
+                          </Panel>
+                        </Button>
+                      </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                  </ItemsControl>
+                  <Button Theme="{StaticResource PlainButton}" Classes="swatch" Classes.sel="{Binding IsCustomColor}"
+                          Command="{Binding PickCustomCommand}" VerticalAlignment="Top">
+                    <Panel Height="40" VerticalAlignment="Top">
+                      <Border Name="Ring" Height="28" VerticalAlignment="Top" BorderThickness="1" />
+                      <Border Classes="customchip" Margin="2,2,2,0" VerticalAlignment="Top">
+                        <TextBlock Text="{loc:Tr Controls.Custom}" />
+                      </Border>
+                      <Rectangle Name="Pick" Classes="mark" Width="5" Height="5" VerticalAlignment="Bottom" Margin="0,0,0,3"
+                                 Fill="{StaticResource Gold500Brush}" />
+                    </Panel>
+                  </Button>
+                </StackPanel>
+                <!-- Custom: R, G, B and a strip of the colour. -->
+                <Border Classes="rgb" IsVisible="{Binding IsCustomColor}">
+                  <Grid ColumnDefinitions="18,12,*,Auto" RowDefinitions="Auto,Auto,Auto,Auto">
+                    <TextBlock Classes="rgbl" Text="R" />
+                    <Slider Grid.Column="2" Minimum="0" Maximum="255" SmallChange="1" LargeChange="16" IsSnapToTickEnabled="True"
+                            TickFrequency="1" Value="{Binding Red}" />
+                    <TextBlock Grid.Column="3" Classes="value" MinWidth="40" TextAlignment="Right" VerticalAlignment="Center"
+                               Text="{Binding Red}" />
+                    <TextBlock Grid.Row="1" Classes="rgbl" Text="G" />
+                    <Slider Grid.Row="1" Grid.Column="2" Minimum="0" Maximum="255" SmallChange="1" LargeChange="16"
+                            IsSnapToTickEnabled="True" TickFrequency="1" Value="{Binding Green}" />
+                    <TextBlock Grid.Row="1" Grid.Column="3" Classes="value" MinWidth="40" TextAlignment="Right"
+                               VerticalAlignment="Center" Text="{Binding Green}" />
+                    <TextBlock Grid.Row="2" Classes="rgbl" Text="B" />
+                    <Slider Grid.Row="2" Grid.Column="2" Minimum="0" Maximum="255" SmallChange="1" LargeChange="16"
+                            IsSnapToTickEnabled="True" TickFrequency="1" Value="{Binding Blue}" />
+                    <TextBlock Grid.Row="2" Grid.Column="3" Classes="value" MinWidth="40" TextAlignment="Right"
+                               VerticalAlignment="Center" Text="{Binding Blue}" />
+                    <Border Grid.Row="3" Grid.ColumnSpan="4" Height="12" Margin="0,8,0,0" BorderThickness="1"
+                            BorderBrush="{StaticResource LineControlBrush}" Background="{Binding CustomBrush}" />
+                  </Grid>
+                </Border>
+              </StackPanel>
+              <!-- Steam Input (PlayStation support) sets the light bar itself and wins over shadPS4. -->
+              <TextBlock Classes="hint" Margin="28,-6,0,0" Text="{loc:Tr Controls.SteamLightHint}" IsVisible="{Binding OwnLightColor}" />
+            </StackPanel>
+          </ScrollViewer>
+        </DockPanel>
+      </TabItem>
+
+      <!-- Emulator: the channel, what is installed, the download -->
+      <TabItem Header="{loc:Tr Settings.Emulator}">
+        <ScrollViewer>
+          <StackPanel Classes="page">
+            <Grid Classes="sechead" ColumnDefinitions="Auto,*,Auto">
+              <TextBlock Classes="section" Text="{loc:Tr Settings.Section.Emulator}" />
+              <Rectangle Margin="12,0,0,0" />
+            </Grid>
+            <views:FieldPanel>
+              <TextBlock Classes="flabel" Text="{loc:Tr Settings.Channel}" />
+              <ListBox Classes="radio" ItemsSource="{Binding Channels}" SelectedItem="{Binding SelectedChannel}">
+                <ListBox.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <StackPanel Spacing="2" />
+                  </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                  <DataTemplate x:DataType="vm:ChannelOption">
+                    <TextBlock FontSize="16" Text="{Binding Label.Text}" />
+                  </DataTemplate>
+                </ListBox.ItemTemplate>
+              </ListBox>
+            </views:FieldPanel>
+            <StackPanel Spacing="6">
+              <Grid ColumnDefinitions="Auto,*">
+                <Panel Width="6" Height="6" Margin="0,7,10,0" VerticalAlignment="Top" RenderTransform="rotate(45deg)">
+                  <Rectangle Fill="{StaticResource SuccessBrush}"
+                             IsVisible="{Binding EmulatorPath, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                  <Rectangle Stroke="{StaticResource WarnBrush}" StrokeThickness="1"
+                             IsVisible="{Binding EmulatorPath, Converter={x:Static ObjectConverters.IsNull}}" />
+                </Panel>
+                <TextBlock Grid.Column="1" Classes="srow" Text="{Binding EmulatorStatus.Text}" />
+              </Grid>
+              <TextBlock Classes="mono" Foreground="{StaticResource Ash500Brush}" HorizontalAlignment="Left" TextTrimming="PathSegmentEllipsis"
+                         Text="{Binding EmulatorPath}" ToolTip.Tip="{Binding EmulatorPath}" />
+            </StackPanel>
+            <Button Classes="bb" HorizontalAlignment="Left" Content="{loc:Tr Emulator.Download}"
+                    Command="{Binding DownloadEmulatorCommand}" />
+            <ProgressBar Maximum="100" Value="{Binding DownloadProgress}" IsVisible="{Binding IsBusy}" />
+            <!-- What the button downloads and from where: the press is the consent, nothing is fetched by itself. -->
+            <TextBlock Classes="small" MaxWidth="640" HorizontalAlignment="Left" Text="{loc:Tr Emulator.Source}" />
+            <CheckBox HorizontalAlignment="Left" IsChecked="{Binding HideEmulatorConsole}">
+              <StackPanel>
+                <TextBlock Classes="label" Text="{loc:Tr Settings.HideConsole}" />
+                <TextBlock Classes="desc" MaxWidth="480" HorizontalAlignment="Left" Text="{loc:Tr Settings.HideConsoleTip}" />
+              </StackPanel>
+            </CheckBox>
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+      <!-- Steam: the client, the name in the game, the game the session runs under, the library; developer mode: the network -->
+      <TabItem Name="SteamTab" Header="{loc:Tr Settings.Steam}">
+        <ScrollViewer DataContext="{Binding Steam}">
+          <StackPanel Classes="page" x:DataType="vm:SteamViewModel">
+            <Grid Classes="sechead" ColumnDefinitions="Auto,*,Auto">
+              <TextBlock Classes="section" Text="{loc:Tr Steam.Client}" />
+              <Rectangle />
+              <Button Grid.Column="2" Theme="{StaticResource LinkButton}" FontSize="15" Content="{loc:Tr Steam.Recheck}"
+                      Command="{Binding RecheckCommand}" IsVisible="{Binding ShowRecheck}" />
+            </Grid>
+            <Grid ColumnDefinitions="Auto,*">
+              <Rectangle Classes="mark" Margin="0,7,10,0" VerticalAlignment="Top"
+                         Fill="{StaticResource SuccessBrush}" IsVisible="{Binding ClientOk}" />
+              <Rectangle Classes="mark" Margin="0,7,10,0" VerticalAlignment="Top"
+                         Stroke="{StaticResource WarnBrush}" StrokeThickness="1" IsVisible="{Binding ClientWarn}" />
+              <Rectangle Classes="mark" Margin="0,7,10,0" VerticalAlignment="Top"
+                         Fill="{StaticResource ErrorBrush}" IsVisible="{Binding ClientError}" />
+              <TextBlock Grid.Column="1" Classes="srow" Text="{Binding ClientText.Text}"
+                         Classes.warn="{Binding ClientWarn}" Classes.error="{Binding ClientError}" />
+            </Grid>
+            <views:FieldPanel>
+              <TextBlock Classes="flabel" Text="{loc:Tr Steam.Name}" />
+              <TextBlock FontFamily="{StaticResource FontMono}" FontSize="17" Foreground="{StaticResource Bone100Brush}"
+                         Text="{Binding GameName}" Classes.off="{Binding !HasGameName}" />
+              <TextBlock Classes="hint" Text="{loc:Tr Steam.NameHint}" IsVisible="{Binding HasGameName}" />
+              <TextBlock Classes="hint" Text="{loc:Tr Steam.NameLater}" IsVisible="{Binding !HasGameName}" />
+            </views:FieldPanel>
+
+            <Grid Classes="sechead" ColumnDefinitions="Auto,*,Auto" Margin="0,4,0,0">
+              <TextBlock Classes="section" Text="{loc:Tr Settings.SteamGame}" />
+              <Rectangle Margin="12,0,0,0" />
+            </Grid>
+            <StackPanel Spacing="8">
+              <ComboBox HorizontalAlignment="Stretch" MinWidth="0" ItemsSource="{Binding Games}" SelectedItem="{Binding SelectedGame}">
+                <ComboBox.ItemTemplate>
+                  <DataTemplate x:DataType="vm:SteamGameOption">
+                    <Grid ColumnDefinitions="*,Auto">
+                      <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" />
+                      <TextBlock Grid.Column="1" Classes="small" Margin="12,0,0,0" VerticalAlignment="Center"
+                                 Text="{loc:Tr Steam.Installed}" IsVisible="{Binding Installed}" />
+                    </Grid>
+                  </DataTemplate>
+                </ComboBox.ItemTemplate>
+              </ComboBox>
+              <TextBlock Classes="small warn" Text="{loc:Tr Steam.NotOwned}" IsVisible="{Binding ShowNotOwned}" />
+              <TextBlock Classes="small" Text="{loc:Tr Steam.Hint}" />
+            </StackPanel>
+
+            <Grid Classes="sechead" ColumnDefinitions="Auto,*,Auto" Margin="0,4,0,0">
+              <TextBlock Classes="section" Text="{loc:Tr Steam.Library}" />
+              <Rectangle />
+              <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="14">
+                <Button Theme="{StaticResource LinkButton}" FontSize="15" Content="{loc:Tr Steam.ChooseFile}"
+                        Command="{Binding ChooseLibraryCommand}" />
+                <Button Theme="{StaticResource LinkButton}" FontSize="15" Content="{loc:Tr Steam.Automatic}"
+                        Command="{Binding AutomaticLibraryCommand}" IsVisible="{Binding IsManualLibrary}" />
+              </StackPanel>
+            </Grid>
+            <StackPanel Spacing="8">
+              <Grid ColumnDefinitions="Auto,*">
+                <Rectangle Classes="mark" Margin="0,7,10,0" VerticalAlignment="Top"
+                           Fill="{StaticResource SuccessBrush}" IsVisible="{Binding LibraryOk}" />
+                <Rectangle Classes="mark" Margin="0,7,10,0" VerticalAlignment="Top"
+                           Fill="{StaticResource ErrorBrush}" IsVisible="{Binding LibraryError}" />
+                <TextBlock Grid.Column="1" Classes="srow" MaxLines="2" TextTrimming="PrefixCharacterEllipsis"
+                           Text="{Binding LibraryText.Text}" ToolTip.Tip="{Binding LibraryText.Text}"
+                           Classes.error="{Binding LibraryError}" />
+              </Grid>
+              <TextBlock Classes="small" Text="{loc:Tr Steam.LibraryHint}" />
+            </StackPanel>
+
+            <!-- Developer mode: co-op over Steam or between game instances on this PC -->
+            <StackPanel Spacing="8" IsVisible="{Binding ShowDeveloperTools}">
+              <Grid Classes="sechead" ColumnDefinitions="Auto,*,Auto">
+                <TextBlock Classes="section dev" Text="{loc:Tr Steam.Network}" />
+                <Rectangle Margin="12,0,0,0" />
+              </Grid>
+              <ListBox Classes="radio" ItemsSource="{Binding Networks}" SelectedItem="{Binding SelectedNetwork}">
+                <ListBox.ItemTemplate>
+                  <DataTemplate x:DataType="vm:NetworkOption">
+                    <TextBlock FontSize="16" Text="{Binding Label.Text}" />
+                  </DataTemplate>
+                </ListBox.ItemTemplate>
+              </ListBox>
+              <TextBlock Classes="small" Text="{loc:Tr Steam.NetworkHint}" />
+            </StackPanel>
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+      <!-- Backups: copies of the main profile's saves, how they are made, putting one back -->
+      <TabItem Header="{loc:Tr Settings.Backups}">
+        <ScrollViewer DataContext="{Binding Backups}">
+          <StackPanel Classes="page" x:DataType="vm:BackupsViewModel">
+            <Grid Classes="sechead" ColumnDefinitions="Auto,*,Auto">
+              <TextBlock Classes="section" Text="{loc:Tr Settings.Backups}" />
+              <Rectangle Margin="12,0,0,0" />
+            </Grid>
+            <views:FieldPanel>
+              <TextBlock Classes="flabel" Text="{loc:Tr Backups.Key}" />
+              <views:KeyCaptureBox Classes="capture" HorizontalAlignment="Left" Keys="{Binding Key}" />
+              <TextBlock Classes="hint" Text="{loc:Tr Backups.KeyTip}" />
+            </views:FieldPanel>
+            <views:FieldPanel>
+              <TextBlock Classes="flabel" Text="{loc:Tr Backups.Every}" />
+              <ComboBox ItemsSource="{Binding EveryChoices}" SelectedItem="{Binding Every}">
+                <ComboBox.ItemTemplate>
+                  <DataTemplate x:DataType="vm:BackupChoice">
+                    <TextBlock Text="{Binding Label.Text}" />
+                  </DataTemplate>
+                </ComboBox.ItemTemplate>
+              </ComboBox>
+            </views:FieldPanel>
+            <CheckBox IsChecked="{Binding AutoBanner}">
+              <StackPanel>
+                <TextBlock Classes="label" Text="{loc:Tr Backups.AutoBanner}" />
+                <TextBlock Classes="desc" MaxWidth="480" HorizontalAlignment="Left" Text="{loc:Tr Backups.AutoBannerTip}" />
+              </StackPanel>
+            </CheckBox>
+            <views:FieldPanel>
+              <TextBlock Classes="flabel" Text="{loc:Tr Backups.Kept}" />
+              <ComboBox ItemsSource="{Binding KeptChoices}" SelectedItem="{Binding Kept}">
+                <ComboBox.ItemTemplate>
+                  <DataTemplate x:DataType="vm:BackupChoice">
+                    <TextBlock Text="{Binding Label.Text}" />
+                  </DataTemplate>
+                </ComboBox.ItemTemplate>
+              </ComboBox>
+            </views:FieldPanel>
+
+            <Grid Classes="sechead" ColumnDefinitions="Auto,*,Auto" Margin="0,6,0,0">
+              <TextBlock Classes="section" Text="{loc:Tr Backups.List}" />
+              <Rectangle />
+              <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8">
+                <Button Classes="bb sm" Content="{loc:Tr Backups.Folder}" Command="{Binding OpenFolderCommand}" />
+                <Button Classes="bb sm" Content="{loc:Tr Backups.Restore}" Command="{Binding RestoreCommand}"
+                        ToolTip.Tip="{loc:Tr Backups.RestoreTip}" />
+                <Button Classes="bb sm" Content="{loc:Tr Backups.Delete}" Command="{Binding DeleteCommand}"
+                        IsVisible="{Binding !DeleteArmed}" />
+                <Button Classes="bb sm armed" Content="{loc:Tr Backups.DeleteSure}" Command="{Binding DeleteCommand}"
+                        IsVisible="{Binding DeleteArmed}" />
+              </StackPanel>
+            </Grid>
+            <ListBox Classes="games" Height="112" ItemsSource="{Binding Items}" SelectedItem="{Binding Selected}"
+                     IsVisible="{Binding !!Items.Count}">
+              <ListBox.ItemTemplate>
+                <DataTemplate x:DataType="vm:BackupItem">
+                  <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Classes="mono" Text="{Binding When}" />
+                    <TextBlock Grid.Column="1" Classes="caption" VerticalAlignment="Center" Text="{Binding Label}"
+                               IsVisible="{Binding HasLabel}" />
+                  </Grid>
+                </DataTemplate>
+              </ListBox.ItemTemplate>
+            </ListBox>
+            <TextBlock Classes="small" Text="{loc:Tr Backups.Empty}" IsVisible="{Binding !Items.Count}" />
+            <TextBlock Classes="tabstatus" Classes.error="{Binding HasError}" Classes.ok="{Binding !HasError}"
+                       Text="{Binding Status.Text}" IsVisible="{Binding HasStatus}" />
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+      <!-- About: the mod's head, the bug report (v9: moved here from General), licences, thanks, links -->
+      <TabItem Header="{loc:Tr Settings.About}">
+        <ScrollViewer>
+          <StackPanel Classes="page">
+            <StackPanel Orientation="Horizontal" Spacing="16">
+              <Image Width="44" Height="44" VerticalAlignment="Center" Source="{StaticResource HaEmblem}" />
+              <StackPanel VerticalAlignment="Center">
+                <TextBlock FontFamily="{StaticResource FontLogo}" FontSize="24" FontWeight="Medium" LetterSpacing="2.4"
+                           LineHeight="28" Foreground="{StaticResource Bone100Brush}" Text="{loc:Tr Home.Title}" />
+                <TextBlock Classes="aboutsub" Margin="0,4,0,0" FontFamily="{StaticResource FontCaps}" FontSize="13" FontWeight="SemiBold"
+                           LetterSpacing="3.1" LineHeight="18" Foreground="{StaticResource Gold500Brush}"
+                           TextWrapping="Wrap" Text="{loc:Tr Home.Subtitle}" />
+                <TextBlock Classes="small" Margin="0,2,0,0" FontSize="13" FontFeatures="+tnum"
+                           Foreground="{StaticResource Ash500Brush}" Text="{Binding AppAbout}" />
+              </StackPanel>
+            </StackPanel>
+
+            <Grid Classes="sechead" ColumnDefinitions="Auto,*,Auto">
+              <TextBlock Classes="section" Text="{loc:Tr About.Broken}" />
+              <Rectangle Margin="12,0,0,0" />
+            </Grid>
+            <Button Classes="bb" HorizontalAlignment="Left" Content="{loc:Tr Report.Button}" Command="{Binding MakeReportCommand}" />
+            <TextBlock Classes="small" Text="{loc:Tr Report.Tip}" />
+            <StackPanel Spacing="8" IsVisible="{Binding HasReportStatus}">
+              <Grid ColumnDefinitions="Auto,*">
+                <Rectangle Classes="mark" Margin="0,7,10,0" VerticalAlignment="Top" Fill="{StaticResource SuccessBrush}"
+                           IsVisible="{Binding HasReportPath}" />
+                <TextBlock Grid.Column="1" Classes="srow" Text="{Binding ReportStatus.Text}" />
+              </Grid>
+              <WrapPanel IsVisible="{Binding HasReportPath}">
+                <TextBlock Classes="mono" Margin="0,0,12,0" Foreground="{StaticResource Ash300Brush}" TextTrimming="PathSegmentEllipsis"
+                           MaxWidth="440" Text="{Binding ReportPath}" ToolTip.Tip="{Binding ReportPath}" />
+                <Button Theme="{StaticResource LinkButton}" FontSize="15" Content="{loc:Tr Report.ShowInFolder}"
+                        Command="{Binding ShowReportInFolderCommand}" />
+              </WrapPanel>
+            </StackPanel>
+
+            <!-- What is open and what is not: the launcher's source (MIT, public repository), the mod closed. -->
+            <Grid Classes="sechead" ColumnDefinitions="Auto,*,Auto">
+              <TextBlock Classes="section" Text="{loc:Tr About.LicensesHead}" />
+              <Rectangle />
+              <Button Grid.Column="2" Classes="bb sm" Content="{loc:Tr About.Licenses}" Command="{Binding OpenLicensesCommand}" />
+            </Grid>
+            <TextBlock Classes="small" Text="{loc:Tr About.Disclaimer}" />
+            <StackPanel Spacing="2">
+              <TextBlock Classes="small" Text="{loc:Tr About.LicenseLine}" />
+              <Button Theme="{StaticResource LinkButton}" HorizontalAlignment="Left" Content="{loc:Tr About.Source}"
+                      Command="{Binding OpenUrlCommand}" CommandParameter="https://github.com/HappyEntity/HuntersAccord" />
+            </StackPanel>
+
+            <Grid Classes="sechead" ColumnDefinitions="Auto,*,Auto">
+              <TextBlock Classes="section" Text="{loc:Tr About.Thanks}" />
+              <Rectangle Margin="12,0,0,0" />
+            </Grid>
+            <StackPanel Spacing="6">
+              <Grid Classes="thanks" ColumnDefinitions="12,*"><Rectangle /><TextBlock Classes="small" Text="{loc:Tr About.ThanksShadPs4}" /></Grid>
+              <Grid Classes="thanks" ColumnDefinitions="12,*"><Rectangle /><TextBlock Classes="small" Text="{loc:Tr About.ThanksPatches}" /></Grid>
+              <Grid Classes="thanks" ColumnDefinitions="12,*"><Rectangle /><TextBlock Classes="small" Text="{loc:Tr About.ThanksFonts}" /></Grid>
+            </StackPanel>
+            <WrapPanel Orientation="Horizontal">
+              <Button Theme="{StaticResource LinkButton}" FontSize="15" Content="shadPS4"
+                      Command="{Binding OpenUrlCommand}" CommandParameter="https://github.com/shadps4-emu/shadPS4" />
+              <TextBlock Margin="10,0" VerticalAlignment="Center" Foreground="{StaticResource TextDisabledBrush}" Text="·" />
+              <Button Theme="{StaticResource LinkButton}" FontSize="15" Content="{loc:Tr About.GoldHenPatches}"
+                      Command="{Binding OpenUrlCommand}" CommandParameter="https://github.com/illusionyy/PS-Game-Patch" />
+              <TextBlock Margin="10,0" VerticalAlignment="Center" Foreground="{StaticResource TextDisabledBrush}" Text="·" />
+              <Button Theme="{StaticResource LinkButton}" FontSize="15" Content="{loc:Tr About.ShadPs4Patches}"
+                      Command="{Binding OpenUrlCommand}" CommandParameter="https://github.com/shadps4-emu/ps4_cheats" />
+            </WrapPanel>
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+    </TabControl>
+
+    <!-- Footer (Display, Controls): when their changes take effect. The rail's line runs on beside it. -->
+    <Border Grid.Row="1" Classes="railfoot" BorderBrush="{StaticResource LineFaintBrush}" BorderThickness="0,0,1,0">
+      <Border.IsVisible>
+        <MultiBinding Converter="{x:Static BoolConverters.Or}">
+          <Binding Path="#DisplayTab.IsSelected" />
+          <Binding Path="#ControlsTab.IsSelected" />
+        </MultiBinding>
+      </Border.IsVisible>
+    </Border>
+    <Border Grid.Row="1" Grid.Column="1" Classes="pagefoot" IsVisible="{Binding #ControlsTab.IsSelected}">
+      <Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center">
+        <TextBlock Classes="tabstatus" Text="{loc:Tr Display.ApplyNext}" IsVisible="{Binding Controls.IsGameStopped}" />
+        <Grid ColumnDefinitions="Auto,*" IsVisible="{Binding Controls.IsGameRunning}">
+          <Rectangle Classes="mark" Margin="0,7,8,0" VerticalAlignment="Top" Stroke="{StaticResource WarnBrush}" StrokeThickness="1" />
+          <TextBlock Grid.Column="1" Classes="tabstatus warn" Text="{loc:Tr Display.ApplyRunning}" />
+        </Grid>
+        <Button Grid.Column="1" Theme="{StaticResource LinkButton}" FontSize="14" Margin="16,0,0,0" VerticalAlignment="Center"
+                Content="{loc:Tr Controls.ConfigFile}" ToolTip.Tip="{loc:Tr Controls.ConfigFileTip}"
+                Command="{Binding Controls.OpenConfigFolderCommand}" />
+      </Grid>
+    </Border>
+    <Border Grid.Row="1" Grid.Column="1" Classes="pagefoot" IsVisible="{Binding #DisplayTab.IsSelected}">
+      <Panel VerticalAlignment="Center">
+        <TextBlock Classes="tabstatus" Text="{loc:Tr Display.ApplyNext}" IsVisible="{Binding Display.IsGameStopped}" />
+        <Grid ColumnDefinitions="Auto,*" IsVisible="{Binding Display.IsGameRunning}">
+          <Rectangle Classes="mark" Margin="0,7,8,0" VerticalAlignment="Top" Stroke="{StaticResource WarnBrush}" StrokeThickness="1" />
+          <TextBlock Grid.Column="1" Classes="tabstatus warn" Text="{loc:Tr Display.ApplyRunning}" />
+        </Grid>
+      </Panel>
+    </Border>
+  </Grid>
+</UserControl>

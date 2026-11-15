@@ -1,0 +1,73 @@
+Hunters' Accord (Seamless Co-op for Bloodborne) — third-party notices
+Copyright (c) 2026 HappyEntity
+
+Hunters' Accord itself: the launcher's source is published under the MIT License at
+https://github.com/HappyEntity/HuntersAccord; the co-op mod in the "mod" folder is closed source, licensed
+under MOD-LICENSE.txt.
+
+Hunters' Accord includes the components below. Each is used under its own licence; the full
+texts are in the "licenses" folder next to this file.
+
+Bloodborne is a trademark of Sony Interactive Entertainment. Hunters' Accord is a fan project,
+not affiliated with or endorsed by Sony Interactive Entertainment or FromSoftware.
+The game is not included: Hunters' Accord works with the player's own copy.
+
+
+Software
+--------
+
+Avalonia UI                     MIT             Copyright (c) The AvaloniaUI Project
+                                                licenses/Avalonia.txt
+ANGLE (Windows graphics)        BSD-3-Clause    Copyright 2018 The ANGLE Project Authors
+                                                licenses/ANGLE.txt
+SkiaSharp (with Skia)           MIT (Skia: BSD-3-Clause)
+                                                Copyright (c) Microsoft Corporation
+                                                licenses/SkiaSharp.txt
+HarfBuzzSharp (with HarfBuzz)   MIT (HarfBuzz: Old MIT)
+                                                Copyright (c) Microsoft Corporation
+                                                licenses/HarfBuzzSharp.txt
+  Libraries inside SkiaSharp and HarfBuzzSharp (Skia, HarfBuzz, FreeType, libpng,
+  zlib, and others): licenses/SkiaSharp-HarfBuzzSharp-ThirdPartyNotices.txt
+MicroCom.Runtime                MIT             Copyright (c) 2021 Nikita Tsukanov
+                                                licenses/MicroCom.Runtime.txt
+Tmds.DBus.Protocol (Linux)      MIT             Copyright (c) Tom Deseyn
+                                                licenses/Tmds.DBus.Protocol.txt
+CommunityToolkit.Mvvm           MIT             Copyright (c) .NET Foundation and Contributors
+                                                licenses/CommunityToolkit.Mvvm.txt
+                                                licenses/CommunityToolkit.Mvvm-ThirdPartyNotices.txt
+Iced (x86 disassembler/encoder) MIT             Copyright (C) 2018-present iced project and contributors
+                                                licenses/Iced.txt
+.NET Runtime                    MIT             Copyright (c) .NET Foundation and Contributors
+                                                licenses/DotNet.txt
+                                                licenses/DotNet-ThirdPartyNotices.txt
+
+
+Fonts (SIL Open Font License 1.1)
+---------------------------------
+
+Cinzel                          Copyright 2020 The Cinzel Project Authors
+                                licenses/Cinzel-OFL.txt
+Cormorant SC                    Copyright 2015 The Cormorant Project Authors
+                                licenses/CormorantSC-OFL.txt
+EB Garamond                     Copyright 2017 The EB Garamond Project Authors
+                                licenses/EBGaramond-OFL.txt
+JetBrains Mono                  Copyright 2020 The JetBrains Mono Project Authors
+                                licenses/JetBrainsMono-OFL.txt
+
+
+Images
+------
+
+Key icons in the game's prompts (drawn for Hunters' Accord). Their letters are rendered from
+GNU FreeFont FreeSans Bold (GPL-3.0 with the font exception) and the small L/R marks from
+DejaVu Sans Condensed Bold (Bitstream Vera licence); only the rendered images are included,
+not the fonts.
+
+
+Not included, downloaded by the launcher from their official sources
+--------------------------------------------------------------------
+
+shadPS4 emulator (GPL-2.0)      https://github.com/shadps4-emu/shadPS4
+Community game patches          https://github.com/illusionyy/PS-Game-Patch (GoldHEN)
+                                https://github.com/shadps4-emu/ps4_cheats (shadPS4)
+  Patch authors are named with each patch in the launcher.

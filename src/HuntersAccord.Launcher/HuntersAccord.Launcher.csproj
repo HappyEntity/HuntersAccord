@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <DefineConstants Condition="'$(HaPlaytest)' == 'true'">$(DefineConstants);HA_PLAYTEST</DefineConstants>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>HuntersAccord.Launcher</RootNamespace>
+    <AssemblyName>HuntersAccord</AssemblyName>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <BuiltInComInteropSupport>false</BuiltInComInteropSupport>
+    <ApplicationIcon>Assets/Icon/huntersaccord.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" />
+    <PackageReference Include="Avalonia.Desktop" />
+    <PackageReference Include="Avalonia.Themes.Fluent" />
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Theme fonts (SIL OFL 1.1, licences next to them), icon and backdrop texture from the Hunters' Accord design system. -->
+    <AvaloniaResource Include="Assets/**" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Licences of everything Hunters' Accord ships (fonts, libraries, .NET): licenses/ next to the exe, summary at the root. -->
+    <None Include="Licenses/*" TargetPath="licenses/%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <None Update="THIRD-PARTY-NOTICES.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+  <ItemGroup>
+    <!--
+      Community-editable translations. Sources live in Resources/Lang; players get them in lang/ next to the exe.
+      English is also embedded as the fallback for missing keys.
+    -->
+    <None Update="Resources\Lang\*.json" TargetPath="lang\%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <EmbeddedResource Include="Resources\Lang\en.json" LogicalName="HuntersAccord.Launcher.lang.en.json"
+                      TargetPath="lang\en.json"
+                      CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HuntersAccord.Core\HuntersAccord.Core.csproj" />
+    <ProjectReference Include="..\HuntersAccord.Platform\HuntersAccord.Platform.csproj" />
+  </ItemGroup>
+</Project>

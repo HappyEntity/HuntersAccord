@@ -1,0 +1,401 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:HuntersAccord.Launcher.ViewModels"
+             xmlns:loc="using:HuntersAccord.Launcher.Localization"
+             xmlns:views="using:HuntersAccord.Launcher.Views"
+             x:Class="HuntersAccord.Launcher.Views.PlayPage"
+             x:DataType="vm:MainWindowViewModel">
+  <UserControl.Styles>
+    <Style Selector="Image.emblem">
+      <Setter Property="Width" Value="38" />
+      <Setter Property="Height" Value="38" />
+      <Setter Property="Margin" Value="0,0,0,10" />
+    </Style>
+    <Style Selector="Image.emblem.compact">
+      <Setter Property="Width" Value="28" />
+      <Setter Property="Height" Value="28" />
+      <Setter Property="Margin" Value="0,0,0,6" />
+    </Style>
+    <Style Selector="TextBlock.logo">
+      <Setter Property="Margin" Value="0,-8,0,-8" />
+    </Style>
+    <Style Selector="TextBlock.logo.compact">
+      <Setter Property="FontSize" Value="38" />
+      <Setter Property="LetterSpacing" Value="4.5" />
+      <Setter Property="Margin" Value="0,-6.5,0,-6.5" />
+    </Style>
+    <Style Selector="TextBlock.logosub">
+      <Setter Property="Margin" Value="0,12,0,0" />
+    </Style>
+    <Style Selector="TextBlock.logosub.compact">
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="LetterSpacing" Value="4.2" />
+      <Setter Property="Margin" Value="0,8,0,0" />
+    </Style>
+    <Style Selector="Grid.divider">
+      <Setter Property="Margin" Value="0,24,0,32" />
+    </Style>
+    <Style Selector="Grid.divider.tight">
+      <Setter Property="Margin" Value="0,20,0,22" />
+    </Style>
+    <!-- Bottom left: the mod's version over the game's. -->
+    <Style Selector="TextBlock.modversion">
+      <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="LetterSpacing" Value="1.4" />
+      <Setter Property="LineHeight" Value="19" />
+      <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+    </Style>
+    <!-- Bottom right: the patches the game starts with, one per line; gold under the pointer (opens Patches). -->
+    <Style Selector="Button.patchcol TextBlock">
+      <Setter Property="HorizontalAlignment" Value="Right" />
+      <Setter Property="TextAlignment" Value="Right" />
+    </Style>
+    <Style Selector="TextBlock.pchead">
+      <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+      <Setter Property="FontSize" Value="13" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="LetterSpacing" Value="1.3" />
+      <Setter Property="Margin" Value="0,0,0,2" />
+      <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+    </Style>
+    <Style Selector="TextBlock.pcitem">
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="LineHeight" Value="19" />
+      <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+    </Style>
+    <Style Selector="TextBlock.pcmore">
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="LineHeight" Value="19" />
+      <Setter Property="FontStyle" Value="Italic" />
+      <Setter Property="Margin" Value="0,2,0,0" />
+      <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+    </Style>
+    <Style Selector="TextBlock.pcnone">
+      <Setter Property="FontSize" Value="13" />
+      <Setter Property="LineHeight" Value="18" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+      <Setter Property="MaxLines" Value="2" />
+      <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+      <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+    </Style>
+    <!-- The online line: smaller, under the status line. -->
+    <Style Selector="TextBlock.online">
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="LineHeight" Value="19" />
+      <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+      <Setter Property="FontFeatures" Value="+tnum" />
+    </Style>
+    <Style Selector="TextBlock.online.warn, TextBlock.online.dev">
+      <Setter Property="Foreground" Value="{StaticResource WarnBrush}" />
+    </Style>
+    <Style Selector="TextBlock.online.error">
+      <Setter Property="Foreground" Value="{StaticResource ErrorBrush}" />
+    </Style>
+    <Style Selector="Button.patchcol:pointerover TextBlock">
+      <Setter Property="Foreground" Value="{StaticResource Gold300Brush}" />
+    </Style>
+    <!-- The newer release: caps in light gold with a diamond, the first line of the versions. -->
+    <Style Selector="Button.update TextBlock">
+      <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="LetterSpacing" Value="1.1" />
+      <Setter Property="LineHeight" Value="19" />
+      <Setter Property="Foreground" Value="{StaticResource Gold300Brush}" />
+    </Style>
+    <Style Selector="Button.update:pointerover TextBlock">
+      <Setter Property="TextDecorations" Value="Underline" />
+    </Style>
+    <!-- The trophies' widget: grey like the corners, gold under the pointer. -->
+    <Style Selector="Button.trw">
+      <Setter Property="Margin" Value="0,0,0,14" />
+      <Setter Property="Padding" Value="14,6" />
+    </Style>
+    <Style Selector="Button.trw /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+    </Style>
+    <Style Selector="Button.trw:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="BorderBrush" Value="{StaticResource LineFaintBrush}" />
+      <Setter Property="Background" Value="#B316121A" />
+    </Style>
+    <Style Selector="TextBlock.trwlabel">
+      <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="LetterSpacing" Value="1.7" />
+      <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+    </Style>
+    <Style Selector="TextBlock.trwn">
+      <Setter Property="FontSize" Value="15" />
+      <Setter Property="FontFeatures" Value="+tnum,+lnum" />
+      <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+    </Style>
+    <Style Selector="Button.trw.empty TextBlock.trwn">
+      <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+    </Style>
+    <Style Selector="TextBlock.trwlast">
+      <Setter Property="FontSize" Value="13" />
+      <Setter Property="LineHeight" Value="17" />
+      <Setter Property="MaxWidth" Value="300" />
+      <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+      <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+    </Style>
+    <Style Selector="Button.trw:pointerover TextBlock.trwlabel, Button.trw:pointerover TextBlock.trwn, Button.trw:pointerover TextBlock.trwlast">
+      <Setter Property="Foreground" Value="{StaticResource Gold300Brush}" />
+    </Style>
+    <!-- The narrow window: the widget without its last line; the patches' column narrower. -->
+    <Style Selector=".narrow Panel.trwlast">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector=".narrow Button.trw">
+      <Setter Property="Margin" Value="0,0,0,18" />
+    </Style>
+    <Style Selector=".narrow Button.patchcol">
+      <Setter Property="MaxWidth" Value="200" />
+    </Style>
+  </UserControl.Styles>
+
+  <Panel>
+    <Panel Margin="0,0,0,56">
+      <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Image Classes="emblem" Classes.compact="{Binding ShowPanel}" HorizontalAlignment="Center"
+               Source="{StaticResource HaEmblem}" />
+        <TextBlock Classes="logo" Classes.compact="{Binding ShowPanel}" Text="{loc:Tr Home.Title}">
+          <TextBlock.Effect>
+            <DropShadowEffect BlurRadius="24" OffsetX="0" OffsetY="0" Color="#80781816" />
+          </TextBlock.Effect>
+        </TextBlock>
+        <TextBlock Classes="logosub" Classes.compact="{Binding ShowPanel}" Text="{loc:Tr Home.Subtitle}" />
+
+        <!-- Ornament: fading lines, dots and a blood gem. -->
+        <Grid Classes="divider" Classes.tight="{Binding ShowPanel}" Width="300" HorizontalAlignment="Center"
+              ColumnDefinitions="*,Auto,Auto,Auto,*">
+          <Rectangle Height="1" VerticalAlignment="Center">
+            <Rectangle.Fill>
+              <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+                <GradientStop Offset="0" Color="#008A7550" />
+                <GradientStop Offset="1" Color="{StaticResource Gold700}" />
+              </LinearGradientBrush>
+            </Rectangle.Fill>
+          </Rectangle>
+          <Rectangle Grid.Column="1" Width="3" Height="3" Margin="10,0" Fill="{StaticResource Gold700Brush}" RenderTransform="rotate(45deg)" />
+          <Panel Grid.Column="2" Width="8" Height="8" RenderTransform="rotate(45deg)">
+            <Rectangle Stroke="{StaticResource Gold500Brush}" StrokeThickness="1" />
+            <Rectangle Margin="2" Fill="{StaticResource Blood500Brush}" />
+          </Panel>
+          <Rectangle Grid.Column="3" Width="3" Height="3" Margin="10,0" Fill="{StaticResource Gold700Brush}" RenderTransform="rotate(45deg)" />
+          <Rectangle Grid.Column="4" Height="1" VerticalAlignment="Center">
+            <Rectangle.Fill>
+              <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+                <GradientStop Offset="0" Color="{StaticResource Gold700}" />
+                <GradientStop Offset="1" Color="#008A7550" />
+              </LinearGradientBrush>
+            </Rectangle.Fill>
+          </Rectangle>
+        </Grid>
+
+        <Panel IsVisible="{Binding !ShowPanel}" Height="152">
+          <StackPanel Spacing="14" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Button Theme="{StaticResource PlayButton}" Classes="play" HorizontalAlignment="Center"
+                    Content="{Binding PlayLabel.Text}" Command="{Binding PlayCommand}"
+                    Classes.busy="{Binding IsDownloadingEmulator}" />
+            <ProgressBar Width="300" Margin="0,2,0,0" Maximum="100" Value="{Binding DownloadProgress}"
+                         IsVisible="{Binding IsDownloadingEmulator}" />
+            <TextBlock Classes="status" HorizontalAlignment="Center" TextAlignment="Center" MaxWidth="440"
+                       TextTrimming="CharacterEllipsis" Text="{Binding HomeStatus.Text}"
+                       IsVisible="{Binding ShowHomeStatus}" />
+            <Grid IsVisible="{Binding HasPlayError}" MaxWidth="440" HorizontalAlignment="Center" ColumnDefinitions="Auto,*">
+              <Rectangle Classes="mark" Margin="0,7,10,0" VerticalAlignment="Top" Fill="{StaticResource ErrorBrush}" />
+              <TextBlock Grid.Column="1" Classes="status error" TextWrapping="Wrap" MaxLines="2"
+                         TextTrimming="CharacterEllipsis" Text="{Binding PlayStatus.Text}" />
+            </Grid>
+            <Border IsVisible="{Binding ShowNoModStamp}" HorizontalAlignment="Center" BorderThickness="1"
+                    BorderBrush="#80D2A85C" Padding="10,4,12,4">
+              <StackPanel Orientation="Horizontal" Spacing="10">
+                <Rectangle Classes="mark" VerticalAlignment="Center" Stroke="{StaticResource WarnBrush}" StrokeThickness="1" />
+                <TextBlock Classes="warn" FontFamily="{StaticResource FontCaps}" FontWeight="SemiBold" FontSize="15"
+                           LetterSpacing="1.5" VerticalAlignment="Center" Text="{loc:Tr Home.NoMod}" />
+                <Border BorderThickness="1,0,0,0" BorderBrush="{StaticResource LineFaintBrush}" Padding="10,0,0,0">
+                  <TextBlock Classes="note" Foreground="{StaticResource Ash300Brush}" VerticalAlignment="Center"
+                             Text="{loc:Tr Home.NoModOff}" />
+                </Border>
+              </StackPanel>
+            </Border>
+            <!-- Co-op: over Steam and as whom, or why not (hidden without the mod: no co-op then). -->
+            <ContentControl Margin="0,-6,0,0" HorizontalAlignment="Center" Content="{Binding Steam}"
+                            IsVisible="{Binding !ShowNoModStamp}">
+              <ContentControl.ContentTemplate>
+                <DataTemplate x:DataType="vm:SteamViewModel">
+                  <StackPanel Orientation="Horizontal" Spacing="12">
+                    <Panel Width="6" Height="6" VerticalAlignment="Center" RenderTransform="rotate(45deg)">
+                      <Rectangle Fill="{StaticResource SuccessBrush}" IsVisible="{Binding OnlineOk}" />
+                      <Rectangle Stroke="{StaticResource WarnBrush}" StrokeThickness="1" IsVisible="{Binding OnlineWarn}" />
+                      <Rectangle Fill="{StaticResource ErrorBrush}" IsVisible="{Binding OnlineError}" />
+                      <Rectangle Fill="{StaticResource WarnBrush}" IsVisible="{Binding OnlineDev}" />
+                    </Panel>
+                    <TextBlock Classes="online" Margin="-3,0,0,0" VerticalAlignment="Center" MaxWidth="560"
+                               TextTrimming="CharacterEllipsis" Text="{Binding OnlineText.Text}" ToolTip.Tip="{Binding OnlineText.Text}"
+                               Classes.warn="{Binding OnlineWarn}" Classes.error="{Binding OnlineError}" Classes.dev="{Binding OnlineDev}" />
+                    <Button Theme="{StaticResource LinkButton}" FontSize="15" VerticalAlignment="Center"
+                            Content="{loc:Tr Online.SteamSettings}" Click="OnOpenSteamSettings"
+                            IsVisible="{Binding ShowOnlineSettingsLink}" />
+                  </StackPanel>
+                </DataTemplate>
+              </ContentControl.ContentTemplate>
+            </ContentControl>
+            <!-- Developer mode: both players on this PC side by side, to test co-op. -->
+            <Button Theme="{StaticResource LinkButton}" Classes="dev" HorizontalAlignment="Center" Content="{loc:Tr Home.TwoPlayers}"
+                    ToolTip.Tip="{loc:Tr Home.TwoPlayersTip}" Command="{Binding PlayTwoPlayersCommand}"
+                    IsVisible="{Binding ShowDeveloperTools}" />
+          </StackPanel>
+        </Panel>
+
+        <!-- Instead of Play while the game is not ready: what is missing and what to do. -->
+        <Panel IsVisible="{Binding ShowPanel}" Width="480" HorizontalAlignment="Center">
+          <Border Classes="panel" DataContext="{Binding Game}">
+            <StackPanel x:DataType="vm:GameSectionViewModel">
+              <TextBlock Classes="hpanel" Margin="0,0,0,8" Text="{Binding PanelTitle.Text}" />
+              <TextBlock Classes="body" Margin="0,0,0,14" Text="{Binding PanelText.Text}" />
+              <TextBlock Classes="mono" Margin="0,0,0,14" Text="{Binding WrongVersionPath}"
+                         ToolTip.Tip="{Binding WrongVersionPath}"
+                         IsVisible="{Binding WrongVersionPath, Converter={x:Static ObjectConverters.IsNotNull}}" />
+
+              <Grid IsVisible="{Binding ShowPkgPanel}" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto"
+                    Margin="0,0,0,14">
+                <TextBlock Classes="key" Text="{loc:Tr Pkg.Base}" Margin="0,0,16,6" />
+                <Grid Grid.Column="1" ColumnDefinitions="*,Auto" Margin="0,0,0,6">
+                  <TextBlock Classes="mono" Text="{Binding BasePkgName}" ToolTip.Tip="{Binding BasePkgName}" />
+                  <TextBlock Grid.Column="1" Classes="caption" Margin="8,0,0,0" VerticalAlignment="Center" Text="{Binding BasePkgSize}" />
+                </Grid>
+                <TextBlock Grid.Row="1" Classes="key" Text="{loc:Tr Pkg.Update}" Margin="0,0,16,6"
+                           IsVisible="{Binding PatchPkgName, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                <Grid Grid.Row="1" Grid.Column="1" ColumnDefinitions="*,Auto" Margin="0,0,0,6"
+                      IsVisible="{Binding PatchPkgName, Converter={x:Static ObjectConverters.IsNotNull}}">
+                  <TextBlock Classes="mono" Text="{Binding PatchPkgName}" ToolTip.Tip="{Binding PatchPkgName}" />
+                  <TextBlock Grid.Column="1" Classes="caption" Margin="8,0,0,0" VerticalAlignment="Center" Text="{Binding PatchPkgSize}" />
+                </Grid>
+                <TextBlock Grid.Row="2" Classes="key" Text="{loc:Tr Pkg.Keys}" Margin="0,0,16,0" />
+                <Panel Grid.Row="2" Grid.Column="1">
+                  <TextBlock Classes="status ok" IsVisible="{Binding HasKeys}" Text="{loc:Tr Pkg.KeysFound}" />
+                  <TextBlock Classes="status error" IsVisible="{Binding !HasKeys}" Text="{loc:Tr Pkg.KeysMissing}" />
+                </Panel>
+              </Grid>
+
+              <StackPanel IsVisible="{Binding IsInstalling}" Spacing="10">
+                <ProgressBar Maximum="100" Value="{Binding InstallProgress}" />
+                <TextBlock Classes="status" TextTrimming="CharacterEllipsis" Text="{Binding InstallText.Text}" />
+              </StackPanel>
+              <!-- Only with something to say: an empty line would push the buttons down. -->
+              <TextBlock Classes="status" TextWrapping="Wrap" Text="{Binding InstallText.Text}">
+                <TextBlock.IsVisible>
+                  <MultiBinding Converter="{x:Static BoolConverters.And}">
+                    <Binding Path="!IsInstalling" />
+                    <Binding Path="InstallText.Text" Converter="{x:Static StringConverters.IsNotNullOrEmpty}" />
+                  </MultiBinding>
+                </TextBlock.IsVisible>
+              </TextBlock>
+
+              <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,14,0,0">
+                <Button Classes="bb" Content="{loc:Tr Game.KeysImport}" Command="{Binding ImportKeysCommand}">
+                  <Button.IsVisible>
+                    <MultiBinding Converter="{x:Static BoolConverters.And}">
+                      <Binding Path="ShowPkgPanel" />
+                      <Binding Path="!HasKeys" />
+                      <Binding Path="!IsInstalling" />
+                    </MultiBinding>
+                  </Button.IsVisible>
+                </Button>
+                <Button Classes="bb" Content="{loc:Tr Game.InstallPkg}" Command="{Binding InstallFromPkgCommand}">
+                  <Button.IsVisible>
+                    <MultiBinding Converter="{x:Static BoolConverters.And}">
+                      <Binding Path="ShowPkgPanel" />
+                      <Binding Path="!IsInstalling" />
+                    </MultiBinding>
+                  </Button.IsVisible>
+                </Button>
+                <Button Classes="bb" Content="{loc:Tr Game.InstallCancel}" Command="{Binding CancelInstallCommand}"
+                        IsVisible="{Binding IsInstalling}" />
+                <Button Classes="bb" Content="{loc:Tr Game.Browse}" Command="{Binding BrowseFolderCommand}"
+                        IsVisible="{Binding !ShowPkgPanel}" />
+                <Button Classes="bb" Content="{loc:Tr Game.Rescan}" Command="{Binding RescanCommand}"
+                        IsVisible="{Binding !ShowPkgPanel}" />
+              </StackPanel>
+            </StackPanel>
+          </Border>
+          <Path HorizontalAlignment="Left" VerticalAlignment="Top" Data="M0.5,12 V0.5 H12"
+                Stroke="{StaticResource Gold700Brush}" StrokeThickness="1" IsHitTestVisible="False" />
+          <Path HorizontalAlignment="Right" VerticalAlignment="Bottom" Data="M0,11.5 H11.5 V0"
+                Stroke="{StaticResource Gold700Brush}" StrokeThickness="1" IsHitTestVisible="False" />
+        </Panel>
+      </StackPanel>
+    </Panel>
+
+    <!-- Bottom left: the versions (5 clicks open developer mode, no visual reaction). A newer release first (v9: it was
+         lost under the game's version): its page, nothing downloaded; Settings → General can turn the check off. -->
+    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="24,0,0,16" Spacing="1">
+      <Button Theme="{StaticResource PlainButton}" Classes="update" HorizontalAlignment="Left" Margin="0,0,0,4"
+              IsVisible="{Binding HasUpdate}" Command="{Binding OpenUpdatePageCommand}" ToolTip.Tip="{loc:Tr Home.UpdateAvailableTip}">
+        <StackPanel Orientation="Horizontal" Spacing="9">
+          <Rectangle Width="6" Height="6" VerticalAlignment="Center" RenderTransform="rotate(45deg)" Fill="{StaticResource Gold500Brush}" />
+          <TextBlock Text="{Binding UpdateNotice.Text}" />
+        </StackPanel>
+      </Button>
+      <StackPanel Spacing="1" Background="Transparent" PointerPressed="OnVersionPressed">
+        <TextBlock Classes="modversion" Text="{Binding AppVersion}" />
+        <TextBlock Classes="caption" Text="{Binding GameInfo}" />
+      </StackPanel>
+      <!-- After an error: the logs in one zip for a bug report. -->
+      <Button Theme="{StaticResource LinkButton}" HorizontalAlignment="Left" Margin="0,4,0,0" IsVisible="{Binding HasPlayError}"
+              Content="{loc:Tr Report.Button}" Command="{Binding MakeReportCommand}"
+              ToolTip.Tip="{loc:Tr Report.Tip}" />
+    </StackPanel>
+
+    <!-- Bottom centre: the trophies at a glance (v9), between the versions and the patches; a click opens Trophies. -->
+    <!-- The context set on a panel of its own: on the button itself its x:DataType would read "Trophies" too (the IDE did). -->
+    <Panel DataContext="{Binding Trophies}" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+    <Button Theme="{StaticResource PlainButton}" Classes="trw" HorizontalAlignment="Center" VerticalAlignment="Bottom"
+            Click="OnOpenTrophies" x:DataType="vm:TrophiesViewModel"
+            Classes.empty="{Binding !HasLast}">
+      <StackPanel Spacing="5" HorizontalAlignment="Center">
+        <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+          <views:TrophyIcon Width="18" Height="18" VerticalAlignment="Center" Picture="{Binding LastPicture}" Badge="{Binding LastBadge}" />
+          <TextBlock Classes="trwlabel" VerticalAlignment="Center" Text="{loc:Tr Trophies.Widget}" />
+          <TextBlock Classes="trwn" VerticalAlignment="Center" Text="{Binding ShortCount}" />
+        </StackPanel>
+        <views:Meter Width="168" Height="1" HorizontalAlignment="Center" Value="{Binding Percent}"
+                     Track="{StaticResource LineFaintBrush}" Fill="{StaticResource Gold500Brush}" />
+        <Panel Classes="trwlast">
+          <TextBlock Classes="trwlast" HorizontalAlignment="Center" Text="{Binding LastText}" IsVisible="{Binding HasLast}" />
+        </Panel>
+      </StackPanel>
+    </Button>
+    </Panel>
+
+    <!-- Bottom right: the patches the game starts with, or that none are on; a click opens Patches. -->
+    <Button Theme="{StaticResource PlainButton}" Classes="patchcol" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+            Margin="0,0,24,16" MaxWidth="240" Click="OnOpenPatches">
+      <StackPanel Spacing="1">
+        <TextBlock Classes="pchead" Text="{loc:Tr Patches.OnHead}" IsVisible="{Binding Patches.HasActive}" />
+        <ItemsControl ItemsSource="{Binding Patches.ActiveNames}" IsVisible="{Binding Patches.HasActive}">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <StackPanel Spacing="1" />
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="x:String">
+              <TextBlock Classes="pcitem" Text="{Binding}" />
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <!-- More than 4 on: "and 2 more" in grey italics. -->
+        <TextBlock Classes="pcmore" Text="{Binding Patches.ActiveMore}" IsVisible="{Binding Patches.HasMore}"
+                   ToolTip.Tip="{Binding Patches.ActiveMoreNames}" />
+        <TextBlock Classes="pcnone" Text="{loc:Tr Patches.None}" IsVisible="{Binding !Patches.HasActive}" />
+      </StackPanel>
+    </Button>
+  </Panel>
+</UserControl>

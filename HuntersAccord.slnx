@@ -1,0 +1,20 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+    <File Path="LICENSE" />
+    <File Path="MOD-LICENSE.txt" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/HuntersAccord.Core/HuntersAccord.Core.csproj" />
+    <Project Path="src/HuntersAccord.Platform/HuntersAccord.Platform.csproj" />
+    <Project Path="src/HuntersAccord.Launcher/HuntersAccord.Launcher.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/HuntersAccord.Core.Tests/HuntersAccord.Core.Tests.csproj" />
+  </Folder>
+</Solution>

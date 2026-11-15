@@ -1,0 +1,155 @@
+<!-- Hunters' Accord's trophy ranks: our own diamond seals (design v9, card TrBadges), not cups; 48x48 each.
+     Bronze one stone, silver three, gold five, platinum moon-silver with a double rim and the Accord's arch with a blood
+     stone; *Locked the same in stone; Hidden an empty diamond with "?". The metals: .notes design trophies.md. -->
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <DrawingImage x:Key="TrophyBronze">
+    <DrawingGroup>
+      <GeometryDrawing Brush="#00000000" Geometry="M0,0 H48 V48 H0 Z" />
+      <GeometryDrawing Brush="#2E1A10" Geometry="M24,3 L45,24 L24,45 L3,24 Z"><GeometryDrawing.Pen><Pen Brush="#C08657" Thickness="1.6" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Geometry="M24,7.8 L40.2,24 L24,40.2 L7.8,24 Z">
+        <GeometryDrawing.Brush>
+          <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+            <GradientStop Offset="0" Color="#C08657" /><GradientStop Offset="0.55" Color="#7C4F2E" /><GradientStop Offset="1" Color="#2E1A10" />
+          </LinearGradientBrush>
+        </GeometryDrawing.Brush>
+        <GeometryDrawing.Pen><Pen Brush="#2E1A10" Thickness="1.2" LineJoin="Miter" /></GeometryDrawing.Pen>
+      </GeometryDrawing>
+      <GeometryDrawing Geometry="M24,10.2 L37.8,24"><GeometryDrawing.Pen><Pen Brush="#8CE2B48A" Thickness="0.9" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Brush="#E2B48A" Geometry="M24,19 L29,24 L24,29 L19,24 Z"><GeometryDrawing.Pen><Pen Brush="#2E1A10" Thickness="1" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+    </DrawingGroup>
+  </DrawingImage>
+  <DrawingImage x:Key="TrophyBronzeLocked">
+    <DrawingGroup>
+      <GeometryDrawing Brush="#00000000" Geometry="M0,0 H48 V48 H0 Z" />
+      <GeometryDrawing Brush="#16121A" Geometry="M24,3 L45,24 L24,45 L3,24 Z"><GeometryDrawing.Pen><Pen Brush="#4C4249" Thickness="1.6" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Geometry="M24,7.8 L40.2,24 L24,40.2 L7.8,24 Z">
+        <GeometryDrawing.Brush>
+          <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+            <GradientStop Offset="0" Color="#4C4249" /><GradientStop Offset="0.55" Color="#2E262C" /><GradientStop Offset="1" Color="#16121A" />
+          </LinearGradientBrush>
+        </GeometryDrawing.Brush>
+        <GeometryDrawing.Pen><Pen Brush="#16121A" Thickness="1.2" LineJoin="Miter" /></GeometryDrawing.Pen>
+      </GeometryDrawing>
+      <GeometryDrawing Geometry="M24,10.2 L37.8,24"><GeometryDrawing.Pen><Pen Brush="#265C5158" Thickness="0.9" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Brush="#5C5158" Geometry="M24,19 L29,24 L24,29 L19,24 Z"><GeometryDrawing.Pen><Pen Brush="#16121A" Thickness="1" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+    </DrawingGroup>
+  </DrawingImage>
+  <DrawingImage x:Key="TrophySilver">
+    <DrawingGroup>
+      <GeometryDrawing Brush="#00000000" Geometry="M0,0 H48 V48 H0 Z" />
+      <GeometryDrawing Brush="#1F1E22" Geometry="M24,3 L45,24 L24,45 L3,24 Z"><GeometryDrawing.Pen><Pen Brush="#B9B7BD" Thickness="1.6" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Geometry="M24,7.8 L40.2,24 L24,40.2 L7.8,24 Z">
+        <GeometryDrawing.Brush>
+          <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+            <GradientStop Offset="0" Color="#B9B7BD" /><GradientStop Offset="0.55" Color="#6C6A70" /><GradientStop Offset="1" Color="#1F1E22" />
+          </LinearGradientBrush>
+        </GeometryDrawing.Brush>
+        <GeometryDrawing.Pen><Pen Brush="#1F1E22" Thickness="1.2" LineJoin="Miter" /></GeometryDrawing.Pen>
+      </GeometryDrawing>
+      <GeometryDrawing Geometry="M24,10.2 L37.8,24"><GeometryDrawing.Pen><Pen Brush="#8CE4E2E6" Thickness="0.9" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Brush="#E4E2E6" Geometry="M24,19 L29,24 L24,29 L19,24 Z"><GeometryDrawing.Pen><Pen Brush="#1F1E22" Thickness="1" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Brush="#E4E2E6" Geometry="M14.5,21.4 L17.1,24 L14.5,26.6 L11.9,24 Z M33.5,21.4 L36.1,24 L33.5,26.6 L30.9,24 Z"><GeometryDrawing.Pen><Pen Brush="#1F1E22" Thickness="0.8" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+    </DrawingGroup>
+  </DrawingImage>
+  <DrawingImage x:Key="TrophySilverLocked">
+    <DrawingGroup>
+      <GeometryDrawing Brush="#00000000" Geometry="M0,0 H48 V48 H0 Z" />
+      <GeometryDrawing Brush="#16121A" Geometry="M24,3 L45,24 L24,45 L3,24 Z"><GeometryDrawing.Pen><Pen Brush="#4C4249" Thickness="1.6" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Geometry="M24,7.8 L40.2,24 L24,40.2 L7.8,24 Z">
+        <GeometryDrawing.Brush>
+          <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+            <GradientStop Offset="0" Color="#4C4249" /><GradientStop Offset="0.55" Color="#2E262C" /><GradientStop Offset="1" Color="#16121A" />
+          </LinearGradientBrush>
+        </GeometryDrawing.Brush>
+        <GeometryDrawing.Pen><Pen Brush="#16121A" Thickness="1.2" LineJoin="Miter" /></GeometryDrawing.Pen>
+      </GeometryDrawing>
+      <GeometryDrawing Geometry="M24,10.2 L37.8,24"><GeometryDrawing.Pen><Pen Brush="#265C5158" Thickness="0.9" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Brush="#5C5158" Geometry="M24,19 L29,24 L24,29 L19,24 Z"><GeometryDrawing.Pen><Pen Brush="#16121A" Thickness="1" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Brush="#5C5158" Geometry="M14.5,21.4 L17.1,24 L14.5,26.6 L11.9,24 Z M33.5,21.4 L36.1,24 L33.5,26.6 L30.9,24 Z"><GeometryDrawing.Pen><Pen Brush="#16121A" Thickness="0.8" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+    </DrawingGroup>
+  </DrawingImage>
+  <DrawingImage x:Key="TrophyGold">
+    <DrawingGroup>
+      <GeometryDrawing Brush="#00000000" Geometry="M0,0 H48 V48 H0 Z" />
+      <GeometryDrawing Brush="#2E2412" Geometry="M24,3 L45,24 L24,45 L3,24 Z"><GeometryDrawing.Pen><Pen Brush="#D8C49A" Thickness="1.6" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Geometry="M24,7.8 L40.2,24 L24,40.2 L7.8,24 Z">
+        <GeometryDrawing.Brush>
+          <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+            <GradientStop Offset="0" Color="#D8C49A" /><GradientStop Offset="0.55" Color="#8A7550" /><GradientStop Offset="1" Color="#2E2412" />
+          </LinearGradientBrush>
+        </GeometryDrawing.Brush>
+        <GeometryDrawing.Pen><Pen Brush="#2E2412" Thickness="1.2" LineJoin="Miter" /></GeometryDrawing.Pen>
+      </GeometryDrawing>
+      <GeometryDrawing Geometry="M24,10.2 L37.8,24"><GeometryDrawing.Pen><Pen Brush="#8CF1E4C2" Thickness="0.9" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Brush="#F1E4C2" Geometry="M24,18.5 L29.5,24 L24,29.5 L18.5,24 Z"><GeometryDrawing.Pen><Pen Brush="#2E2412" Thickness="1" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Brush="#F1E4C2" Geometry="M14.5,21.6 L16.9,24 L14.5,26.4 L12.1,24 Z M33.5,21.6 L35.9,24 L33.5,26.4 L31.1,24 Z M24,12.1 L26.4,14.5 L24,16.9 L21.6,14.5 Z M24,31.1 L26.4,33.5 L24,35.9 L21.6,33.5 Z"><GeometryDrawing.Pen><Pen Brush="#2E2412" Thickness="0.8" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+    </DrawingGroup>
+  </DrawingImage>
+  <DrawingImage x:Key="TrophyGoldLocked">
+    <DrawingGroup>
+      <GeometryDrawing Brush="#00000000" Geometry="M0,0 H48 V48 H0 Z" />
+      <GeometryDrawing Brush="#16121A" Geometry="M24,3 L45,24 L24,45 L3,24 Z"><GeometryDrawing.Pen><Pen Brush="#4C4249" Thickness="1.6" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Geometry="M24,7.8 L40.2,24 L24,40.2 L7.8,24 Z">
+        <GeometryDrawing.Brush>
+          <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+            <GradientStop Offset="0" Color="#4C4249" /><GradientStop Offset="0.55" Color="#2E262C" /><GradientStop Offset="1" Color="#16121A" />
+          </LinearGradientBrush>
+        </GeometryDrawing.Brush>
+        <GeometryDrawing.Pen><Pen Brush="#16121A" Thickness="1.2" LineJoin="Miter" /></GeometryDrawing.Pen>
+      </GeometryDrawing>
+      <GeometryDrawing Geometry="M24,10.2 L37.8,24"><GeometryDrawing.Pen><Pen Brush="#265C5158" Thickness="0.9" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Brush="#5C5158" Geometry="M24,18.5 L29.5,24 L24,29.5 L18.5,24 Z"><GeometryDrawing.Pen><Pen Brush="#16121A" Thickness="1" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Brush="#5C5158" Geometry="M14.5,21.6 L16.9,24 L14.5,26.4 L12.1,24 Z M33.5,21.6 L35.9,24 L33.5,26.4 L31.1,24 Z M24,12.1 L26.4,14.5 L24,16.9 L21.6,14.5 Z M24,31.1 L26.4,33.5 L24,35.9 L21.6,33.5 Z"><GeometryDrawing.Pen><Pen Brush="#16121A" Thickness="0.8" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+    </DrawingGroup>
+  </DrawingImage>
+  <DrawingImage x:Key="TrophyPlatinum">
+    <DrawingGroup>
+      <GeometryDrawing Brush="#00000000" Geometry="M0,0 H48 V48 H0 Z" />
+      <GeometryDrawing Geometry="M24,0.8 L47.2,24 L24,47.2 L0.8,24 Z"><GeometryDrawing.Pen><Pen Brush="#B2DBE3F2" Thickness="0.9" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Brush="#141623" Geometry="M24,3 L45,24 L24,45 L3,24 Z"><GeometryDrawing.Pen><Pen Brush="#DBE3F2" Thickness="1.6" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Geometry="M24,7.8 L40.2,24 L24,40.2 L7.8,24 Z">
+        <GeometryDrawing.Brush>
+          <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+            <GradientStop Offset="0" Color="#DBE3F2" /><GradientStop Offset="0.55" Color="#7F8FB0" /><GradientStop Offset="1" Color="#141623" />
+          </LinearGradientBrush>
+        </GeometryDrawing.Brush>
+        <GeometryDrawing.Pen><Pen Brush="#141623" Thickness="1.2" LineJoin="Miter" /></GeometryDrawing.Pen>
+      </GeometryDrawing>
+      <GeometryDrawing Geometry="M24,10.2 L37.8,24"><GeometryDrawing.Pen><Pen Brush="#8CFFFFFF" Thickness="0.9" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Geometry="M18.5,32 V24.5 A11,11 0 0 1 24,15 A11,11 0 0 1 29.5,24.5 V32"><GeometryDrawing.Pen><Pen Brush="#FFFFFF" Thickness="1.8" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Geometry="M24,32 V25"><GeometryDrawing.Pen><Pen Brush="#FFFFFF" Thickness="1.2" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Brush="#9E2229" Geometry="M24,18.2 L26.4,20.6 L24,23 L21.6,20.6 Z"><GeometryDrawing.Pen><Pen Brush="#FFFFFF" Thickness="0.8" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Geometry="M16.5,32.6 H31.5"><GeometryDrawing.Pen><Pen Brush="#FFFFFF" Thickness="1.6" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+    </DrawingGroup>
+  </DrawingImage>
+  <DrawingImage x:Key="TrophyPlatinumLocked">
+    <DrawingGroup>
+      <GeometryDrawing Brush="#00000000" Geometry="M0,0 H48 V48 H0 Z" />
+      <GeometryDrawing Geometry="M24,0.8 L47.2,24 L24,47.2 L0.8,24 Z"><GeometryDrawing.Pen><Pen Brush="#B24C4249" Thickness="0.9" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Brush="#16121A" Geometry="M24,3 L45,24 L24,45 L3,24 Z"><GeometryDrawing.Pen><Pen Brush="#4C4249" Thickness="1.6" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Geometry="M24,7.8 L40.2,24 L24,40.2 L7.8,24 Z">
+        <GeometryDrawing.Brush>
+          <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+            <GradientStop Offset="0" Color="#4C4249" /><GradientStop Offset="0.55" Color="#2E262C" /><GradientStop Offset="1" Color="#16121A" />
+          </LinearGradientBrush>
+        </GeometryDrawing.Brush>
+        <GeometryDrawing.Pen><Pen Brush="#16121A" Thickness="1.2" LineJoin="Miter" /></GeometryDrawing.Pen>
+      </GeometryDrawing>
+      <GeometryDrawing Geometry="M24,10.2 L37.8,24"><GeometryDrawing.Pen><Pen Brush="#265C5158" Thickness="0.9" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Geometry="M18.5,32 V24.5 A11,11 0 0 1 24,15 A11,11 0 0 1 29.5,24.5 V32"><GeometryDrawing.Pen><Pen Brush="#5C5158" Thickness="1.8" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Geometry="M24,32 V25"><GeometryDrawing.Pen><Pen Brush="#5C5158" Thickness="1.2" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Brush="#3A2F36" Geometry="M24,18.2 L26.4,20.6 L24,23 L21.6,20.6 Z"><GeometryDrawing.Pen><Pen Brush="#5C5158" Thickness="0.8" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Geometry="M16.5,32.6 H31.5"><GeometryDrawing.Pen><Pen Brush="#5C5158" Thickness="1.6" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+    </DrawingGroup>
+  </DrawingImage>
+  <DrawingImage x:Key="TrophyHidden">
+    <DrawingGroup>
+      <GeometryDrawing Brush="#00000000" Geometry="M0,0 H48 V48 H0 Z" />
+      <GeometryDrawing Brush="#0C0A0E" Geometry="M24,2.5 L45.5,24 L24,45.5 L2.5,24 Z"><GeometryDrawing.Pen><Pen Brush="#7A6D65" Thickness="1.5" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Geometry="M24,8.5 L39.5,24 L24,39.5 L8.5,24 Z"><GeometryDrawing.Pen><Pen Brush="#2E262C" Thickness="1.5" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Geometry="M20.6,20.2 C20.6,17.6 22.2,16.2 24.2,16.2 C26.4,16.2 27.8,17.6 27.8,19.5 C27.8,22.3 24.6,22.6 24.6,25.6 V26.6"><GeometryDrawing.Pen><Pen Brush="#A89D90" Thickness="2.2" LineJoin="Miter" /></GeometryDrawing.Pen></GeometryDrawing>
+      <GeometryDrawing Brush="#A89D90" Geometry="M24.6,28.6 L25.9,29.9 L24.6,31.2 L23.3,29.9 Z" />
+    </DrawingGroup>
+  </DrawingImage>
+</ResourceDictionary>

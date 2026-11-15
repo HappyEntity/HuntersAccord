@@ -1,0 +1,263 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:HuntersAccord.Launcher.ViewModels"
+             xmlns:loc="using:HuntersAccord.Launcher.Localization"
+             x:Class="HuntersAccord.Launcher.Views.Fps60DetailsPage"
+             x:DataType="vm:PatchesViewModel">
+  <UserControl.Styles>
+    <!-- "Back" with its key: caps, ash; light gold under the pointer. -->
+    <Style Selector="Button.back TextBlock.caps">
+      <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+      <Setter Property="FontSize" Value="16" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="LetterSpacing" Value="1" />
+      <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Button.back Path">
+      <Setter Property="Stroke" Value="{StaticResource Ash300Brush}" />
+    </Style>
+    <Style Selector="Button.back:pointerover TextBlock.caps">
+      <Setter Property="Foreground" Value="{StaticResource Gold300Brush}" />
+    </Style>
+    <Style Selector="Button.back:pointerover Path">
+      <Setter Property="Stroke" Value="{StaticResource Gold300Brush}" />
+    </Style>
+    <Style Selector="Border.keycap.sm">
+      <Setter Property="Height" Value="18" />
+      <Setter Property="MinWidth" Value="18" />
+      <Setter Property="Padding" Value="4,0" />
+    </Style>
+    <Style Selector="Border.keycap.sm > TextBlock">
+      <Setter Property="FontSize" Value="11" />
+    </Style>
+    <!-- Path: "Patches ◆ 60 FPS (Hunters' Accord)". -->
+    <Style Selector="TextBlock.crumbprev">
+      <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+      <Setter Property="FontSize" Value="16" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="LetterSpacing" Value="1.3" />
+      <Setter Property="Foreground" Value="{StaticResource Ash500Brush}" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="TextBlock.crumb">
+      <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+      <Setter Property="FontSize" Value="20" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="LetterSpacing" Value="2.4" />
+      <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="TextBlock.lead">
+      <Setter Property="FontSize" Value="16" />
+      <Setter Property="LineHeight" Value="23" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+      <Setter Property="MaxWidth" Value="760" />
+      <Setter Property="HorizontalAlignment" Value="Left" />
+      <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+    </Style>
+    <!-- Benefits: two columns, gold diamonds. -->
+    <Style Selector="Grid.benefit > Rectangle">
+      <Setter Property="Width" Value="5" />
+      <Setter Property="Height" Value="5" />
+      <Setter Property="Margin" Value="0,7,0,0" />
+      <Setter Property="HorizontalAlignment" Value="Left" />
+      <Setter Property="VerticalAlignment" Value="Top" />
+      <Setter Property="RenderTransform" Value="rotate(45deg)" />
+      <Setter Property="Fill" Value="{StaticResource Gold500Brush}" />
+    </Style>
+    <Style Selector="Grid.benefit > TextBlock">
+      <Setter Property="Grid.Column" Value="1" />
+      <Setter Property="FontSize" Value="15" />
+      <Setter Property="LineHeight" Value="20" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+      <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+    </Style>
+    <!-- Comparison table: Hunters' Accord's column on a gold wash; the better values bone with a green diamond, none grey. -->
+    <Style Selector="TextBlock.th">
+      <Setter Property="FontFamily" Value="{StaticResource FontCaps}" />
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="LetterSpacing" Value="1.4" />
+      <Setter Property="Margin" Value="12,0,12,8" />
+      <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+    </Style>
+    <Style Selector="TextBlock.th.ours">
+      <Setter Property="Foreground" Value="{StaticResource Gold300Brush}" />
+    </Style>
+    <Style Selector="StackPanel.td">
+      <Setter Property="Orientation" Value="Horizontal" />
+      <Setter Property="Spacing" Value="8" />
+      <Setter Property="Margin" Value="12,7" />
+    </Style>
+    <Style Selector="StackPanel.td.first">
+      <Setter Property="Margin" Value="0,7,12,7" />
+    </Style>
+    <Style Selector="StackPanel.td > TextBlock">
+      <Setter Property="FontSize" Value="15" />
+      <Setter Property="LineHeight" Value="20" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+      <Setter Property="FontFeatures" Value="+tnum" />
+      <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+    </Style>
+    <Style Selector="StackPanel.td.best > TextBlock">
+      <Setter Property="Foreground" Value="{StaticResource Bone100Brush}" />
+    </Style>
+    <Style Selector="StackPanel.td.none > TextBlock">
+      <Setter Property="Foreground" Value="{StaticResource TextDisabledBrush}" />
+    </Style>
+    <Style Selector="StackPanel.td > Rectangle">
+      <Setter Property="IsVisible" Value="False" />
+      <Setter Property="Width" Value="5" />
+      <Setter Property="Height" Value="5" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="RenderTransform" Value="rotate(45deg)" />
+      <Setter Property="Fill" Value="{StaticResource SuccessBrush}" />
+    </Style>
+    <Style Selector="StackPanel.td.best > Rectangle">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="Border.tr">
+      <Setter Property="Grid.ColumnSpan" Value="4" />
+      <Setter Property="BorderThickness" Value="0,0,0,1" />
+      <Setter Property="BorderBrush" Value="{StaticResource LineFaintBrush}" />
+    </Style>
+    <!-- Limits: small ash lines with an outlined diamond; credits smallest. -->
+    <Style Selector="Grid.limit > Rectangle">
+      <Setter Property="Width" Value="4" />
+      <Setter Property="Height" Value="4" />
+      <Setter Property="Margin" Value="0,8,0,0" />
+      <Setter Property="HorizontalAlignment" Value="Left" />
+      <Setter Property="VerticalAlignment" Value="Top" />
+      <Setter Property="RenderTransform" Value="rotate(45deg)" />
+      <Setter Property="Stroke" Value="{StaticResource Ash500Brush}" />
+      <Setter Property="StrokeThickness" Value="1" />
+    </Style>
+    <Style Selector="Grid.limit > TextBlock">
+      <Setter Property="Grid.Column" Value="1" />
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="LineHeight" Value="19" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+      <Setter Property="Foreground" Value="{StaticResource Ash300Brush}" />
+    </Style>
+  </UserControl.Styles>
+
+  <Grid RowDefinitions="*,Auto">
+    <ScrollViewer>
+      <StackPanel Margin="48,22" Spacing="14">
+        <!-- Back (Esc) │ Patches ◆ 60 FPS (Hunters' Accord) RECOMMENDED -->
+        <Border BorderBrush="{StaticResource LineFaintBrush}" BorderThickness="0,0,0,1" Padding="0,0,0,12">
+          <WrapPanel Orientation="Horizontal">
+            <Button Theme="{StaticResource PlainButton}" Classes="back" VerticalAlignment="Center"
+                    Command="{Binding CloseFeaturedDetailsCommand}">
+              <StackPanel Orientation="Horizontal" Spacing="10">
+                <Path Data="M4.5,0.5 L0.5,4.5 L4.5,8.5" StrokeThickness="1" Margin="3,0,0,0" VerticalAlignment="Center" />
+                <TextBlock Classes="caps" Text="{loc:Tr Common.Back}" />
+                <Border Classes="keycap sm" Margin="4,0,0,0" VerticalAlignment="Center">
+                  <TextBlock Text="{loc:Tr Common.EscKey}" />
+                </Border>
+              </StackPanel>
+            </Button>
+            <Rectangle Width="1" Height="22" Margin="16,0" VerticalAlignment="Center" Fill="{StaticResource LineFaintBrush}" />
+            <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+              <TextBlock Classes="crumbprev" Text="{loc:Tr Home.Patches}" />
+              <Rectangle Width="5" Height="5" VerticalAlignment="Center" RenderTransform="rotate(45deg)" Fill="{StaticResource Gold700Brush}" />
+              <TextBlock Classes="crumb" Text="{Binding Featured.Name.Text}" />
+              <Border Classes="badge" Margin="-2,0,0,0" VerticalAlignment="Center">
+                <TextBlock Text="{loc:Tr Patches.Recommended}" />
+              </Border>
+            </StackPanel>
+          </WrapPanel>
+        </Border>
+
+        <TextBlock Classes="lead" Text="{loc:Tr Fps60.Intro}" />
+        <Rectangle Classes="rule" />
+
+        <Grid ColumnDefinitions="*,32,*" RowDefinitions="Auto,10,Auto,10,Auto,10,Auto,10,Auto">
+          <Grid Classes="benefit" ColumnDefinitions="14,*"><Rectangle /><TextBlock Text="{loc:Tr Fps60.Benefit1}" /></Grid>
+          <Grid Classes="benefit" ColumnDefinitions="14,*" Grid.Column="2"><Rectangle /><TextBlock Text="{loc:Tr Fps60.Benefit2}" /></Grid>
+          <Grid Classes="benefit" ColumnDefinitions="14,*" Grid.Row="2"><Rectangle /><TextBlock Text="{loc:Tr Fps60.Benefit3}" /></Grid>
+          <Grid Classes="benefit" ColumnDefinitions="14,*" Grid.Row="2" Grid.Column="2"><Rectangle /><TextBlock Text="{loc:Tr Fps60.Benefit4}" /></Grid>
+          <Grid Classes="benefit" ColumnDefinitions="14,*" Grid.Row="4"><Rectangle /><TextBlock Text="{loc:Tr Fps60.Benefit5}" /></Grid>
+          <Grid Classes="benefit" ColumnDefinitions="14,*" Grid.Row="4" Grid.Column="2"><Rectangle /><TextBlock Text="{loc:Tr Fps60.Benefit6}" /></Grid>
+          <Grid Classes="benefit" ColumnDefinitions="14,*" Grid.Row="6"><Rectangle /><TextBlock Text="{loc:Tr Fps60.BenefitPartnerSpeed}" /></Grid>
+          <Grid Classes="benefit" ColumnDefinitions="14,*" Grid.Row="6" Grid.Column="2"><Rectangle /><TextBlock Text="{loc:Tr Fps60.BenefitDodge}" /></Grid>
+          <Grid Classes="benefit" ColumnDefinitions="14,*" Grid.Row="8"><Rectangle /><TextBlock Text="{loc:Tr Fps60.Benefit7}" /></Grid>
+          <Grid Classes="benefit" ColumnDefinitions="14,*" Grid.Row="8" Grid.Column="2"><Rectangle /><TextBlock Text="{loc:Tr Fps60.Benefit8}" /></Grid>
+        </Grid>
+        <Rectangle Classes="rule" />
+
+        <!-- Hunters' Accord · other 60 FPS patches · without a patch. -->
+        <Grid ColumnDefinitions="34*,22*,22*,22*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+          <Border Grid.Column="1" Grid.RowSpan="9" Background="#0FB49B6C" />
+          <Border Classes="tr" BorderBrush="{StaticResource LineControlBrush}" />
+          <TextBlock Grid.Column="1" Classes="th ours" Text="Hunters' Accord" />
+          <TextBlock Grid.Column="2" Classes="th" Text="{loc:Tr Fps60.Cmp.Others}" />
+          <TextBlock Grid.Column="3" Classes="th" Text="{loc:Tr Fps60.Cmp.WithoutPatch}" />
+
+          <Border Grid.Row="1" Classes="tr" />
+          <StackPanel Grid.Row="1" Classes="td first"><TextBlock Text="{loc:Tr Fps60.Cmp.FrameRate}" /></StackPanel>
+          <StackPanel Grid.Row="1" Grid.Column="1" Classes="td best"><Rectangle /><TextBlock Text="60" /></StackPanel>
+          <StackPanel Grid.Row="1" Grid.Column="2" Classes="td best"><Rectangle /><TextBlock Text="60" /></StackPanel>
+          <StackPanel Grid.Row="1" Grid.Column="3" Classes="td"><Rectangle /><TextBlock Text="30" /></StackPanel>
+
+          <Border Grid.Row="2" Classes="tr" />
+          <StackPanel Grid.Row="2" Classes="td first"><TextBlock Text="{loc:Tr Fps60.Cmp.Physics}" /></StackPanel>
+          <StackPanel Grid.Row="2" Grid.Column="1" Classes="td best"><Rectangle /><TextBlock Text="{loc:Tr Fps60.Cmp.RealTime}" /></StackPanel>
+          <StackPanel Grid.Row="2" Grid.Column="2" Classes="td"><Rectangle /><TextBlock Text="{loc:Tr Fps60.Cmp.Slower}" /></StackPanel>
+          <StackPanel Grid.Row="2" Grid.Column="3" Classes="td none"><Rectangle /><TextBlock Text="—" /></StackPanel>
+
+          <Border Grid.Row="3" Classes="tr" />
+          <StackPanel Grid.Row="3" Classes="td first"><TextBlock Text="{loc:Tr Fps60.Cmp.Parry}" /></StackPanel>
+          <StackPanel Grid.Row="3" Grid.Column="1" Classes="td best"><Rectangle /><TextBlock Text="{loc:Tr Fps60.Cmp.ParryFull}" /></StackPanel>
+          <StackPanel Grid.Row="3" Grid.Column="2" Classes="td"><Rectangle /><TextBlock Text="{loc:Tr Fps60.Cmp.ParryHalf}" /></StackPanel>
+          <StackPanel Grid.Row="3" Grid.Column="3" Classes="td best"><Rectangle /><TextBlock Text="{loc:Tr Fps60.Cmp.ParryFull}" /></StackPanel>
+
+          <Border Grid.Row="4" Classes="tr" />
+          <StackPanel Grid.Row="4" Classes="td first"><TextBlock Text="{loc:Tr Fps60.Cmp.Ticks}" /></StackPanel>
+          <StackPanel Grid.Row="4" Grid.Column="1" Classes="td best"><Rectangle /><TextBlock Text="{loc:Tr Fps60.Cmp.As30}" /></StackPanel>
+          <StackPanel Grid.Row="4" Grid.Column="2" Classes="td"><Rectangle /><TextBlock Text="{loc:Tr Fps60.Cmp.TwiceAsOften}" /></StackPanel>
+          <StackPanel Grid.Row="4" Grid.Column="3" Classes="td none"><Rectangle /><TextBlock Text="—" /></StackPanel>
+
+          <Border Grid.Row="5" Classes="tr" />
+          <StackPanel Grid.Row="5" Classes="td first"><TextBlock Text="{loc:Tr Fps60.Cmp.PartnerSprint}" /></StackPanel>
+          <StackPanel Grid.Row="5" Grid.Column="1" Classes="td best"><Rectangle /><TextBlock Text="{loc:Tr Fps60.Cmp.Sprint}" /></StackPanel>
+          <StackPanel Grid.Row="5" Grid.Column="2" Classes="td"><Rectangle /><TextBlock Text="{loc:Tr Fps60.Cmp.AsRun}" /></StackPanel>
+          <StackPanel Grid.Row="5" Grid.Column="3" Classes="td none"><Rectangle /><TextBlock Text="—" /></StackPanel>
+
+          <Border Grid.Row="6" Classes="tr" />
+          <StackPanel Grid.Row="6" Classes="td first"><TextBlock Text="{loc:Tr Fps60.Cmp.DodgeWindow}" /></StackPanel>
+          <StackPanel Grid.Row="6" Grid.Column="1" Classes="td best"><Rectangle /><TextBlock Text="{loc:Tr Fps60.Cmp.DodgeFull}" /></StackPanel>
+          <StackPanel Grid.Row="6" Grid.Column="2" Classes="td"><Rectangle /><TextBlock Text="{loc:Tr Fps60.Cmp.DodgeHalf}" /></StackPanel>
+          <StackPanel Grid.Row="6" Grid.Column="3" Classes="td best"><Rectangle /><TextBlock Text="{loc:Tr Fps60.Cmp.DodgeFull}" /></StackPanel>
+
+          <Border Grid.Row="7" Classes="tr" />
+          <StackPanel Grid.Row="7" Classes="td first"><TextBlock Text="{loc:Tr Fps60.Cmp.Camera}" /></StackPanel>
+          <StackPanel Grid.Row="7" Grid.Column="1" Classes="td best"><Rectangle /><TextBlock Text="{loc:Tr Fps60.Cmp.As60}" /></StackPanel>
+          <StackPanel Grid.Row="7" Grid.Column="2" Classes="td"><Rectangle /><TextBlock Text="{loc:Tr Fps60.Cmp.Slower}" /></StackPanel>
+          <StackPanel Grid.Row="7" Grid.Column="3" Classes="td none"><Rectangle /><TextBlock Text="—" /></StackPanel>
+
+          <Border Grid.Row="8" Classes="tr" />
+          <StackPanel Grid.Row="8" Classes="td first"><TextBlock Text="{loc:Tr Fps60.Cmp.File}" /></StackPanel>
+          <StackPanel Grid.Row="8" Grid.Column="1" Classes="td best"><Rectangle /><TextBlock Text="{loc:Tr Fps60.Cmp.No}" /></StackPanel>
+          <StackPanel Grid.Row="8" Grid.Column="2" Classes="td"><Rectangle /><TextBlock Text="{loc:Tr Fps60.Cmp.Yes}" /></StackPanel>
+          <StackPanel Grid.Row="8" Grid.Column="3" Classes="td none"><Rectangle /><TextBlock Text="—" /></StackPanel>
+        </Grid>
+
+        <StackPanel Spacing="4">
+          <Grid Classes="limit" ColumnDefinitions="14,*"><Rectangle /><TextBlock Text="{loc:Tr Fps60.Limit1}" /></Grid>
+          <Grid Classes="limit" ColumnDefinitions="14,*"><Rectangle /><TextBlock Text="{loc:Tr Fps60.Limit2}" /></Grid>
+          <Grid Classes="limit" ColumnDefinitions="14,*"><Rectangle /><TextBlock Text="{loc:Tr Fps60.Limit3}" /></Grid>
+        </StackPanel>
+        <TextBlock FontSize="13" LineHeight="18" TextWrapping="Wrap" Foreground="{StaticResource Ash500Brush}"
+                   Text="{loc:Tr Fps60.Credits}" />
+      </StackPanel>
+    </ScrollViewer>
+
+    <!-- One action while the patch is off: turn it on (the sections show the change). -->
+    <Border Grid.Row="1" Classes="pagefoot" Padding="48,8" IsVisible="{Binding !Featured.IsOn}">
+      <Button Classes="bb" HorizontalAlignment="Right" VerticalAlignment="Center" Content="{loc:Tr Fps60.TurnOn}"
+              Command="{Binding TurnOnFeaturedCommand}" IsEnabled="{Binding Featured.CanToggle}" />
+    </Border>
+  </Grid>
+</UserControl>

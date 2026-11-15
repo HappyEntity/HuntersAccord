@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- The public part of the core (MIT): what the launcher needs. -->
+  <PropertyGroup>
+    <RootNamespace>HuntersAccord.Core</RootNamespace>
+    <!-- ModLibrary calls the mod library's C entry point through a function pointer. -->
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="HuntersAccord.Core.Tests" />
+  </ItemGroup>
+</Project>
